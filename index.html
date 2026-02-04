@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professional Navigation Bar</title>
+    <title>BCA Career Guide - Learn & Get Job Ready</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -12,535 +13,2995 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #059669;
+            --accent: #7c3aed;
+            --warning: #f59e0b;
+            --text-dark: #1f2937;
+            --text-medium: #4b5563;
+            --text-light: #6b7280;
+            --bg-white: #ffffff;
+            --bg-light: #f9fafb;
+            --bg-gray: #f3f4f6;
+            --border: #e5e7eb;
+            --sidebar-width: 280px;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.7;
         }
 
-        /* Top Bar */
-        .top-bar {
-            background: #1a1a2e;
-            color: #fff;
-            padding: 8px 0;
-            font-size: 13px;
+        /* Sidebar Styles */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: var(--sidebar-width);
+            height: 100vh;
+            background: var(--bg-white);
+            border-right: 1px solid var(--border);
+            overflow-y: auto;
+            z-index: 1000;
+            transition: transform 0.3s ease;
         }
 
-        .top-bar .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+        .sidebar-header {
+            padding: 24px 20px;
+            border-bottom: 1px solid var(--border);
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+        }
+
+        .sidebar-header h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .sidebar-header p {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        .nav-section {
+            padding: 16px 0;
+        }
+
+        .nav-section-title {
+            padding: 8px 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--text-light);
+            letter-spacing: 0.5px;
+        }
+
+        .nav-item {
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+            color: var(--text-medium);
         }
 
-        .top-bar a {
-            color: #a0a0a0;
-            text-decoration: none;
-            margin-left: 20px;
-            transition: color 0.3s;
+        .nav-item:hover {
+            background: var(--bg-gray);
+            color: var(--primary);
         }
 
-        .top-bar a:hover {
-            color: #fff;
+        .nav-item.active {
+            background: rgba(37, 99, 235, 0.08);
+            border-left-color: var(--primary);
+            color: var(--primary);
+            font-weight: 500;
         }
 
-        .top-bar .contact-info span {
-            margin-right: 20px;
+        .nav-item i {
+            width: 24px;
+            margin-right: 12px;
+            font-size: 1.1rem;
         }
 
-        .top-bar .contact-info i {
-            margin-right: 5px;
-            color: #4a90e2;
+        .nav-item .badge {
+            margin-left: auto;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            background: var(--primary);
+            color: white;
         }
 
-        /* Main Navigation */
-        .navbar {
-            background: #fff;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        .course-subnav {
+            display: none;
+            padding-left: 56px;
+            background: var(--bg-gray);
+        }
+
+        .course-subnav.show {
+            display: block;
+        }
+
+        .subnav-item {
+            padding: 10px 16px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            color: var(--text-light);
+            transition: all 0.2s;
+            border-left: 2px solid transparent;
+        }
+
+        .subnav-item:hover,
+        .subnav-item.active {
+            color: var(--primary);
+            border-left-color: var(--primary);
+            background: rgba(37, 99, 235, 0.05);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            min-height: 100vh;
+        }
+
+        .top-bar {
             position: sticky;
             top: 0;
-            z-index: 1000;
-        }
-
-        .navbar .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+            background: var(--bg-white);
+            padding: 16px 32px;
+            border-bottom: 1px solid var(--border);
             display: flex;
+            align-items: center;
             justify-content: space-between;
-            align-items: center;
+            z-index: 100;
         }
 
-        .logo {
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-dark);
+        }
+
+        .breadcrumb {
             display: flex;
             align-items: center;
-            text-decoration: none;
-            padding: 15px 0;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: var(--text-light);
         }
 
-        .logo-icon {
-            width: 45px;
-            height: 45px;
-            background: linear-gradient(135deg, #4a90e2, #357abd);
-            border-radius: 10px;
+        .breadcrumb span {
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .progress-indicator {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .progress-bar {
+            width: 150px;
+            height: 8px;
+            background: var(--bg-gray);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 4px;
+            transition: width 0.3s;
+        }
+
+        .content-area {
+            padding: 32px;
+            max-width: 1000px;
+        }
+
+        /* Course Cards for Home */
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 24px;
+        }
+
+        .course-card {
+            background: var(--bg-white);
+            border-radius: 16px;
+            padding: 28px;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+        }
+
+        .course-card.ds::before { background: linear-gradient(90deg, #2563eb, #7c3aed); }
+        .course-card.ai::before { background: linear-gradient(90deg, #7c3aed, #ec4899); }
+        .course-card.web::before { background: linear-gradient(90deg, #059669, #0891b2); }
+        .course-card.sd::before { background: linear-gradient(90deg, #f59e0b, #ef4444); }
+
+        .course-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+        }
+
+        .course-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-right: 12px;
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 16px;
         }
 
-        .logo-icon i {
-            color: #fff;
-            font-size: 22px;
+        .course-card.ds .course-icon { background: linear-gradient(135deg, #2563eb, #7c3aed); }
+        .course-card.ai .course-icon { background: linear-gradient(135deg, #7c3aed, #ec4899); }
+        .course-card.web .course-icon { background: linear-gradient(135deg, #059669, #0891b2); }
+        .course-card.sd .course-icon { background: linear-gradient(135deg, #f59e0b, #ef4444); }
+
+        .course-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 8px;
+            color: var(--text-dark);
         }
 
-        .logo-text {
-            font-size: 24px;
-            font-weight: 700;
-            color: #1a1a2e;
+        .course-card p {
+            font-size: 0.95rem;
+            color: var(--text-medium);
+            margin-bottom: 16px;
         }
 
-        .logo-text span {
-            color: #4a90e2;
-        }
-
-        /* Nav Menu */
-        .nav-menu {
+        .course-meta {
             display: flex;
-            list-style: none;
+            gap: 16px;
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .course-meta span {
+            display: flex;
             align-items: center;
+            gap: 6px;
         }
 
-        .nav-menu li {
-            position: relative;
+        /* Section Styles */
+        .section {
+            background: var(--bg-white);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            margin-bottom: 24px;
+            overflow: hidden;
         }
 
-        .nav-menu > li > a {
-            display: block;
-            padding: 25px 18px;
-            color: #333;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 15px;
-            transition: color 0.3s;
-            position: relative;
+        .section-header {
+            padding: 20px 24px;
+            background: var(--bg-gray);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border);
         }
 
-        .nav-menu > li > a::after {
-            content: '';
-            position: absolute;
-            bottom: 20px;
-            left: 18px;
-            right: 18px;
-            height: 2px;
-            background: #4a90e2;
-            transform: scaleX(0);
+        .section-header h2 {
+            font-size: 1.15rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-header h2 i {
+            color: var(--primary);
+        }
+
+        .section-header .toggle-icon {
             transition: transform 0.3s;
         }
 
-        .nav-menu > li:hover > a {
-            color: #4a90e2;
+        .section-header.collapsed .toggle-icon {
+            transform: rotate(-90deg);
         }
 
-        .nav-menu > li:hover > a::after {
-            transform: scaleX(1);
-        }
-
-        /* Dropdown */
-        .dropdown-content {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background: #fff;
-            min-width: 220px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            border-radius: 8px;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(10px);
-            transition: all 0.3s;
-            padding: 10px 0;
-        }
-
-        .nav-menu li:hover .dropdown-content {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .dropdown-content a {
-            display: block;
-            padding: 12px 20px;
-            color: #555;
-            text-decoration: none;
-            font-size: 14px;
-            transition: all 0.3s;
-        }
-
-        .dropdown-content a:hover {
-            background: #f8f9fa;
-            color: #4a90e2;
-            padding-left: 25px;
-        }
-
-        .dropdown-content a i {
-            margin-right: 10px;
-            width: 16px;
-        }
-
-        /* Mega Menu */
-        .mega-menu {
-            position: absolute;
-            top: 100%;
-            left: -200px;
-            background: #fff;
-            width: 800px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            border-radius: 8px;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(10px);
-            transition: all 0.3s;
-            padding: 30px;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-        }
-
-        .nav-menu li:hover .mega-menu {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .mega-menu-column h4 {
-            color: #1a1a2e;
-            font-size: 16px;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #4a90e2;
-        }
-
-        .mega-menu-column a {
-            display: block;
-            padding: 8px 0;
-            color: #666;
-            text-decoration: none;
-            font-size: 14px;
-            transition: color 0.3s;
-        }
-
-        .mega-menu-column a:hover {
-            color: #4a90e2;
-        }
-
-        /* Search Box */
-        .nav-search {
-            display: flex;
-            align-items: center;
-            margin-left: 20px;
-        }
-
-        .search-box {
-            display: flex;
-            align-items: center;
-            background: #f5f5f5;
-            border-radius: 25px;
-            padding: 8px 15px;
-            transition: all 0.3s;
-        }
-
-        .search-box:focus-within {
-            background: #fff;
-            box-shadow: 0 0 0 2px #4a90e2;
-        }
-
-        .search-box input {
-            border: none;
-            background: transparent;
-            outline: none;
-            padding: 5px;
-            width: 150px;
-            font-size: 14px;
-        }
-
-        .search-box button {
-            background: none;
-            border: none;
-            color: #666;
-            cursor: pointer;
-            padding: 5px;
-            transition: color 0.3s;
-        }
-
-        .search-box button:hover {
-            color: #4a90e2;
-        }
-
-        /* CTA Button */
-        .nav-cta {
-            margin-left: 20px;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #4a90e2, #357abd);
-            color: #fff;
-            padding: 12px 25px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 14px;
-            transition: all 0.3s;
-            display: inline-block;
-            box-shadow: 0 4px 15px rgba(74, 144, 226, 0.3);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(74, 144, 226, 0.4);
-        }
-
-        /* Mobile Menu Toggle */
-        .menu-toggle {
+        .section-content {
+            padding: 24px;
             display: none;
-            flex-direction: column;
+        }
+
+        .section-content.show {
+            display: block;
+        }
+
+        /* Typography */
+        h1.page-title {
+            font-size: 2rem;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+        }
+
+        .page-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            margin-bottom: 32px;
+        }
+
+        h3 {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            margin: 24px 0 12px;
+        }
+
+        h3:first-child {
+            margin-top: 0;
+        }
+
+        p {
+            margin-bottom: 16px;
+            color: var(--text-medium);
+        }
+
+        ul, ol {
+            margin: 16px 0;
+            padding-left: 24px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            color: var(--text-medium);
+        }
+
+        /* Code Blocks */
+        pre {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 16px 0;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        code {
+            font-family: 'Fira Code', monospace;
+            background: var(--bg-gray);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: var(--primary);
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+            color: inherit;
+        }
+
+        .code-header {
+            background: #0f172a;
+            padding: 10px 16px;
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0;
+        }
+
+        .code-header + pre {
+            margin-top: 0;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .code-lang {
+            color: #94a3b8;
+            font-size: 0.85rem;
+        }
+
+        .copy-btn {
+            background: #334155;
+            border: none;
+            color: #94a3b8;
+            padding: 4px 12px;
+            border-radius: 4px;
             cursor: pointer;
-            padding: 10px;
+            font-size: 0.85rem;
+            transition: all 0.2s;
         }
 
-        .menu-toggle span {
-            width: 25px;
-            height: 3px;
-            background: #333;
-            margin: 3px 0;
-            border-radius: 2px;
-            transition: all 0.3s;
+        .copy-btn:hover {
+            background: #475569;
+            color: white;
         }
 
-        /* Hero Section (Demo) */
-        .hero {
-            height: 400px;
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
+        /* Info Boxes */
+        .info-box {
+            padding: 16px 20px;
+            border-radius: 8px;
+            margin: 16px 0;
+            display: flex;
+            gap: 12px;
+        }
+
+        .info-box i {
+            font-size: 1.2rem;
+            margin-top: 2px;
+        }
+
+        .info-box.tip {
+            background: rgba(5, 150, 105, 0.1);
+            border-left: 4px solid var(--secondary);
+        }
+
+        .info-box.tip i { color: var(--secondary); }
+
+        .info-box.note {
+            background: rgba(37, 99, 235, 0.1);
+            border-left: 4px solid var(--primary);
+        }
+
+        .info-box.note i { color: var(--primary); }
+
+        .info-box.warning {
+            background: rgba(245, 158, 11, 0.1);
+            border-left: 4px solid var(--warning);
+        }
+
+        .info-box.warning i { color: var(--warning); }
+
+        /* Roadmap */
+        .roadmap {
+            position: relative;
+            padding-left: 32px;
+        }
+
+        .roadmap::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border);
+        }
+
+        .roadmap-step {
+            position: relative;
+            margin-bottom: 24px;
+            padding: 20px;
+            background: var(--bg-gray);
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .roadmap-step::before {
+            content: '';
+            position: absolute;
+            left: -28px;
+            top: 24px;
+            width: 16px;
+            height: 16px;
+            background: var(--primary);
+            border-radius: 50%;
+            border: 3px solid var(--bg-white);
+        }
+
+        .roadmap-step h4 {
+            color: var(--primary);
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .roadmap-step .duration {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-bottom: 12px;
+        }
+
+        .roadmap-step ul {
+            margin: 0;
+        }
+
+        /* Practice Questions */
+        .question-card {
+            background: var(--bg-gray);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border: 1px solid var(--border);
+        }
+
+        .question-card .q-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .q-number {
+            background: var(--primary);
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #fff;
-            text-align: center;
+            font-size: 0.85rem;
+            font-weight: 600;
         }
 
-        .hero h1 {
-            font-size: 48px;
+        .q-difficulty {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .q-difficulty.easy { background: #d1fae5; color: #065f46; }
+        .q-difficulty.medium { background: #fef3c7; color: #92400e; }
+        .q-difficulty.hard { background: #fee2e2; color: #991b1b; }
+
+        .answer-toggle {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-top: 12px;
+        }
+
+        .answer-toggle:hover {
+            background: var(--primary-dark);
+        }
+
+        .answer {
+            margin-top: 16px;
+            padding: 16px;
+            background: var(--bg-white);
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            display: none;
+        }
+
+        .answer.show {
+            display: block;
+        }
+
+        /* Project Cards */
+        .project-card {
+            background: var(--bg-white);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
             margin-bottom: 20px;
         }
 
-        .hero p {
-            font-size: 18px;
-            color: #a0a0a0;
+        .project-card h4 {
+            color: var(--text-dark);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        /* Mobile Responsive */
-        @media (max-width: 992px) {
-            .top-bar {
-                display: none;
+        .project-card h4 i {
+            color: var(--primary);
+        }
+
+        .project-type {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .project-type.mini { background: #dbeafe; color: #1e40af; }
+        .project-type.major { background: #fae8ff; color: #86198f; }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .tech-tag {
+            background: var(--bg-gray);
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 0.8rem;
+            color: var(--text-medium);
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+        }
+
+        th, td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background: var(--bg-gray);
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        tr:hover {
+            background: var(--bg-light);
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 24px;
+        }
+
+        .tab {
+            padding: 12px 24px;
+            cursor: pointer;
+            color: var(--text-medium);
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .tab:hover {
+            color: var(--primary);
+        }
+
+        .tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+            font-weight: 500;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
             }
 
-            .menu-toggle {
-                display: flex;
+            .sidebar.open {
+                transform: translateX(0);
             }
 
-            .nav-menu {
-                position: fixed;
-                top: 75px;
-                left: -100%;
-                width: 100%;
-                height: calc(100vh - 75px);
-                background: #fff;
-                flex-direction: column;
-                align-items: flex-start;
+            .main-content {
+                margin-left: 0;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .content-area {
                 padding: 20px;
-                transition: left 0.3s;
-                overflow-y: auto;
             }
 
-            .nav-menu.active {
-                left: 0;
+            h1.page-title {
+                font-size: 1.5rem;
             }
 
-            .nav-menu > li {
-                width: 100%;
-            }
-
-            .nav-menu > li > a {
-                padding: 15px 0;
-                border-bottom: 1px solid #eee;
-            }
-
-            .nav-menu > li > a::after {
-                display: none;
-            }
-
-            .dropdown-content,
-            .mega-menu {
-                position: static;
-                opacity: 1;
-                visibility: visible;
-                transform: none;
-                box-shadow: none;
-                width: 100%;
-                padding-left: 20px;
-                display: none;
-            }
-
-            .mega-menu {
+            .course-grid {
                 grid-template-columns: 1fr;
             }
 
-            .nav-menu li:hover .dropdown-content,
-            .nav-menu li:hover .mega-menu {
-                display: block;
+            .top-bar {
+                padding: 12px 16px;
             }
 
-            .nav-search,
-            .nav-cta {
-                margin: 15px 0;
-                width: 100%;
+            .progress-indicator {
+                display: none;
             }
 
-            .search-box {
-                width: 100%;
+            pre {
+                font-size: 0.8rem;
+                padding: 16px;
             }
 
-            .search-box input {
-                width: 100%;
+            .tabs {
+                overflow-x: auto;
             }
 
-            .btn-primary {
-                display: block;
-                text-align: center;
+            .tab {
+                padding: 10px 16px;
+                white-space: nowrap;
             }
+        }
+
+        /* Overlay for mobile */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
+
+        .overlay.show {
+            display: block;
+        }
+
+        /* Highlight */
+        .highlight {
+            background: linear-gradient(120deg, #fef3c7 0%, #fef3c7 100%);
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+
+        /* Checklist */
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+
+        .checklist li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 8px 0;
+        }
+
+        .checklist li i {
+            color: var(--secondary);
+            margin-top: 4px;
+        }
+
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        .stat-card {
+            background: var(--bg-gray);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-card .number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-card .label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* Welcome banner */
+        .welcome-banner {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 40px;
+            border-radius: 16px;
+            margin-bottom: 32px;
+        }
+
+        .welcome-banner h1 {
+            font-size: 2rem;
+            margin-bottom: 12px;
+        }
+
+        .welcome-banner p {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.1rem;
+            margin-bottom: 0;
         }
     </style>
 </head>
 <body>
-    <!-- Top Bar -->
-    <div class="top-bar">
-        <div class="container">
-            <div class="contact-info">
-                <span><i class="fas fa-phone"></i> +1 234 567 890</span>
-                <span><i class="fas fa-envelope"></i> info@company.com</span>
-                <span><i class="fas fa-clock"></i> Mon - Fri: 9:00 - 18:00</span>
-            </div>
-            <div class="social-links">
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-            </div>
-        </div>
-    </div>
+    <!-- Overlay for mobile -->
+    <div class="overlay" id="overlay"></div>
 
-    <!-- Main Navigation -->
-    <nav class="navbar">
-        <div class="container">
-            <a href="#" class="logo">
-                <div class="logo-icon">
-                    <i class="fas fa-cube"></i>
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h1>🎓 BCA Career Guide</h1>
+            <p>Learn & Get Job Ready</p>
+        </div>
+
+        <nav class="nav-section">
+            <div class="nav-section-title">Navigation</div>
+            <div class="nav-item active" data-page="home">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </div>
+        </nav>
+
+        <nav class="nav-section">
+            <div class="nav-section-title">Courses</div>
+            
+            <!-- Data Science -->
+            <div class="nav-item" data-course="ds">
+                <i class="fas fa-chart-line"></i>
+                <span>Data Science</span>
+                <span class="badge">New</span>
+            </div>
+            <div class="course-subnav" id="ds-subnav">
+                <div class="subnav-item" data-section="ds-intro">Introduction</div>
+                <div class="subnav-item" data-section="ds-prereq">Prerequisites</div>
+                <div class="subnav-item" data-section="ds-roadmap">Roadmap</div>
+                <div class="subnav-item" data-section="ds-notes">Course Notes</div>
+                <div class="subnav-item" data-section="ds-practice">Practice & Projects</div>
+                <div class="subnav-item" data-section="ds-jobs">Jobs & Internships</div>
+            </div>
+
+            <!-- AI -->
+            <div class="nav-item" data-course="ai">
+                <i class="fas fa-brain"></i>
+                <span>Artificial Intelligence</span>
+            </div>
+            <div class="course-subnav" id="ai-subnav">
+                <div class="subnav-item" data-section="ai-intro">Introduction</div>
+                <div class="subnav-item" data-section="ai-prereq">Prerequisites</div>
+                <div class="subnav-item" data-section="ai-roadmap">Roadmap</div>
+                <div class="subnav-item" data-section="ai-notes">Course Notes</div>
+                <div class="subnav-item" data-section="ai-practice">Practice & Projects</div>
+                <div class="subnav-item" data-section="ai-jobs">Jobs & Internships</div>
+            </div>
+
+            <!-- Web Development -->
+            <div class="nav-item" data-course="web">
+                <i class="fas fa-code"></i>
+                <span>Web Development</span>
+            </div>
+            <div class="course-subnav" id="web-subnav">
+                <div class="subnav-item" data-section="web-intro">Introduction</div>
+                <div class="subnav-item" data-section="web-prereq">Prerequisites</div>
+                <div class="subnav-item" data-section="web-roadmap">Roadmap</div>
+                <div class="subnav-item" data-section="web-notes">Course Notes</div>
+                <div class="subnav-item" data-section="web-practice">Practice & Projects</div>
+                <div class="subnav-item" data-section="web-jobs">Jobs & Internships</div>
+            </div>
+
+            <!-- Software Development -->
+            <div class="nav-item" data-course="sd">
+                <i class="fas fa-laptop-code"></i>
+                <span>Software Development</span>
+            </div>
+            <div class="course-subnav" id="sd-subnav">
+                <div class="subnav-item" data-section="sd-intro">Introduction</div>
+                <div class="subnav-item" data-section="sd-prereq">Prerequisites</div>
+                <div class="subnav-item" data-section="sd-roadmap">Roadmap</div>
+                <div class="subnav-item" data-section="sd-notes">Course Notes</div>
+                <div class="subnav-item" data-section="sd-practice">Practice & Projects</div>
+                <div class="subnav-item" data-section="sd-jobs">Jobs & Internships</div>
+            </div>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="top-bar">
+            <button class="mobile-menu-btn" id="menuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="breadcrumb">
+                <i class="fas fa-home"></i>
+                <span id="currentPage">Home</span>
+            </div>
+            <div class="progress-indicator">
+                <span>Progress:</span>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 0%"></div>
                 </div>
-                <span class="logo-text">Brand<span>Name</span></span>
-            </a>
-
-            <div class="menu-toggle" id="menuToggle">
-                <span></span>
-                <span></span>
-                <span></span>
             </div>
-
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="#">Home</a></li>
-                <li>
-                    <a href="#">Services <i class="fas fa-chevron-down" style="font-size: 10px; margin-left: 5px;"></i></a>
-                    <div class="dropdown-content">
-                        <a href="#"><i class="fas fa-code"></i> Web Development</a>
-                        <a href="#"><i class="fas fa-mobile-alt"></i> Mobile Apps</a>
-                        <a href="#"><i class="fas fa-cloud"></i> Cloud Solutions</a>
-                        <a href="#"><i class="fas fa-shield-alt"></i> Cyber Security</a>
-                        <a href="#"><i class="fas fa-chart-line"></i> Digital Marketing</a>
-                    </div>
-                </li>
-                <li>
-                    <a href="#">Products <i class="fas fa-chevron-down" style="font-size: 10px; margin-left: 5px;"></i></a>
-                    <div class="mega-menu">
-                        <div class="mega-menu-column">
-                            <h4>Software</h4>
-                            <a href="#">Project Management</a>
-                            <a href="#">CRM Solutions</a>
-                            <a href="#">Analytics Tools</a>
-                            <a href="#">Automation</a>
-                        </div>
-                        <div class="mega-menu-column">
-                            <h4>Hardware</h4>
-                            <a href="#">Servers</a>
-                            <a href="#">Networking</a>
-                            <a href="#">Storage</a>
-                            <a href="#">Accessories</a>
-                        </div>
-                        <div class="mega-menu-column">
-                            <h4>Solutions</h4>
-                            <a href="#">Enterprise</a>
-                            <a href="#">Small Business</a>
-                            <a href="#">Startup</a>
-                            <a href="#">Education</a>
-                        </div>
-                    </div>
-                </li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
-
-                <li class="nav-search">
-                    <div class="search-box">
-                        <input type="text" placeholder="Search...">
-                        <button><i class="fas fa-search"></i></button>
-                    </div>
-                </li>
-
-                <li class="nav-cta">
-                    <a href="#" class="btn-primary">Get Started</a>
-                </li>
-            </ul>
         </div>
-    </nav>
 
-    <!-- Hero Section (Demo) -->
-    <section class="hero">
-        <div>
-            <h1>Professional Navigation Bar</h1>
-            <p>Scroll down to see the sticky navigation effect</p>
+        <div class="content-area" id="contentArea">
+            <!-- Content will be loaded here -->
         </div>
-    </section>
-
-    <!-- Content for scrolling demo -->
-    <div style="height: 1000px; background: #f5f5f5; padding: 50px; text-align: center;">
-        <h2>Page Content</h2>
-        <p>Scroll to test the sticky navigation</p>
-    </div>
+    </main>
 
     <script>
-        // Mobile Menu Toggle
-        const menuToggle = document.getElementById('menuToggle');
-        const navMenu = document.getElementById('navMenu');
+        // Page Content
+        const pages = {
+            home: `
+                <div class="welcome-banner">
+                    <h1>🚀 Welcome, BCA Students!</h1>
+                    <p>Aapka career guide yahan hai! Clear roadmap ke saath job-ready banein.</p>
+                </div>
 
-        menuToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            menuToggle.classList.toggle('active');
-        });
+                <h1 class="page-title">Choose Your Career Path</h1>
+                <p class="page-subtitle">Apni interest ke hisaab se course select karein aur step-by-step seekhein</p>
 
-        // Close menu when clicking on a link
-        document.querySelectorAll('.nav-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-                menuToggle.classList.remove('active');
-            });
-        });
-    </script>
-</body>
-</html>
+                <div class="course-grid">
+                    <div class="course-card ds" data-course="ds">
+                        <div class="course-icon"><i class="fas fa-chart-line"></i></div>
+                        <h3>Data Science</h3>
+                        <p>Data se insights nikalna seekhein. Python, ML aur Analytics mein career banayein.</p>
+                        <div class="course-meta">
+                            <span><i class="fas fa-clock"></i> 4-6 months</span>
+                            <span><i class="fas fa-rupee-sign"></i> 4-8 LPA</span>
+                        </div>
+                    </div>
+
+                    <div class="course-card ai" data-course="ai">
+                        <div class="course-icon"><i class="fas fa-brain"></i></div>
+                        <h3>Artificial Intelligence</h3>
+                        <p>AI/ML ka future samjhein. Intelligent systems banana seekhein.</p>
+                        <div class="course-meta">
+                            <span><i class="fas fa-clock"></i> 5-7 months</span>
+                            <span><i class="fas fa-rupee-sign"></i> 5-12 LPA</span>
+                        </div>
+                    </div>
+
+                    <div class="course-card web" data-course="web">
+                        <div class="course-icon"><i class="fas fa-code"></i></div>
+                        <h3>Web Development</h3>
+                        <p>Websites aur web apps banana seekhein. Freelancing ka best option.</p>
+                        <div class="course-meta">
+                            <span><i class="fas fa-clock"></i> 3-5 months</span>
+                            <span><i class="fas fa-rupee-sign"></i> 3-10 LPA</span>
+                        </div>
+                    </div>
+
+                    <div class="course-card sd" data-course="sd">
+                        <div class="course-icon"><i class="fas fa-laptop-code"></i></div>
+                        <h3>Software Development</h3>
+                        <p>Core programming aur DSA mein expert banein. Product companies ka raasta.</p>
+                        <div class="course-meta">
+                            <span><i class="fas fa-clock"></i> 4-6 months</span>
+                            <span><i class="fas fa-rupee-sign"></i> 5-15 LPA</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="number">4</div>
+                        <div class="label">Career Paths</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number">100+</div>
+                        <div class="label">Topics Covered</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number">50+</div>
+                        <div class="label">Practice Questions</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number">20+</div>
+                        <div class="label">Projects</div>
+                    </div>
+                </div>
+
+                <div class="info-box tip">
+                    <i class="fas fa-lightbulb"></i>
+                    <div>
+                        <strong>Pro Tip:</strong> Ek course choose karein aur uspe focus karein. Multiple courses ek saath mat start karein - confusion hoga!
+                    </div>
+                </div>
+            `,
+
+            // ===============================
+            // DATA SCIENCE PAGES
+            // ===============================
+            'ds-intro': `
+                <h1 class="page-title">📊 Data Science - Introduction</h1>
+                <p class="page-subtitle">Data se business decisions lena seekhein - India ka fastest growing field!</p>
+
+                <div class="section">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <h2><i class="fas fa-info-circle"></i> Data Science Kya Hai?</h2>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="section-content show">
+                        <p>Data Science matlab <span class="highlight">data se meaningful insights nikalna</span>. Jaise ki:</p>
+                        <ul>
+                            <li>Amazon recommend karta hai ki "yeh product bhi kharidein" - yeh Data Science hai!</li>
+                            <li>Netflix suggest karta hai ki "yeh movie dekhein" - yeh bhi Data Science!</li>
+                            <li>Bank decide karta hai ki loan dena chahiye ya nahi - yeh bhi Data Science!</li>
+                        </ul>
+                        
+                        <div class="info-box note">
+                            <i class="fas fa-info-circle"></i>
+                            <div><strong>Simple Words Mein:</strong> Data Science = Data + Statistics + Programming + Business Understanding</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <h2><i class="fas fa-briefcase"></i> Career Opportunities</h2>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="section-content show">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Job Role</th>
+                                    <th>Fresher Salary</th>
+                                    <th>Companies</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Data Analyst</td>
+                                    <td>₹4-7 LPA</td>
+                                    <td>TCS, Infosys, Wipro</td>
+                                </tr>
+                                <tr>
+                                    <td>Junior Data Scientist</td>
+                                    <td>₹5-10 LPA</td>
+                                    <td>Flipkart, Swiggy, Zomato</td>
+                                </tr>
+                                <tr>
+                                    <td>ML Engineer</td>
+                                    <td>₹6-12 LPA</td>
+                                    <td>Google, Microsoft, Amazon</td>
+                                </tr>
+                                <tr>
+                                    <td>Business Analyst</td>
+                                    <td>₹4-8 LPA</td>
+                                    <td>Deloitte, Accenture, EY</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="info-box tip">
+                            <i class="fas fa-lightbulb"></i>
+                            <div><strong>BCA Students Ke Liye:</strong> Data Analyst role se start karein - yeh sabse accessible hai aur growth bahut achi hai!</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <h2><i class="fas fa-question-circle"></i> Kya Yeh Course Aapke Liye Hai?</h2>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="section-content show">
+                        <p><strong>Yeh course perfect hai agar aap:</strong></p>
+                        <ul class="checklist">
+                            <li><i class="fas fa-check"></i> Numbers aur patterns mein interest rakhte hain</li>
+                            <li><i class="fas fa-check"></i> Problem solving pasand hai</li>
+                            <li><i class="fas fa-check"></i> Python seekhne ready hain</li>
+                            <li><i class="fas fa-check"></i> Remote work ya high salary chahte hain</li>
+                        </ul>
+                        
+                        <p><strong>Yeh course avoid karein agar:</strong></p>
+                        <ul>
+                            <li>Maths se bilkul darr lagta hai (basic maths zaruri hai)</li>
+                            <li>Coding mein interest nahi hai</li>
+                        </ul>
+                    </div>
+                </div>
+            `,
+
+            'ds-prereq': `
+                <h1 class="page-title">📋 Data Science - Prerequisites</h1>
+                <p class="page-subtitle">Shuru karne se pehle yeh basics hone chahiye</p>
+
+                <div class="info-box tip">
+                    <i class="fas fa-lightbulb"></i>
+                    <div><strong>Good News:</strong> BCA mein jo seekha hai woh bahut help karega. Zyada naya seekhne ki zarurat nahi!</div>
+                </div>
+
+                <div class="section">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <h2><i class="fas fa-laptop"></i> Technical Prerequisites</h2>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="section-content show">
+                        <h3>1. Basic Computer Skills ✅</h3>
+                        <ul>
+                            <li>File management (create, copy, move)</li>
+                            <li>Software install karna</li>
+                            <li>Basic internet usage</li>
+                        </ul>
+
+                        <h3>2. Basic Programming Concept (Optional but Helpful)</h3>
+                        <ul>
+                            <li>Variables, loops, conditions ka idea</li>
+                            <li>C ya Java mein basic code likha ho to acha hai</li>
+                            <li>Agar nahi bhi aata to Python se fresh start kar sakte hain!</li>
+                        </ul>
+
+                        <h3>3. Required Software</h3>
+                        <div class="code-header">
+                            <span class="code-lang">Software List</span>
+                        </div>
+                        <pre><code>1. Python (Download from python.org)
+2. VS Code ya PyCharm (Code editor)
+3. Anaconda (Optional - but recommended)
+4. Google Colab (Free, browser mein chalega)</code></pre>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <h2><i class="fas fa-calculator"></i> Mathematics Requirements</h2>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="section-content show">
+                        <div class="info-box note">
+                            <i class="fas fa-info-circle"></i>
+                            <div>Dariye mat! 10th-12th level maths kaafi hai. Advanced maths course mein hi sikhayenge.</div>
+                        </div>
+
+                        <h3>Basic Maths Needed:</h3>
+                        <ul>
+                            <li><strong>Arithmetic:</strong> Add, subtract, multiply, divide, percentages</li>
+                            <li><strong>Basic Algebra:</strong> Simple equations (x + 5 = 10 type)</li>
+                            <li><strong>Basic Statistics:</strong> Mean, median, mode (class 10 level)</li>
+                        </ul>
+
+                        <h3>Yeh Baad Mein Sikhenge (Course Mein):</h3>
+                        <ul>
+                            <li>Probability basics</li>
+                            <li>Standard deviation</li>
+                            <li>Correlation</li>
+                            <li>Linear algebra (just basics)</li>
+                        </ul>
+
+                        <div class="info-box tip">
+                            <i class="fas fa-lightbulb"></i>
+                            <div><strong>Practice:</strong> Khan Academy par free mein 10th-12th maths revise kar sakte hain!</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <h2><i class="fas fa-clock"></i> Time Commitment</h2>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="section-content show">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Study Mode</th>
+                                    <th>Daily Time</th>
+                                    <th>Duration</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Part-time (College ke saath)</td>
+                                    <td>2-3 hours</td>
+                                    <td>5-6 months</td>
+                                </tr>
+                                <tr>
+                                    <td>Full-time (Vacations mein)</td>
+                                    <td>5-6 hours</td>
+                                    <td>3-4 months</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `,
+
+            'ds-roadmap': `
+                <h1 class="page-title">🗺️ Data Science - Learning Roadmap</h1>
+                <p class="page-subtitle">Step-by-step guide - Beginner se Job-Ready tak!</p>
+
+                <div class="roadmap">
+                    <div class="roadmap-step">
+                        <h4>Phase 1: Python Fundamentals</h4>
+                        <div class="duration">⏱️ Duration: 3-4 Weeks</div>
+                        <ul>
+                            <li>Python syntax, variables, data types</li>
+                            <li>Lists, tuples, dictionaries, sets</li>
+                            <li>Loops (for, while) aur conditions (if-else)</li>
+                            <li>Functions aur modules</li>
+                            <li>File handling basics</li>
+                        </ul>
+                    </div>
+
+                    <div class="roadmap-step">
+                        <h4>Phase 2: Statistics for Data Science</h4>
+                        <div class="duration">⏱️ Duration: 2-3 Weeks</div>
+                        <ul>
+                            <li>Descriptive Statistics (Mean, Median, Mode, Variance)</li>
+                            <li>Probability basics</li>
+                            <li>Normal Distribution</li>
+                            <li>Correlation aur Covariance</li>
+                            <li>Hypothesis Testing (basics)</li>
+                        </ul>
+                    </div>
+
+                    <div class="roadmap-step">
+                        <h4>Phase 3: Data Manipulation with NumPy & Pandas</h4>
+                        <div class="duration">⏱️ Duration: 3-4 Weeks</div>
+                        <ul>
+                            <li>NumPy arrays aur operations</li>
+                            <li>Pandas DataFrames</li>
+                            <li>Data cleaning techniques</li>
+                            <li>Data filtering, sorting, grouping</li>
+                            <li>Handling missing values</li>
+                        </ul>
+                    </div>
+
+                    <div class="roadmap-step">
+                        <h4>Phase 4: Data Visualization</h4>
+                        <div class="duration">⏱️ Duration: 2 Weeks</div>
+                        <ul>
+                            <li>Matplotlib basics</li>
+                            <li>Seaborn for statistical plots</li>
+                            <li>Line plots, bar charts, histograms</li>
+                            <li>Scatter plots, heatmaps</li>
+                            <li>Creating dashboards concepts</li>
+                        </ul>
+                    </div>
+
+                    <div class="roadmap-step">
+                        <h4>Phase 5: SQL for Data Analysis</h4>
+                        <div class="duration">⏱️ Duration: 2-3 Weeks</div>
+                        <ul>
+                            <li>Database basics</li>
+                            <li>SELECT, WHERE, ORDER BY</li>
+                            <li>JOINs (INNER, LEFT, RIGHT)</li>
+                            <li>GROUP BY, HAVING</li>
+                            <li>Subqueries</li>
+                        </ul>
+                    </div>
+
+                    <div class="roadmap-step">
+                        <h4>Phase 6: Machine Learning Basics</h4>
+                        <div class="duration">⏱️ Duration: 4-5 Weeks</div>
+                        <ul>
+                            <li>ML concepts (supervised vs unsupervised)</li>
+                            <li>Linear Regression</li>
+                            <li>Logistic Regression</li>
+                            <li>Decision Trees & Random Forest</li>
+                            <li>Model evaluation (accuracy, precision, recall)</li>
+                            <li>Scikit-learn library</li>
+                        </ul>
+                    </div>
+
+                    <div class="roadmap-step">
+                        <h4>Phase 7: Projects & Portfolio</h4>
+                        <div class="duration">⏱️ Duration: 3-4 Weeks</div>
+                        <ul>
+                            <li>3-4 mini projects complete karein</li>
+                            <li>1 major project (end-to-end)</li>
+                            <li>GitHub par projects upload karein</li>
+                            <li>Portfolio website banayein</li>
+                            <li>LinkedIn profile optimize karein</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="info-box tip">
+                    <i class="fas fa-lightbulb"></i>
+                    <div><strong>Important:</strong> Har phase ke baad small project zarur karein. Theory + Practice = Success!</div>
+                </div>
+            `,
+
+            'ds-notes': `
+                <h1 class="page-title">📚 Data Science - Complete Course Notes</h1>
+                <p class="page-subtitle">Easy Hinglish notes with examples aur code!</p>
+
+                <div class="tabs">
+                    <div class="tab active" data-tab="python">Python Basics</div>
+                    <div class="tab" data-tab="stats">Statistics</div>
+                    <div class="tab" data-tab="numpy">NumPy</div>
+                    <div class="tab" data-tab="pandas">Pandas</div>
+                    <div class="tab" data-tab="viz">Visualization</div>
+                    <div class="tab" data-tab="sql">SQL</div>
+                    <div class="tab" data-tab="ml">ML Basics</div>
+                </div>
+
+                <div class="tab-content active" id="python">
+                    <h3>🐍 Python Basics for Data Science</h3>
+                    
+                    <p><strong>Python Kyu?</strong> Python sabse easy language hai aur Data Science mein most popular hai. Libraries bahut achi hain!</p>
+
+                    <h3>1. Variables aur Data Types</h3>
+                    <p>Variables matlab containers jisme data store hota hai:</p>
+                    
+                    <div class="code-header">
+                        <span class="code-lang">Python</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code># Numbers (Integers aur Floats)
+age = 21                    # Integer (whole number)
+salary = 25000.50           # Float (decimal number)
+print(f"Age: {age}, Salary: {salary}")
+
+# Strings (Text)
+name = "Rahul"
+college = "ABC University"
+print(f"Name: {name}, College: {college}")
+
+# Boolean (True/False)
+is_student = True
+has_laptop = False
+
+# Multiple variables ek line mein
+x, y, z = 1, 2, 3</code></pre>
+
+                    <h3>2. Lists - Data Collection</h3>
+                    <p>Lists matlab ek container jisme multiple items store kar sakte hain:</p>
+                    
+                    <div class="code-header">
+                        <span class="code-lang">Python</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code># List banana
+marks = [85, 90, 78, 92, 88]
+names = ["Rahul", "Priya", "Amit"]
+
+# List access karna (index 0 se start hota hai)
+print(marks[0])      # Output: 85 (first item)
+print(marks[-1])     # Output: 88 (last item)
+
+# List modify karna
+marks.append(95)     # End mein add
+marks.insert(0, 80)  # Position 0 par add
+marks.remove(78)     # 78 remove karo
+
+# List slicing
+print(marks[1:4])    # Index 1 se 3 tak
+
+# List functions
+print(len(marks))    # Total items
+print(sum(marks))    # Saare items ka sum
+print(max(marks))    # Maximum value
+print(min(marks))    # Minimum value</code></pre>
+
+                    <h3>3. Dictionaries - Key-Value Pairs</h3>
+                    
+                    <div class="code-header">
+                        <span class="code-lang">Python</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code># Dictionary banana
+student = {
+    "name": "Rahul Kumar",
+    "age": 21,
+    "course": "BCA",
+    "marks": [85, 90, 78]
+}
+
+# Access karna
+print(student["name"])       # Rahul Kumar
+print(student.get("age"))    # 21
+
+# Add/Update karna
+student["college"] = "ABC University"
+student["age"] = 22
+
+# Loop through dictionary
+for key, value in student.items():
+    print(f"{key}: {value}")</code></pre>
+
+                    <h3>4. Loops - Code repeat karna</h3>
+                    
+                    <div class="code-header">
+                        <span class="code-lang">Python</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code># For Loop
+marks = [85, 90, 78, 92, 88]
+for mark in marks:
+    if mark >= 90:
+        print(f"{mark} - Excellent!")
+    elif mark >= 80:
+        print(f"{mark} - Good")
+    else:
+        print(f"{mark} - Average")
+
+# Range ke saath for loop
+for i in range(5):          # 0 se 4 tak
+    print(f"Number: {i}")
+
+# While Loop
+count = 0
+while count < 5:
+    print(count)
+    count += 1
+
+# List Comprehension (shortcut)
+squares = [x**2 for x in range(1, 6)]
+print(squares)  # [1, 4, 9, 16, 25]</code></pre>
+
+                    <h3>5. Functions - Reusable Code</h3>
+                    
+                    <div class="code-header">
+                        <span class="code-lang">Python</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code># Simple function
+def greet(name):
+    return f"Hello, {name}!"
+
+print(greet("Rahul"))
+
+# Function with default parameter
+def calculate_percentage(marks, total=500):
+    percentage = (sum(marks) / total) * 100
+    return round(percentage, 2)
+
+marks = [85, 90, 78, 92, 88]
+result = calculate_percentage(marks)
+print(f"Percentage: {result}%")
+
+# Multiple return values
+def get_stats(numbers):
+    return min(numbers), max(numbers), sum(numbers)/len(numbers)
+
+minimum, maximum, average = get_stats([10, 20, 30, 40])
+print(f"Min: {minimum}, Max: {maximum}, Avg: {average}")</code></pre>
+
+                    <div class="info-box tip">
+                        <i class="fas fa-lightbulb"></i>
+                        <div><strong>Practice Tip:</strong> Yeh saara code khud likh kar run karein. Google Colab use karein - free hai aur browser mein chalega!</div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="stats">
+                    <h3>📊 Statistics for Data Science</h3>
+                    
+                    <p>Statistics data ko samajhne mein help karta hai. Data Scientists ko yeh concepts zaroori hain:</p>
+
+                    <h3>1. Measures of Central Tendency</h3>
+                    <p>Data ka "center" kya hai, yeh batate hain:</p>
+                    
+                    <div class="code-header">
+                        <span class="code-lang">Python</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>import statistics
+
+marks = [85, 90, 78, 92, 88, 95, 72, 85]
+
+# Mean (Average) - Saare values ka sum / total count
+mean = statistics.mean(marks)
+print(f"Mean: {mean}")  # 85.625
+
+# Median - Beech wali value (sorted data mein)
+median = statistics.median(marks)
+print(f"Median: {median}")  # 86.5
+
+# Mode - Sabse zyada baar aane wali value
+mode = statistics.mode(marks)
+print(f"Mode: {mode}")  # 85
+
+# Manual calculation
+manual_mean = sum(marks) / len(marks)
+print(f"Manual Mean: {manual_mean}")</code></pre>
+
+                    <h3>2. Measures of Spread</h3>
+                    <p>Data kitna spread hai (kitna vary karta hai):</p>
+                    
+                    <div class="code-header">
+                        <span class="code-lang">Python</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>import statistics
+import numpy as np
+
+data = [85, 90, 78, 92, 88, 95, 72, 85]
+
+# Range - Maximum minus Minimum
+range_val = max(data) - min(data)
+print(f"Range: {range_val}")  # 23
+
+# Variance - Average of squared differences from mean
+variance = statistics.variance(data)
+print(f"Variance: {variance}")
+
+# Standard Deviation - Variance ka square root
+# Zyada std dev = zyada spread/variation
+std_dev = statistics.stdev(data)
+print(f"Standard Deviation: {std_dev}")
+
+# Percentiles using NumPy
+arr = np.array(data)
+print(f"25th percentile: {np.percentile(arr, 25)}")
+print(f"50th percentile: {np.percentile(arr, 50)}")  # Same as median
+print(f"75th percentile: {np.percentile(arr, 75)}")</code></pre>
+
+                    <h3>3. Correlation</h3>
+                    <p>Do variables ke beech relationship:</p>
+                    
+                    <div class="code-header">
+                        <span class="code-lang">Python</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>import numpy as np
+
+# Study hours aur marks
+study_hours = [2, 3, 5, 6, 8, 10]
+marks = [45, 55, 65, 70, 85, 95]
+
+# Correlation coefficient (-1 to +1)
+# +1 = perfect positive (ek badhega to doosra bhi badhega)
+# -1 = perfect negative (ek badhega to doosra ghatega)
+# 0 = no relationship
+correlation = np.corrcoef(study_hours, marks)[0, 1]
+print(f"Correlation: {correlation:.2f}")  # ~0.99 (strong positive)
+
+# Real world example
+# Zyada study = zyada marks (positive correlation)
+# Zyada TV = kam marks (negative correlation)</code></pre>
+
+                    <div class="info-box note">
+                        <i class="fas fa-info-circle"></i>
+                        <div><strong>Yaad Rakhein:</strong> Correlation ≠ Causation! Ice cream sales aur drowning mein correlation hai, but ice cream drowning cause nahi karta - dono summer mein badhte hain!</div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="numpy">
+                    <h3>🔢 NumPy - Numerical Python</h3>
+                    
+                    <p>NumPy arrays Python lists se 50x faster hain! Data Science mein foundation hai:</p>
+
+                    <h3>1. NumPy Arrays Basics</h3>
+                    
+                    <div class="code-header">
+                        <span class="code-lang">Python</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>import numpy as np
+
+# 1D Array banana
+arr1 = np.array([1, 2, 3, 4, 5])
+print(arr1)
+print(f"Type: {type(arr1)}")
+
+# 2D Array (Matrix)
+arr2 = np.array([
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+])
+print(arr2)
+
+# Array properties
+print(f"Shape: {arr2.shape}")    # (3, 3)
+print(f"Dimensions: {arr2.ndim}")  # 2
+print(f"Size: {arr2.size}")      # 9
+print(f"Data type: {arr2.dtype}")  # int64
+
+# Special arrays
+zeros = np.zeros((3, 3))         # 3x3 array of zeros
+ones = np.ones((2, 4))           # 2x4 array of ones
+identity = np.eye(3)             # 3x3 identity matrix
+random = np.random.rand(3, 3)    # Random values 0-1</code></pre>
+
+                    <h3>2. Array Operations</h3>
+                    
+                    <div class="code-header">
+                        <span class="code-lang">Python</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>import numpy as np
+
+arr = np.array([10, 20, 30, 40, 50])
+
+# Arithmetic operations (element-wise)
+print(arr + 5)      # [15, 25, 35, 45, 55]
+print(arr * 2)      # [20, 40, 60, 80, 100]
+print(arr ** 2)     # [100, 400, 900, 1600, 2500]
+
+# Statistical functions
+print(f"Sum: {np.sum(arr)}")
+print(f"Mean: {np.mean(arr)}")
+print(f"Std Dev: {np.std(arr)}")
+print(f"Max: {np.max(arr)}")
+print(f"Min: {np.min(arr)}")
+
+# 2D Array operations
+matrix = np.array([[1, 2], [3, 4]])
+print(f"Row sum: {np.sum(matrix, axis=1)}")    # [3, 7]
+print(f"Column sum: {np.sum(matrix, axis=0)}")  # [4, 6]
+
+# Boolean indexing
+marks = np.array([45, 78, 92, 34, 88, 67])
+passed = marks[marks >= 40]
+print(f"Passed students: {passed}")</code></pre>
+
+                    <h3>3. Array Reshaping & Slicing</h3>
+                    
+                    <div class="code-header">
+                        <span class="code-lang">Python</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>import numpy as np
+
+# Reshape
+arr = np.arange(12)  # [0, 1, 2, ..., 11]
+reshaped = arr.reshape(3, 4)  # 3 rows, 4 columns
+print(reshaped)
+
+# Slicing 2D arrays
+matrix = np.array([
+    [1, 2, 3, 4],
+    [5, 6, 7, 8],
+    [9, 10, 11, 12]
+])
+
+print(matrix[0, :])      # First row: [1, 2, 3, 4]
+print(matrix[:, 0])      # First column: [1, 5, 9]
+print(matrix[0:2, 1:3])  # Submatrix
+
+# Flatten (2D to 1D)
+flat = matrix.flatten()
+print(flat)  # [1, 2, 3, ..., 12]</code></pre>
+                </div>
+
+                <div class="tab-content" id="pandas">
+                    <h3>🐼 Pandas - Data Analysis Power</h3>
+                    
+                    <p>Pandas = Excel in Python! Tables (DataFrames) ke saath kaam karna bahut easy ho jaata hai:</p>
+
+                    <h3>1. DataFrame Basics</h3>
+                    
+                    <div class="code-header">
+                        <span class="code-lang">Python</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>import pandas as pd
+
+# Dictionary se DataFrame banana
+data = {
+    'Name': ['Rahul', 'Priya', 'Amit', 'Sneha'],
+    'Age': [21, 22, 20, 21],
+    'Marks': [85, 92, 78, 88],
+    'City': ['Delhi', 'Mumbai', 'Delhi', 'Chennai']
+}
+df = pd.DataFrame(data)
+print(df)
+
+# Output:
+#     Name  Age  Marks     City
+# 0  Rahul   21     85    Delhi
+# 1  Priya   22     92   Mumbai
+# 2   Amit   20     78    Delhi
+# 3  Sneha   21     88  Chennai
+
+# Basic info
+print(df.shape)       # (4, 4)
+print(df.columns)     # Column names
+print(df.dtypes)      # Data types
+print(df.describe())  # Statistics summary</code></pre>
+
+                    <h3>2. Data Selection & Filtering</h3>
+                    
+                    <div class="code-header">
+                        <span class="code-lang">Python</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>import pandas as pd
+
+# Sample DataFrame
+df = pd.DataFrame({
+    'Name': ['Rahul', 'Priya', 'Amit', 'Sneha', 'Raj'],
+    'Age': [21, 22, 20, 21, 23],
+    'Marks': [85, 92, 78, 88, 95],
+    'City': ['Delhi', 'Mumbai', 'Delhi', 'Chennai', 'Mumbai']
+})
+
+# Column select karna
+print(df['Name'])           # Single column
+print(df[['Name', 'Marks']])  # Multiple columns
+
+# Row select karna
+print(df.iloc[0])          # First row (by index)
+print(df.iloc[0:3])        # First 3 rows
+print(df.loc[0])           # By label
+
+# Filtering (conditions)
+high_scorers = df[df['Marks'] >= 90]
+print(high_scorers)
+
+delhi_students = df[df['City'] == 'Delhi']
+print(delhi_students)
+
+# Multiple conditions
+result = df[(df['Marks'] >= 85) & (df['Age'] <= 21)]
+print(result)</code></pre>
+
+                    <h3>3. Data Cleaning</h3>
+                    
+                    <div class="code-header">
+                        <span class="code-lang">Python</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>import pandas as pd
+import numpy as np
+
+# DataFrame with missing values
+df = pd.DataFrame({
+    'Name': ['Rahul', 'Priya', None, 'Sneha'],
+    'Age': [21, np.nan, 20, 21],
+    'Marks': [85, 92, np.nan, 88]
+})
+
+# Check missing values
+print(df.isnull().sum())
+
+# Handle missing values
+# Option 1: Remove rows with missing values
+df_clean = df.dropna()
+
+# Option 2: Fill with specific value
+df['Age'] = df['Age'].fillna(df['Age'].mean())
+df['Marks'] = df['Marks'].fillna(0)
+df['Name'] = df['Name'].fillna('Unknown')
+
+# Remove duplicates
+df = df.drop_duplicates()
+
+# Rename columns
+df = df.rename(columns={'Marks': 'Score'})
+
+# Change data type
+df['Age'] = df['Age'].astype(int)</code></pre>
+
+                    <h3>4. GroupBy & Aggregation</h3>
+                    
+                    <div class="code-header">
+                        <span class="code-lang">Python</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>import pandas as pd
+
+df = pd.DataFrame({
+    'City': ['Delhi', 'Mumbai', 'Delhi', 'Chennai', 'Mumbai'],
+    'Product': ['Laptop', 'Phone', 'Phone', 'Laptop', 'Laptop'],
+    'Sales': [50000, 20000, 18000, 45000, 55000]
+})
+
+# Group by City
+city_sales = df.groupby('City')['Sales'].sum()
+print(city_sales)
+
+# Multiple aggregations
+summary = df.groupby('City').agg({
+    'Sales': ['sum', 'mean', 'count']
+})
+print(summary)
+
+# Pivot Table
+pivot = pd.pivot_table(df, values='Sales', 
+                       index='City', columns='Product', 
+                       aggfunc='sum')
+print(pivot)</code></pre>
+                </div>
+
+                <div class="tab-content" id="viz">
+                    <h3>📈 Data Visualization</h3>
+                    
+                    <p>Data ko visualize karna bahut important hai - "A picture is worth a thousand words!"</p>
+
+                    <h3>1. Matplotlib Basics</h3>
+                    
+                    <div class="code-header">
+                        <span class="code-lang">Python</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>import matplotlib.pyplot as plt
+import numpy as np
+
+# Line Plot
+months = ['Jan', 'Feb', 'Mar', 'Apr', 'May']
+sales = [100, 120, 150, 130, 180]
+
+plt.figure(figsize=(10, 5))
+plt.plot(months, sales, marker='o', color='blue', linewidth=2)
+plt.title('Monthly Sales 2024')
+plt.xlabel('Month')
+plt.ylabel('Sales (in thousands)')
+plt.grid(True)
+plt.show()
+
+# Bar Chart
+products = ['Laptop', 'Phone', 'Tablet', 'Watch']
+revenue = [500, 800, 300, 200]
+
+plt.figure(figsize=(8, 5))
+plt.bar(products, revenue, color=['blue', 'green', 'orange', 'red'])
+plt.title('Product Revenue')
+plt.xlabel('Products')
+plt.ylabel('Revenue (in lakhs)')
+plt.show()
+
+# Histogram
+marks = np.random.normal(70, 15, 200)  # Random marks
+
+plt.figure(figsize=(8, 5))
+plt.hist(marks, bins=20, color='skyblue', edgecolor='black')
+plt.title('Marks Distribution')
+plt.xlabel('Marks')
+plt.ylabel('Number of Students')
+plt.show()</code></pre>
+
+                    <h3>2. Seaborn for Statistical Plots</h3>
+                    
+                    <div class="code-header">
+                        <span class="code-lang">Python</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>import seaborn as sns
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Sample data
+df = pd.DataFrame({
+    'City': ['Delhi']*20 + ['Mumbai']*20,
+    'Sales': list(range(100, 120)) + list(range(120, 140)),
+    'Profit': list(range(20, 40)) + list(range(30, 50))
+})
+
+# Box Plot - Distribution compare karna
+plt.figure(figsize=(8, 5))
+sns.boxplot(x='City', y='Sales', data=df)
+plt.title('Sales Distribution by City')
+plt.show()
+
+# Scatter Plot with regression line
+plt.figure(figsize=(8, 5))
+sns.regplot(x='Sales', y='Profit', data=df)
+plt.title('Sales vs Profit')
+plt.show()
+
+# Heatmap - Correlation matrix
+correlation = df[['Sales', 'Profit']].corr()
+plt.figure(figsize=(6, 4))
+sns.heatmap(correlation, annot=True, cmap='coolwarm')
+plt.title('Correlation Heatmap')
+plt.show()</code></pre>
+                </div>
+
+                <div class="tab-content" id="sql">
+                    <h3>🗄️ SQL for Data Science</h3>
+                    
+                    <p>Companies ka data databases mein hota hai. SQL se data nikalna aana chahiye!</p>
+
+                    <h3>1. Basic Queries</h3>
+                    
+                    <div class="code-header">
+                        <span class="code-lang">SQL</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>-- Table se saara data lena
+SELECT * FROM students;
+
+-- Specific columns
+SELECT name, marks FROM students;
+
+-- Condition ke saath
+SELECT * FROM students WHERE marks >= 80;
+
+-- Multiple conditions
+SELECT * FROM students 
+WHERE marks >= 80 AND city = 'Delhi';
+
+-- Sorting
+SELECT * FROM students 
+ORDER BY marks DESC;
+
+-- Limit results
+SELECT * FROM students 
+ORDER BY marks DESC 
+LIMIT 5;</code></pre>
+
+                    <h3>2. Aggregation Functions</h3>
+                    
+                    <div class="code-header">
+                        <span class="code-lang">SQL</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>-- Count
+SELECT COUNT(*) FROM students;
+
+-- Average marks
+SELECT AVG(marks) as avg_marks FROM students;
+
+-- Maximum and Minimum
+SELECT MAX(marks), MIN(marks) FROM students;
+
+-- Sum
+SELECT SUM(sales) FROM orders;
+
+-- Group By
+SELECT city, AVG(marks) as avg_marks
+FROM students
+GROUP BY city;
+
+-- Having (condition on groups)
+SELECT city, COUNT(*) as student_count
+FROM students
+GROUP BY city
+HAVING COUNT(*) > 5;</code></pre>
+
+                    <h3>3. Joins</h3>
+                    
+                    <div class="code-header">
+                        <span class="code-lang">SQL</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>-- Inner Join (matching records from both tables)
+SELECT students.name, courses.course_name
+FROM students
+INNER JOIN enrollments ON students.id = enrollments.student_id
+INNER JOIN courses ON enrollments.course_id = courses.id;
+
+-- Left Join (all from left, matching from right)
+SELECT students.name, orders.order_id
+FROM students
+LEFT JOIN orders ON students.id = orders.student_id;
+
+-- Subquery
+SELECT name, marks
+FROM students
+WHERE marks > (SELECT AVG(marks) FROM students);</code></pre>
+
+                    <h3>Python mein SQL (SQLite)</h3>
+                    
+                    <div class="code-header">
+                        <span class="code-lang">Python</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>import sqlite3
+import pandas as pd
+
+# Database se connect karna
+conn = sqlite3.connect('students.db')
+
+# SQL query run karna
+query = "SELECT * FROM students WHERE marks >= 80"
+df = pd.read_sql_query(query, conn)
+print(df)
+
+# Connection close karna
+conn.close()</code></pre>
+                </div>
+
+                <div class="tab-content" id="ml">
+                    <h3>🤖 Machine Learning Basics</h3>
+                    
+                    <p>ML = Computer ko data se seekhna sikhana! Prediction karna possible hota hai.</p>
+
+                    <h3>1. ML Types</h3>
+                    <ul>
+                        <li><strong>Supervised Learning:</strong> Labeled data se seekhna (jaise marks predict karna based on study hours)</li>
+                        <li><strong>Unsupervised Learning:</strong> Patterns find karna (jaise customer groups banana)</li>
+                    </ul>
+
+                    <h3>2. Linear Regression (Price Prediction)</h3>
+                    
+                    <div class="code-header">
+                        <span class="code-lang">Python</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+import numpy as np
+
+# Sample data: House size (sq ft) vs Price (lakhs)
+X = np.array([[500], [800], [1000], [1200], [1500], [1800], [2000]])
+y = np.array([25, 35, 45, 55, 70, 85, 95])
+
+# Train-Test split (80% train, 20% test)
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+# Model train karna
+model = LinearRegression()
+model.fit(X_train, y_train)
+
+# Prediction
+new_house = [[1100]]  # 1100 sq ft
+predicted_price = model.predict(new_house)
+print(f"Predicted price: ₹{predicted_price[0]:.2f} lakhs")
+
+# Model accuracy
+score = model.score(X_test, y_test)
+print(f"Model R² score: {score:.2f}")</code></pre>
+
+                    <h3>3. Classification (Pass/Fail Prediction)</h3>
+                    
+                    <div class="code-header">
+                        <span class="code-lang">Python</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+import numpy as np
+
+# Data: Study hours vs Pass (1) or Fail (0)
+X = np.array([[1], [2], [3], [4], [5], [6], [7], [8], [9], [10]])
+y = np.array([0, 0, 0, 0, 1, 1, 1, 1, 1, 1])  # 0=Fail, 1=Pass
+
+# Split data
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+# Train model
+model = LogisticRegression()
+model.fit(X_train, y_train)
+
+# Predict
+predictions = model.predict(X_test)
+print(f"Predictions: {predictions}")
+
+# Accuracy
+accuracy = accuracy_score(y_test, predictions)
+print(f"Accuracy: {accuracy * 100:.2f}%")
+
+# Single prediction
+study_hours = [[4.5]]
+result = model.predict(study_hours)
+print(f"4.5 hours study = {'Pass' if result[0] == 1 else 'Fail'}")</code></pre>
+
+                    <h3>4. Decision Tree</h3>
+                    
+                    <div class="code-header">
+                        <span class="code-lang">Python</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>from sklearn.tree import DecisionTreeClassifier
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+
+# Load sample data (Iris flower classification)
+iris = load_iris()
+X = iris.data      # Features (petal length, width etc.)
+y = iris.target    # Labels (flower type)
+
+# Split
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+# Train Decision Tree
+model = DecisionTreeClassifier(max_depth=3)
+model.fit(X_train, y_train)
+
+# Predict & Evaluate
+predictions = model.predict(X_test)
+accuracy = accuracy_score(y_test, predictions)
+print(f"Accuracy: {accuracy * 100:.2f}%")</code></pre>
+
+                    <div class="info-box tip">
+                        <i class="fas fa-lightbulb"></i>
+                        <div><strong>ML Tip:</strong> Pehle simple algorithms (Linear/Logistic Regression) master karein, phir advanced mein jaayein!</div>
+                    </div>
+                </div>
+            `,
+
+            'ds-practice': `
+                <h1 class="page-title">💪 Data Science - Practice & Projects</h1>
+                <p class="page-subtitle">Hands-on practice se skills build karein!</p>
+
+                <div class="section">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <h2><i class="fas fa-question-circle"></i> Practice Questions</h2>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="section-content show">
+                        
+                        <div class="question-card">
+                            <div class="q-header">
+                                <span class="q-number">1</span>
+                                <span class="q-difficulty easy">Easy</span>
+                            </div>
+                            <p><strong>Python Lists:</strong> Ek list banao jisme 10 students ke marks hain. Calculate karo average, highest aur lowest marks.</p>
+                            <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+                            <div class="answer">
+                                <pre><code>marks = [85, 92, 78, 65, 88, 95, 72, 80, 90, 68]
+
+average = sum(marks) / len(marks)
+highest = max(marks)
+lowest = min(marks)
+
+print(f"Average: {average}")
+print(f"Highest: {highest}")
+print(f"Lowest: {lowest}")</code></pre>
+                            </div>
+                        </div>
+
+                        <div class="question-card">
+                            <div class="q-header">
+                                <span class="q-number">2</span>
+                                <span class="q-difficulty easy">Easy</span>
+                            </div>
+                            <p><strong>NumPy:</strong> 5x5 matrix banao random numbers se (0-100). Row-wise aur column-wise sum find karo.</p>
+                            <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+                            <div class="answer">
+                                <pre><code>import numpy as np
+
+# 5x5 random matrix (0-100)
+matrix = np.random.randint(0, 101, size=(5, 5))
+print("Matrix:")
+print(matrix)
+
+# Row-wise sum
+row_sum = np.sum(matrix, axis=1)
+print(f"\nRow sums: {row_sum}")
+
+# Column-wise sum
+col_sum = np.sum(matrix, axis=0)
+print(f"Column sums: {col_sum}")</code></pre>
+                            </div>
+                        </div>
+
+                        <div class="question-card">
+                            <div class="q-header">
+                                <span class="q-number">3</span>
+                                <span class="q-difficulty medium">Medium</span>
+                            </div>
+                            <p><strong>Pandas:</strong> Ek CSV file read karo (ya dictionary se DataFrame banao). Find karo: (1) Top 5 highest scorers, (2) City-wise average marks, (3) Students with marks > 80.</p>
+                            <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+                            <div class="answer">
+                                <pre><code>import pandas as pd
+
+# Sample DataFrame
+data = {
+    'Name': ['Rahul', 'Priya', 'Amit', 'Sneha', 'Raj', 'Neha'],
+    'City': ['Delhi', 'Mumbai', 'Delhi', 'Mumbai', 'Delhi', 'Chennai'],
+    'Marks': [85, 92, 78, 88, 95, 72]
+}
+df = pd.DataFrame(data)
+
+# Top 5 highest scorers
+top5 = df.nlargest(5, 'Marks')
+print("Top 5:\n", top5)
+
+# City-wise average
+city_avg = df.groupby('City')['Marks'].mean()
+print("\nCity-wise Average:\n", city_avg)
+
+# Marks > 80
+high_scorers = df[df['Marks'] > 80]
+print("\nHigh Scorers:\n", high_scorers)</code></pre>
+                            </div>
+                        </div>
+
+                        <div class="question-card">
+                            <div class="q-header">
+                                <span class="q-number">4</span>
+                                <span class="q-difficulty medium">Medium</span>
+                            </div>
+                            <p><strong>SQL Query:</strong> Students table mein se (1) City-wise student count, (2) Average marks > 80 wali cities, (3) Top 3 cities by total marks.</p>
+                            <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+                            <div class="answer">
+                                <pre><code>-- 1. City-wise student count
+SELECT city, COUNT(*) as student_count
+FROM students
+GROUP BY city;
+
+-- 2. Cities with avg marks > 80
+SELECT city, AVG(marks) as avg_marks
+FROM students
+GROUP BY city
+HAVING AVG(marks) > 80;
+
+-- 3. Top 3 cities by total marks
+SELECT city, SUM(marks) as total_marks
+FROM students
+GROUP BY city
+ORDER BY total_marks DESC
+LIMIT 3;</code></pre>
+                            </div>
+                        </div>
+
+                        <div class="question-card">
+                            <div class="q-header">
+                                <span class="q-number">5</span>
+                                <span class="q-difficulty hard">Hard</span>
+                            </div>
+                            <p><strong>ML Challenge:</strong> Student ke study hours, attendance, aur previous marks se final marks predict karne ka Linear Regression model banao.</p>
+                            <button class="answer-toggle" onclick="toggleAnswer(this)">Show Answer</button>
+                            <div class="answer">
+                                <pre><code>from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+import numpy as np
+
+# Data: [study_hours, attendance%, prev_marks]
+X = np.array([
+    [2, 60, 45], [4, 75, 55], [6, 85, 65],
+    [3, 70, 50], [5, 80, 60], [7, 90, 75],
+    [8, 95, 80], [1, 50, 35], [4, 78, 58]
+])
+y = np.array([50, 65, 75, 55, 70, 85, 92, 40, 68])
+
+# Split data
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+# Train model
+model = LinearRegression()
+model.fit(X_train, y_train)
+
+# Predict for new student
+new_student = [[5, 80, 65]]  # 5 hrs, 80% att, 65 prev marks
+prediction = model.predict(new_student)
+print(f"Predicted marks: {prediction[0]:.2f}")
+
+# Model score
+print(f"R² Score: {model.score(X_test, y_test):.2f}")</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <h2><i class="fas fa-project-diagram"></i> Mini Projects</h2>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="section-content show">
+                        
+                        <div class="project-card">
+                            <span class="project-type mini">Mini Project</span>
+                            <h4><i class="fas fa-chart-bar"></i> Student Performance Analyzer</h4>
+                            <p>CSV file se students data load karo. Analysis karo: pass/fail ratio, subject-wise performance, topper identification.</p>
+                            <div class="tech-stack">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Pandas</span>
+                                <span class="tech-tag">Matplotlib</span>
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <span class="project-type mini">Mini Project</span>
+                            <h4><i class="fas fa-store"></i> Sales Data Dashboard</h4>
+                            <p>E-commerce sales data analyze karo. Top products, monthly trends, city-wise sales visualize karo.</p>
+                            <div class="tech-stack">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Pandas</span>
+                                <span class="tech-tag">Seaborn</span>
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <span class="project-type mini">Mini Project</span>
+                            <h4><i class="fas fa-virus"></i> COVID-19 Data Analysis</h4>
+                            <p>COVID cases data download karo aur analyze karo: state-wise comparison, daily trends, recovery rates.</p>
+                            <div class="tech-stack">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Pandas</span>
+                                <span class="tech-tag">Plotly</span>
+                            </div>
+                        </div>
+
+                        <div class="project-card">
+                            <span class="project-type mini">Mini Project</span>
+                            <h4><i class="fas fa-home"></i> House Price Predictor</h4>
+                            <p>Linear Regression use karke house prices predict karo based on size, location, bedrooms.</p>
+                            <div class="tech-stack">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Scikit-learn</span>
+                                <span class="tech-tag">Pandas</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <h2><i class="fas fa-trophy"></i> Major Project</h2>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="section-content show">
+                        
+                        <div class="project-card">
+                            <span class="project-type major">Major Project</span>
+                            <h4><i class="fas fa-graduation-cap"></i> Complete Student Performance Prediction System</h4>
+                            <p>End-to-end ML project: Data collection, cleaning, EDA, model training, evaluation, aur simple web interface.</p>
+                            
+                            <h3>Project Steps:</h3>
+                            <ol>
+                                <li><strong>Data Collection:</strong> Kaggle se dataset download ya dummy data create</li>
+                                <li><strong>Data Cleaning:</strong> Missing values handle, outliers remove</li>
+                                <li><strong>EDA:</strong> Visualizations banao, patterns find karo</li>
+                                <li><strong>Feature Engineering:</strong> New features create</li>
+                                <li><strong>Model Training:</strong> Multiple models try (Linear, Decision Tree, Random Forest)</li>
+                                <li><strong>Model Evaluation:</strong> Best model select</li>
+                                <li><strong>Deployment:</strong> Flask se simple web app banao</li>
+                            </ol>
+
+                            <div class="tech-stack">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Pandas</span>
+                                <span class="tech-tag">Scikit-learn</span>
+                                <span class="tech-tag">Matplotlib</span>
+                                <span class="tech-tag">Flask</span>
+                                <span class="tech-tag">HTML/CSS</span>
+                            </div>
+                        </div>
+
+                        <div class="info-box tip">
+                            <i class="fas fa-lightbulb"></i>
+                            <div><strong>Important:</strong> Major project GitHub par upload karo with proper README. Interview mein yahi project discuss hoga!</div>
+                        </div>
+                    </div>
+                </div>
+            `,
+
+            'ds-jobs': `
+                <h1 class="page-title">💼 Data Science - Jobs & Internships</h1>
+                <p class="page-subtitle">Job-ready banein aur career start karein!</p>
+
+                <div class="section">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <h2><i class="fas fa-user-tie"></i> Job Roles for BCA Freshers</h2>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="section-content show">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Role</th>
+                                    <th>Salary Range</th>
+                                    <th>Key Skills</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Data Analyst</strong> (Best for start)</td>
+                                    <td>₹3-6 LPA</td>
+                                    <td>Excel, SQL, Python, Visualization</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Junior Data Scientist</strong></td>
+                                    <td>₹4-8 LPA</td>
+                                    <td>Python, ML, Statistics, SQL</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Business Analyst</strong></td>
+                                    <td>₹4-7 LPA</td>
+                                    <td>SQL, Excel, Communication, Domain knowledge</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>BI Developer</strong></td>
+                                    <td>₹4-8 LPA</td>
+                                    <td>SQL, Power BI/Tableau, ETL</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <h2><i class="fas fa-bullseye"></i> Required Skills Checklist</h2>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="section-content show">
+                        <h3>Technical Skills (Must Have):</h3>
+                        <ul class="checklist">
+                            <li><i class="fas fa-check"></i> Python programming (NumPy, Pandas)</li>
+                            <li><i class="fas fa-check"></i> SQL queries (intermediate level)</li>
+                            <li><i class="fas fa-check"></i> Data Visualization (Matplotlib, Seaborn)</li>
+                            <li><i class="fas fa-check"></i> Statistics fundamentals</li>
+                            <li><i class="fas fa-check"></i> Basic Machine Learning</li>
+                            <li><i class="fas fa-check"></i> Excel (Pivot tables, VLOOKUP)</li>
+                        </ul>
+
+                        <h3>Tools (Good to Know):</h3>
+                        <ul class="checklist">
+                            <li><i class="fas fa-check"></i> Power BI or Tableau</li>
+                            <li><i class="fas fa-check"></i> Jupyter Notebook / Google Colab</li>
+                            <li><i class="fas fa-check"></i> Git & GitHub</li>
+                        </ul>
+
+                        <h3>Soft Skills:</h3>
+                        <ul class="checklist">
+                            <li><i class="fas fa-check"></i> Problem-solving ability</li>
+                            <li><i class="fas fa-check"></i> Communication (findings explain karna)</li>
+                            <li><i class="fas fa-check"></i> Curiosity & self-learning attitude</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <h2><i class="fas fa-file-alt"></i> Resume Tips</h2>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="section-content show">
+                        <div class="info-box tip">
+                            <i class="fas fa-lightbulb"></i>
+                            <div>Resume 1 page mein rakho. Clear formatting, no fancy designs!</div>
+                        </div>
+
+                        <h3>Resume Structure:</h3>
+                        <ol>
+                            <li><strong>Contact Info:</strong> Name, Phone, Email, LinkedIn, GitHub</li>
+                            <li><strong>Summary:</strong> 2-3 lines mein apni skills aur goals</li>
+                            <li><strong>Education:</strong> BCA details with percentage/CGPA</li>
+                            <li><strong>Skills:</strong> Technical skills list (Python, SQL, etc.)</li>
+                            <li><strong>Projects:</strong> 2-3 best projects with brief description</li>
+                            <li><strong>Certifications:</strong> Any relevant courses</li>
+                        </ol>
+
+                        <h3>Sample Project Description:</h3>
+                        <div class="code-header">
+                            <span class="code-lang">Resume Format</span>
+                        </div>
+                        <pre><code>Student Performance Prediction System
+- Built ML model predicting student exam scores with 85% accuracy
+- Used Python, Pandas, Scikit-learn for data analysis and modeling
+- Created interactive dashboard using Matplotlib and Seaborn
+- Deployed as Flask web application on Heroku
+- GitHub: github.com/yourname/project</code></pre>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <h2><i class="fas fa-laptop-house"></i> Internship Resources</h2>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="section-content show">
+                        <h3>Where to Apply:</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Platform</th>
+                                    <th>Type</th>
+                                    <th>Tips</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Internshala</td>
+                                    <td>Internships</td>
+                                    <td>Daily check karein, quick apply</td>
+                                </tr>
+                                <tr>
+                                    <td>LinkedIn</td>
+                                    <td>Jobs + Network</td>
+                                    <td>Profile strong banao, connections badao</td>
+                                </tr>
+                                <tr>
+                                    <td>Naukri</td>
+                                    <td>Full-time Jobs</td>
+                                    <td>Resume update rakhein</td>
+                                </tr>
+                                <tr>
+                                    <td>AngelList</td>
+                                    <td>Startups</td>
+                                    <td>Good for freshers, flexible roles</td>
+                                </tr>
+                                <tr>
+                                    <td>Company Websites</td>
+                                    <td>Direct Apply</td>
+                                    <td>Careers page regularly check karein</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h3>Interview Preparation:</h3>
+                        <ul>
+                            <li><strong>SQL:</strong> LeetCode, HackerRank SQL practice</li>
+                            <li><strong>Python:</strong> Basic coding questions</li>
+                            <li><strong>Statistics:</strong> Mean, median, probability basics</li>
+                            <li><strong>Projects:</strong> Apne projects ache se explain karna seekho</li>
+                            <li><strong>Case Studies:</strong> Business problems solve karne practice karo</li>
+                        </ul>
+                    </div>
+                </div>
+            `,
+
+            // ===============================
+            // AI PAGES
+            // ===============================
+            'ai-intro': `
+                <h1 class="page-title">🤖 Artificial Intelligence - Introduction</h1>
+                <p class="page-subtitle">Future ka field! Machines ko intelligent banana seekhein.</p>
+
+                <div class="section">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <h2><i class="fas fa-info-circle"></i> AI Kya Hai?</h2>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="section-content show">
+                        <p>Artificial Intelligence matlab <span class="highlight">machines ko human-like intelligence dena</span>:</p>
+                        <ul>
+                            <li><strong>See:</strong> Computer Vision - images recognize karna (face unlock)</li>
+                            <li><strong>Hear:</strong> Speech Recognition - voice commands samajhna (Alexa, Siri)</li>
+                            <li><strong>Think:</strong> Decision Making - best option choose karna (chess playing AI)</li>
+                            <li><strong>Learn:</strong> Machine Learning - experience se improve hona</li>
+                        </ul>
+
+                        <div class="info-box note">
+                            <i class="fas fa-info-circle"></i>
+                            <div><strong>Real Examples:</strong> Google Translate, Netflix recommendations, Self-driving cars, ChatGPT - yeh sab AI hai!</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <h2><i class="fas fa-briefcase"></i> Career Opportunities</h2>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="section-content show">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Job Role</th>
+                                    <th>Fresher Salary</th>
+                                    <th>Companies</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>ML Engineer</td>
+                                    <td>₹6-15 LPA</td>
+                                    <td>Google, Microsoft, Amazon</td>
+                                </tr>
+                                <tr>
+                                    <td>AI Developer</td>
+                                    <td>₹5-12 LPA</td>
+                                    <td>Flipkart, Ola, Swiggy</td>
+                                </tr>
+                                <tr>
+                                    <td>Data Scientist (AI)</td>
+                                    <td>₹6-14 LPA</td>
+                                    <td>Paytm, Razorpay, Groww</td>
+                                </tr>
+                                <tr>
+                                    <td>NLP Engineer</td>
+                                    <td>₹8-18 LPA</td>
+                                    <td>OpenAI, Anthropic, Adobe</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="info-box warning">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <div><strong>Reality Check:</strong> AI roles mein competition high hai. Strong fundamentals + projects zaruri hain. MCA/MTech karna helpful ho sakta hai!</div>
+                        </div>
+                    </div>
+                </div>
+            `,
+
+            'ai-prereq': `
+                <h1 class="page-title">📋 AI - Prerequisites</h1>
+                <p class="page-subtitle">AI seekhne se pehle yeh basics hone chahiye</p>
+
+                <div class="section">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <h2><i class="fas fa-laptop"></i> Technical Prerequisites</h2>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="section-content show">
+                        <h3>1. Python (Most Important)</h3>
+                        <ul>
+                            <li>Variables, data types, loops, functions</li>
+                            <li>OOP basics (classes, objects)</li>
+                            <li>Libraries: NumPy, Pandas, Matplotlib</li>
+                        </ul>
+
+                        <h3>2. Mathematics (Don't Worry - Basic Level)</h3>
+                        <ul>
+                            <li><strong>Linear Algebra:</strong> Vectors, matrices (basics)</li>
+                            <li><strong>Calculus:</strong> Derivatives concept (for understanding, not solving)</li>
+                            <li><strong>Probability:</strong> Basic probability rules</li>
+                            <li><strong>Statistics:</strong> Mean, variance, distributions</li>
+                        </ul>
+
+                        <div class="info-box tip">
+                            <i class="fas fa-lightbulb"></i>
+                            <div>Maths darr lagta hai? 3Blue1Brown YouTube channel dekho - visualizations se samajh aayega!</div>
+                        </div>
+                    </div>
+                </div>
+            `,
+
+            'ai-roadmap': `
+                <h1 class="page-title">🗺️ AI - Learning Roadmap</h1>
+                <p class="page-subtitle">Step-by-step AI expert bano!</p>
+
+                <div class="roadmap">
+                    <div class="roadmap-step">
+                        <h4>Phase 1: Python & Math Foundations</h4>
+                        <div class="duration">⏱️ Duration: 4-5 Weeks</div>
+                        <ul>
+                            <li>Python advanced (OOP, libraries)</li>
+                            <li>NumPy for numerical computing</li>
+                            <li>Linear Algebra basics</li>
+                            <li>Probability & Statistics</li>
+                        </ul>
+                    </div>
+
+                    <div class="roadmap-step">
+                        <h4>Phase 2: Machine Learning Fundamentals</h4>
+                        <div class="duration">⏱️ Duration: 5-6 Weeks</div>
+                        <ul>
+                            <li>Supervised Learning (Classification, Regression)</li>
+                            <li>Unsupervised Learning (Clustering)</li>
+                            <li>Model Evaluation & Validation</li>
+                            <li>Scikit-learn mastery</li>
+                        </ul>
+                    </div>
+
+                    <div class="roadmap-step">
+                        <h4>Phase 3: Search & Optimization</h4>
+                        <div class="duration">⏱️ Duration: 2-3 Weeks</div>
+                        <ul>
+                            <li>Search Algorithms (BFS, DFS, A*)</li>
+                            <li>Game Playing (Minimax)</li>
+                            <li>Optimization techniques</li>
+                        </ul>
+                    </div>
+
+                    <div class="roadmap-step">
+                        <h4>Phase 4: Neural Networks & Deep Learning</h4>
+                        <div class="duration">⏱️ Duration: 5-6 Weeks</div>
+                        <ul>
+                            <li>Neural Network fundamentals</li>
+                            <li>TensorFlow/Keras basics</li>
+                            <li>CNNs for image processing</li>
+                            <li>RNNs for sequences (intro)</li>
+                        </ul>
+                    </div>
+
+                    <div class="roadmap-step">
+                        <h4>Phase 5: AI Projects</h4>
+                        <div class="duration">⏱️ Duration: 4-5 Weeks</div>
+                        <ul>
+                            <li>Image Classification project</li>
+                            <li>Chatbot development</li>
+                            <li>Recommendation system</li>
+                            <li>Portfolio building</li>
+                        </ul>
+                    </div>
+                </div>
+            `,
+
+            'ai-notes': `
+                <h1 class="page-title">📚 AI - Complete Course Notes</h1>
+                <p class="page-subtitle">AI concepts simple Hinglish mein!</p>
+
+                <div class="tabs">
+                    <div class="tab active" data-tab="ai-basics">AI Basics</div>
+                    <div class="tab" data-tab="search">Search Algorithms</div>
+                    <div class="tab" data-tab="ml-ai">ML for AI</div>
+                    <div class="tab" data-tab="nn">Neural Networks</div>
+                </div>
+
+                <div class="tab-content active" id="ai-basics">
+                    <h3>🤖 AI Fundamentals</h3>
+                    
+                    <h3>AI Types:</h3>
+                    <ul>
+                        <li><strong>Narrow AI:</strong> Specific task mein expert (Chess, Image recognition) - Yeh aaj exist karta hai</li>
+                        <li><strong>General AI:</strong> Human-like intelligence - Abhi exist nahi karta</li>
+                        <li><strong>Super AI:</strong> Humans se zyada intelligent - Science fiction mein hai</li>
+                    </ul>
+
+                    <h3>AI vs ML vs DL:</h3>
+                    <div class="code-header">
+                        <span class="code-lang">Concept</span>
+                    </div>
+                    <pre><code>AI (Artificial Intelligence)
+└── ML (Machine Learning) - AI ka subset
+    └── DL (Deep Learning) - ML ka subset using Neural Networks
+
+Simple words mein:
+- AI: Machine ko intelligent banana
+- ML: Machine ko data se seekhna sikhana
+- DL: Complex patterns seekhna using neural networks</code></pre>
+                </div>
+
+                <div class="tab-content" id="search">
+                    <h3>🔍 Search Algorithms</h3>
+                    
+                    <p>AI mein search = best solution dhundna</p>
+
+                    <h3>1. Breadth-First Search (BFS)</h3>
+                    <p>Level by level search - shortest path guarantee</p>
+                    
+                    <div class="code-header">
+                        <span class="code-lang">Python</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>from collections import deque
+
+def bfs(graph, start, goal):
+    """
+    BFS: Pehle saare neighbors check, phir next level
+    Use: Shortest path in unweighted graph
+    """
+    visited = set()
+    queue = deque([[start]])  # Queue of paths
+    
+    while queue:
+        path = queue.popleft()
+        node = path[-1]
+        
+        if node == goal:
+            return path
+        
+        if node not in visited:
+            visited.add(node)
+            for neighbor in graph.get(node, []):
+                new_path = list(path)
+                new_path.append(neighbor)
+                queue.append(new_path)
+    
+    return None
+
+# Example graph
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+
+path = bfs(graph, 'A', 'F')
+print(f"Path: {path}")  # ['A', 'C', 'F']</code></pre>
+
+                    <h3>2. Depth-First Search (DFS)</h3>
+                    <p>Deep jaao pehle, phir backtrack karo</p>
+                    
+                    <div class="code-header">
+                        <span class="code-lang">Python</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>def dfs(graph, start, goal, visited=None, path=None):
+    """
+    DFS: Ek branch explore completely, phir next
+    Use: When memory limited, solution depth known
+    """
+    if visited is None:
+        visited = set()
+    if path is None:
+        path = []
+    
+    visited.add(start)
+    path = path + [start]
+    
+    if start == goal:
+        return path
+    
+    for neighbor in graph.get(start, []):
+        if neighbor not in visited:
+            result = dfs(graph, neighbor, goal, visited, path)
+            if result:
+                return result
+    
+    return None
+
+path = dfs(graph, 'A', 'F')
+print(f"DFS Path: {path}")</code></pre>
+
+                    <h3>3. A* Algorithm (Best Path Finding)</h3>
+                    
+                    <div class="code-header">
+                        <span class="code-lang">Python</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>import heapq
+
+def a_star(graph, start, goal, heuristic):
+    """
+    A* = Best of BFS + Greedy
+    f(n) = g(n) + h(n)
+    g(n) = actual cost from start
+    h(n) = estimated cost to goal (heuristic)
+    """
+    open_set = [(0, start, [start])]  # (f_score, node, path)
+    closed_set = set()
+    g_scores = {start: 0}
+    
+    while open_set:
+        _, current, path = heapq.heappop(open_set)
+        
+        if current == goal:
+            return path, g_scores[current]
+        
+        if current in closed_set:
+            continue
+        closed_set.add(current)
+        
+        for neighbor, cost in graph[current]:
+            if neighbor in closed_set:
+                continue
+            
+            new_g = g_scores[current] + cost
+            if neighbor not in g_scores or new_g < g_scores[neighbor]:
+                g_scores[neighbor] = new_g
+                f_score = new_g + heuristic[neighbor]
+                heapq.heappush(open_set, (f_score, neighbor, path + [neighbor]))
+    
+    return None, float('inf')
+
+# Example with costs
+graph = {
+    'A': [('B', 1), ('C', 3)],
+    'B': [('D', 3), ('E', 1)],
+    'C': [('F', 2)],
+    'D': [('F', 2)],
+    'E': [('F', 4)],
+    'F': []
+}
+heuristic = {'A': 5, 'B': 4, 'C': 2, 'D': 3, 'E': 2, 'F': 0}
+
+path, cost = a_star(graph, 'A', 'F', heuristic)
+print(f"A* Path: {path}, Cost: {cost}")</code></pre>
+                </div>
+
+                <div class="tab-content" id="ml-ai">
+                    <h3>🎯 Machine Learning for AI</h3>
+                    
+                    <h3>Classification Example: Spam Detection</h3>
+                    
+                    <div class="code-header">
+                        <span class="code-lang">Python</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>from sklearn.naive_bayes import MultinomialNB
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.model_selection import train_test_split
+
+# Sample emails
+emails = [
+    "Win free money now click here",
+    "Meeting tomorrow at 3pm",
+    "Congratulations you won lottery",
+    "Project report due Friday",
+    "Get rich quick scheme",
+    "Can you review my code please"
+]
+labels = [1, 0, 1, 0, 1, 0]  # 1 = spam, 0 = not spam
+
+# Text ko numbers mein convert (vectorization)
+vectorizer = CountVectorizer()
+X = vectorizer.fit_transform(emails)
+
+# Train-test split
+X_train, X_test, y_train, y_test = train_test_split(
+    X, labels, test_size=0.3, random_state=42
+)
+
+# Naive Bayes classifier
+model = MultinomialNB()
+model.fit(X_train, y_train)
+
+# Test prediction
+new_email = ["Free gift waiting for you"]
+new_X = vectorizer.transform(new_email)
+prediction = model.predict(new_X)
+print(f"Spam: {prediction[0] == 1}")</code></pre>
+
+                    <h3>Clustering Example: Customer Segmentation</h3>
+                    
+                    <div class="code-header">
+                        <span class="code-lang">Python</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>from sklearn.cluster import KMeans
+import numpy as np
+
+# Customer data: [income, spending_score]
+customers = np.array([
+    [15, 39], [16, 81], [17, 6], [18, 77], [19, 40],
+    [70, 88], [71, 9], [72, 79], [73, 10], [74, 86],
+    [40, 45], [41, 50], [42, 48], [43, 52], [44, 47]
+])
+
+# K-Means clustering
+kmeans = KMeans(n_clusters=3, random_state=42)
+kmeans.fit(customers)
+
+# Cluster labels
+print(f"Cluster labels: {kmeans.labels_}")
+
+# Predict new customer's cluster
+new_customer = [[50, 60]]
+cluster = kmeans.predict(new_customer)
+print(f"New customer belongs to cluster: {cluster[0]}")</code></pre>
+                </div>
+
+                <div class="tab-content" id="nn">
+                    <h3>🧠 Neural Networks Introduction</h3>
+                    
+                    <p>Neural Networks = Human brain jaisa structure (simplified)!</p>
+
+                    <h3>Simple Neural Network with Keras</h3>
+                    
+                    <div class="code-header">
+                        <span class="code-lang">Python</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>import tensorflow as tf
+from tensorflow import keras
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+
+# Load data
+iris = load_iris()
+X = iris.data
+y = iris.target
+
+# Split data
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+# Build Neural Network
+model = keras.Sequential([
+    keras.layers.Dense(64, activation='relu', input_shape=(4,)),
+    keras.layers.Dense(32, activation='relu'),
+    keras.layers.Dense(3, activation='softmax')  # 3 classes
+])
+
+# Compile model
+model.compile(
+    optimizer='adam',
+    loss='sparse_categorical_crossentropy',
+    metrics=['accuracy']
+)
+
+# Train model
+model.fit(X_train, y_train, epochs=50, validation_split=0.2, verbose=0)
+
+# Evaluate
+loss, accuracy = model.evaluate(X_test, y_test)
+print(f"Test Accuracy: {accuracy * 100:.2f}%")
+
+# Predict
+predictions = model.predict(X_test[:3])
+print(f"Predictions: 
