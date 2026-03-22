@@ -8,93 +8,53 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Font Awesome Icons -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
-        /* ============================================
-           CSS VARIABLES & ROOT SETTINGS
-        ============================================ */
+        /* ===== CSS Variables ===== */
         :root {
-            /* Primary Theme Colors */
             --primary: #6366f1;
             --primary-light: #818cf8;
             --primary-dark: #4f46e5;
-            --primary-glow: rgba(99, 102, 241, 0.5);
-            
-            /* Secondary Colors */
+            --primary-glow: rgba(99, 102, 241, 0.4);
             --secondary: #8b5cf6;
             --accent: #06b6d4;
-            --accent-2: #f472b6;
-            
-            /* Light Theme Colors */
             --bg-primary: #f0f4ff;
             --bg-secondary: #ffffff;
             --bg-tertiary: #e8eeff;
-            --bg-card: rgba(255, 255, 255, 0.85);
             --text-primary: #1a1a2e;
             --text-secondary: #4a5568;
             --text-muted: #718096;
             --border-color: rgba(99, 102, 241, 0.15);
-            
-            /* Glass Effect */
-            --glass-bg: rgba(255, 255, 255, 0.75);
+            --glass-bg: rgba(255, 255, 255, 0.8);
             --glass-border: rgba(255, 255, 255, 0.4);
-            --glass-shadow: 0 8px 32px rgba(99, 102, 241, 0.15);
-            
-            /* Gradients */
-            --gradient-primary: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #06b6d4 100%);
-            --gradient-secondary: linear-gradient(135deg, #f472b6 0%, #8b5cf6 100%);
-            --gradient-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --gradient-card: linear-gradient(145deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.8) 100%);
-            --gradient-dark: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            
-            /* Shadows */
-            --shadow-sm: 0 2px 10px rgba(99, 102, 241, 0.08);
-            --shadow-md: 0 4px 25px rgba(99, 102, 241, 0.12);
+            --gradient-primary: linear-gradient(135deg, #6366f1, #8b5cf6);
+            --gradient-card: linear-gradient(145deg, rgba(255,255,255,0.95), rgba(255,255,255,0.8));
+            --shadow-sm: 0 2px 10px rgba(99, 102, 241, 0.1);
+            --shadow-md: 0 4px 25px rgba(99, 102, 241, 0.15);
             --shadow-lg: 0 10px 50px rgba(99, 102, 241, 0.2);
-            --shadow-glow: 0 0 50px var(--primary-glow);
-            --shadow-card: 0 10px 40px rgba(99, 102, 241, 0.1);
-            
-            /* Spacing & Sizing */
             --nav-height: 80px;
-            --section-padding: 120px;
-            --container-max: 1400px;
-            --border-radius: 20px;
-            
-            /* Transitions */
-            --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-bounce: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            --transition: 0.3s ease;
+            --radius: 16px;
         }
 
-        /* Dark Theme Variables */
         [data-theme="dark"] {
             --bg-primary: #0a0a1a;
             --bg-secondary: #12122a;
             --bg-tertiary: #1a1a3e;
-            --bg-card: rgba(26, 26, 62, 0.9);
             --text-primary: #f8fafc;
             --text-secondary: #cbd5e1;
             --text-muted: #94a3b8;
             --border-color: rgba(99, 102, 241, 0.2);
-            --glass-bg: rgba(26, 26, 62, 0.85);
+            --glass-bg: rgba(26, 26, 62, 0.9);
             --glass-border: rgba(99, 102, 241, 0.2);
-            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-            --gradient-card: linear-gradient(145deg, rgba(26, 26, 62, 0.95) 0%, rgba(18, 18, 42, 0.9) 100%);
-            --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.3);
-            --shadow-md: 0 4px 25px rgba(0, 0, 0, 0.4);
-            --shadow-lg: 0 10px 50px rgba(0, 0, 0, 0.5);
-            --shadow-card: 0 10px 40px rgba(0, 0, 0, 0.3);
+            --gradient-card: linear-gradient(145deg, rgba(26, 26, 62, 0.95), rgba(18, 18, 42, 0.9));
         }
 
-        /* ============================================
-           RESET & BASE STYLES
-        ============================================ */
-        *, *::before, *::after {
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -102,34 +62,25 @@
 
         html {
             scroll-behavior: smooth;
-            font-size: 16px;
-            scroll-padding-top: var(--nav-height);
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Inter', sans-serif;
             background: var(--bg-primary);
             color: var(--text-primary);
-            line-height: 1.7;
+            line-height: 1.6;
             overflow-x: hidden;
-            transition: background-color var(--transition-normal), color var(--transition-normal);
-        }
-
-        body.loading {
-            overflow: hidden;
+            transition: background var(--transition), color var(--transition);
         }
 
         h1, h2, h3, h4, h5, h6 {
             font-family: 'Poppins', sans-serif;
             font-weight: 700;
-            line-height: 1.3;
-            color: var(--text-primary);
         }
 
         a {
             text-decoration: none;
             color: inherit;
-            transition: var(--transition-fast);
         }
 
         button {
@@ -137,60 +88,16 @@
             border: none;
             outline: none;
             font-family: inherit;
-            background: none;
-        }
-
-        input, textarea {
-            font-family: inherit;
-            border: none;
-            outline: none;
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        ul, ol {
-            list-style: none;
         }
 
         .container {
-            width: 100%;
-            max-width: var(--container-max);
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 24px;
+            padding: 0 20px;
         }
 
-        /* Selection Style */
-        ::selection {
-            background: var(--primary);
-            color: white;
-        }
-
-        /* Scrollbar Style */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--bg-tertiary);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--gradient-primary);
-            border-radius: 10px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--primary-dark);
-        }
-
-        /* ============================================
-           LOADING SCREEN
-        ============================================ */
-        .loading-screen {
+        /* ===== Loading Screen ===== */
+        .loader {
             position: fixed;
             top: 0;
             left: 0;
@@ -201,103 +108,69 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            z-index: 100000;
-            transition: opacity 0.6s ease, visibility 0.6s ease;
+            z-index: 99999;
+            transition: opacity 0.5s, visibility 0.5s;
         }
 
-        .loading-screen.hidden {
+        .loader.hide {
             opacity: 0;
             visibility: hidden;
         }
 
-        .loader-content {
-            text-align: center;
-        }
-
-        .loader-logo {
-            font-size: 3rem;
+        .loader-icon {
+            font-size: 4rem;
             color: white;
-            margin-bottom: 30px;
-            animation: pulse 1.5s infinite;
+            margin-bottom: 20px;
+            animation: bounce 1s infinite;
         }
 
         .loader-spinner {
-            width: 60px;
-            height: 60px;
-            border: 4px solid rgba(255, 255, 255, 0.3);
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255,255,255,0.3);
             border-top-color: white;
             border-radius: 50%;
             animation: spin 1s linear infinite;
-            margin: 0 auto 25px;
         }
 
         .loader-text {
             color: white;
-            font-size: 1.2rem;
-            font-weight: 500;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-        }
-
-        .loader-progress {
-            width: 200px;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 10px;
             margin-top: 20px;
-            overflow: hidden;
-        }
-
-        .loader-progress-bar {
-            height: 100%;
-            background: white;
-            border-radius: 10px;
-            animation: progress 2s ease-in-out;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
         }
 
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
-        @keyframes progress {
-            0% { width: 0%; }
-            100% { width: 100%; }
-        }
-
-        /* ============================================
-           SETTINGS PANEL
-        ============================================ */
-        .settings-toggle {
+        /* ===== Settings ===== */
+        .settings-btn {
             position: fixed;
             bottom: 100px;
             right: 25px;
-            width: 60px;
-            height: 60px;
+            width: 55px;
+            height: 55px;
             background: var(--gradient-primary);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
-            z-index: 9999;
-            box-shadow: var(--shadow-lg), var(--shadow-glow);
-            transition: var(--transition-normal);
+            color: white;
+            font-size: 1.3rem;
+            z-index: 1000;
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition);
             animation: float 3s ease-in-out infinite;
         }
 
-        .settings-toggle:hover {
+        .settings-btn:hover {
             transform: scale(1.1) rotate(90deg);
-            box-shadow: var(--shadow-lg), 0 0 30px var(--primary-glow);
-        }
-
-        .settings-toggle i {
-            font-size: 1.5rem;
-            color: white;
         }
 
         @keyframes float {
@@ -307,107 +180,102 @@
 
         .settings-panel {
             position: fixed;
-            bottom: 175px;
+            bottom: 170px;
             right: 25px;
-            width: 320px;
+            width: 300px;
             background: var(--glass-bg);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
+            backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
-            border-radius: var(--border-radius);
+            border-radius: var(--radius);
             box-shadow: var(--shadow-lg);
-            z-index: 9998;
-            transform: translateY(20px) scale(0.95);
+            z-index: 1000;
+            transform: translateY(20px);
             opacity: 0;
             visibility: hidden;
-            transition: var(--transition-normal);
-            overflow: hidden;
+            transition: var(--transition);
         }
 
         .settings-panel.active {
-            transform: translateY(0) scale(1);
+            transform: translateY(0);
             opacity: 1;
             visibility: visible;
         }
 
         .settings-header {
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            padding: 20px 25px;
+            align-items: center;
+            padding: 20px;
             background: var(--gradient-primary);
             color: white;
+            border-radius: var(--radius) var(--radius) 0 0;
         }
 
         .settings-header h3 {
-            font-size: 1.1rem;
+            font-size: 1rem;
             display: flex;
             align-items: center;
             gap: 10px;
-            color: white;
         }
 
         .settings-close {
-            width: 35px;
-            height: 35px;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255,255,255,0.2);
             border-radius: 50%;
+            width: 32px;
+            height: 32px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            transition: var(--transition-fast);
+            transition: var(--transition);
         }
 
         .settings-close:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: rotate(90deg);
+            background: rgba(255,255,255,0.3);
         }
 
         .settings-body {
-            padding: 25px;
+            padding: 20px;
         }
 
-        .settings-item {
+        .setting-item {
             display: flex;
-            align-items: center;
             justify-content: space-between;
+            align-items: center;
             padding: 15px 0;
             border-bottom: 1px solid var(--border-color);
         }
 
-        .settings-item:last-child {
+        .setting-item:last-child {
             border-bottom: none;
         }
 
-        .settings-item-label {
+        .setting-label {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             color: var(--text-secondary);
-            font-weight: 500;
         }
 
-        .settings-item-label i {
+        .setting-label i {
             color: var(--primary);
-            font-size: 1.1rem;
-            width: 24px;
+            width: 20px;
         }
 
         /* Toggle Switch */
-        .toggle-switch {
+        .switch {
             position: relative;
-            width: 55px;
-            height: 28px;
+            width: 50px;
+            height: 26px;
         }
 
-        .toggle-switch input {
+        .switch input {
             opacity: 0;
             width: 0;
             height: 0;
         }
 
-        .toggle-slider {
+        .slider {
             position: absolute;
             cursor: pointer;
             top: 0;
@@ -416,73 +284,56 @@
             bottom: 0;
             background: var(--bg-tertiary);
             border-radius: 50px;
-            transition: var(--transition-normal);
+            transition: var(--transition);
         }
 
-        .toggle-slider::before {
+        .slider:before {
             content: '';
             position: absolute;
-            height: 22px;
-            width: 22px;
+            height: 20px;
+            width: 20px;
             left: 3px;
             bottom: 3px;
             background: white;
             border-radius: 50%;
-            transition: var(--transition-normal);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
 
-        .toggle-switch input:checked + .toggle-slider {
+        .switch input:checked + .slider {
             background: var(--gradient-primary);
         }
 
-        .toggle-switch input:checked + .toggle-slider::before {
-            transform: translateX(27px);
+        .switch input:checked + .slider:before {
+            transform: translateX(24px);
         }
 
-        /* Color Picker */
-        .color-picker {
+        /* Color Options */
+        .color-options {
             display: flex;
             gap: 10px;
             flex-wrap: wrap;
             margin-top: 15px;
         }
 
-        .color-option {
-            width: 42px;
-            height: 42px;
-            border-radius: 12px;
-            cursor: pointer;
+        .color-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
             border: 3px solid transparent;
-            transition: var(--transition-fast);
-            position: relative;
+            cursor: pointer;
+            transition: var(--transition);
         }
 
-        .color-option:hover {
+        .color-btn:hover {
             transform: scale(1.15);
         }
 
-        .color-option.active {
+        .color-btn.active {
             border-color: var(--text-primary);
-            transform: scale(1.1);
         }
 
-        .color-option.active::after {
-            content: '\f00c';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-            font-size: 0.9rem;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-        }
-
-        /* ============================================
-           NAVIGATION
-        ============================================ */
+        /* ===== Navbar ===== */
         .navbar {
             position: fixed;
             top: 0;
@@ -490,16 +341,14 @@
             width: 100%;
             height: var(--nav-height);
             background: var(--glass-bg);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
+            backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--glass-border);
-            z-index: 9990;
-            transition: var(--transition-normal);
+            z-index: 999;
+            transition: var(--transition);
         }
 
         .navbar.scrolled {
             box-shadow: var(--shadow-md);
-            background: var(--glass-bg);
         }
 
         .nav-container {
@@ -507,9 +356,9 @@
             align-items: center;
             justify-content: space-between;
             height: 100%;
-            max-width: var(--container-max);
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 24px;
+            padding: 0 20px;
         }
 
         .nav-logo {
@@ -517,12 +366,12 @@
             align-items: center;
             gap: 12px;
             font-family: 'Poppins', sans-serif;
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             font-weight: 800;
         }
 
         .nav-logo i {
-            font-size: 2rem;
+            font-size: 1.8rem;
             background: var(--gradient-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -538,271 +387,70 @@
 
         .nav-menu {
             display: flex;
-            align-items: center;
-            gap: 10px;
+            gap: 5px;
+            list-style: none;
         }
 
         .nav-link {
-            padding: 10px 20px;
-            font-size: 0.95rem;
-            font-weight: 500;
+            padding: 10px 18px;
             color: var(--text-secondary);
-            border-radius: 12px;
-            position: relative;
-            transition: var(--transition-fast);
+            font-weight: 500;
+            border-radius: 10px;
+            transition: var(--transition);
         }
 
-        .nav-link:hover,
-        .nav-link.active {
+        .nav-link:hover, .nav-link.active {
             color: var(--primary);
             background: rgba(99, 102, 241, 0.1);
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 6px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 3px;
-            background: var(--gradient-primary);
-            border-radius: 3px;
-            transition: var(--transition-fast);
-        }
-
-        .nav-link:hover::after,
-        .nav-link.active::after {
-            width: calc(100% - 40px);
         }
 
         .nav-actions {
             display: flex;
-            align-items: center;
             gap: 15px;
-        }
-
-        .nav-search {
-            width: 45px;
-            height: 45px;
-            background: var(--bg-tertiary);
-            border-radius: 12px;
-            display: flex;
             align-items: center;
-            justify-content: center;
-            color: var(--text-secondary);
-            transition: var(--transition-fast);
         }
 
-        .nav-search:hover {
-            background: var(--primary);
-            color: white;
-            transform: scale(1.05);
-        }
-
-        .nav-cta {
-            padding: 12px 28px;
+        .nav-btn {
+            padding: 12px 25px;
             background: var(--gradient-primary);
             color: white;
-            font-weight: 600;
             border-radius: 12px;
-            box-shadow: var(--shadow-sm);
-            transition: var(--transition-normal);
+            font-weight: 600;
+            transition: var(--transition);
         }
 
-        .nav-cta:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-md), var(--shadow-glow);
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
         }
 
-        .nav-hamburger {
+        .hamburger {
             display: none;
             flex-direction: column;
-            gap: 6px;
+            gap: 5px;
             padding: 10px;
-            cursor: pointer;
+            background: none;
         }
 
-        .nav-hamburger span {
-            width: 28px;
+        .hamburger span {
+            width: 25px;
             height: 3px;
             background: var(--text-primary);
             border-radius: 3px;
-            transition: var(--transition-fast);
+            transition: var(--transition);
         }
 
-        .nav-hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(6px, 6px);
-        }
-
-        .nav-hamburger.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .nav-hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -7px);
-        }
-
-        /* ============================================
-           SEARCH MODAL
-        ============================================ */
-        .search-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(15px);
-            z-index: 99999;
-            display: flex;
-            align-items: flex-start;
-            justify-content: center;
-            padding-top: 120px;
-            opacity: 0;
-            visibility: hidden;
-            transition: var(--transition-normal);
-        }
-
-        .search-modal.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .search-wrapper {
-            width: 100%;
-            max-width: 700px;
-            padding: 0 24px;
-            transform: translateY(-30px);
-            transition: var(--transition-normal);
-        }
-
-        .search-modal.active .search-wrapper {
-            transform: translateY(0);
-        }
-
-        .search-box {
-            display: flex;
-            align-items: center;
-            background: var(--bg-secondary);
-            border-radius: var(--border-radius);
-            padding: 20px 30px;
-            gap: 20px;
-            box-shadow: var(--shadow-lg);
-        }
-
-        .search-box i {
-            font-size: 1.4rem;
-            color: var(--primary);
-        }
-
-        .search-box input {
-            flex: 1;
-            background: transparent;
-            font-size: 1.2rem;
-            color: var(--text-primary);
-        }
-
-        .search-box input::placeholder {
-            color: var(--text-muted);
-        }
-
-        .search-close {
-            width: 45px;
-            height: 45px;
-            background: var(--bg-tertiary);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-secondary);
-            transition: var(--transition-fast);
-        }
-
-        .search-close:hover {
-            background: var(--primary);
-            color: white;
-            transform: rotate(90deg);
-        }
-
-        .search-results {
-            margin-top: 20px;
-            background: var(--bg-secondary);
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            max-height: 400px;
-            overflow-y: auto;
-            display: none;
-        }
-
-        .search-result-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 18px 25px;
-            border-bottom: 1px solid var(--border-color);
-            transition: var(--transition-fast);
-            cursor: pointer;
-        }
-
-        .search-result-item:hover {
-            background: var(--bg-tertiary);
-        }
-
-        .search-result-item:last-child {
-            border-bottom: none;
-        }
-
-        .result-info {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .result-info i {
-            width: 45px;
-            height: 45px;
-            background: var(--gradient-primary);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-        }
-
-        .result-info h4 {
-            font-size: 1rem;
-            margin-bottom: 3px;
-        }
-
-        .result-info span {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-
-        .result-badge {
-            padding: 6px 15px;
-            background: rgba(99, 102, 241, 0.1);
-            color: var(--primary);
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        /* ============================================
-           HERO SECTION
-        ============================================ */
+        /* ===== Hero Section ===== */
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
-            padding: 140px 24px 100px;
+            padding: 120px 20px 80px;
             overflow: hidden;
         }
 
-        /* Animated Background */
         .hero-bg {
             position: absolute;
             top: 0;
@@ -810,13 +458,6 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            overflow: hidden;
-        }
-
-        .gradient-orbs {
-            position: absolute;
-            width: 100%;
-            height: 100%;
         }
 
         .orb {
@@ -827,17 +468,16 @@
         }
 
         .orb-1 {
-            width: 600px;
-            height: 600px;
+            width: 500px;
+            height: 500px;
             background: rgba(99, 102, 241, 0.3);
             top: -20%;
             right: -10%;
-            animation-delay: 0s;
         }
 
         .orb-2 {
-            width: 500px;
-            height: 500px;
+            width: 400px;
+            height: 400px;
             background: rgba(139, 92, 246, 0.25);
             bottom: -15%;
             left: -10%;
@@ -845,8 +485,8 @@
         }
 
         .orb-3 {
-            width: 400px;
-            height: 400px;
+            width: 300px;
+            height: 300px;
             background: rgba(6, 182, 212, 0.2);
             top: 50%;
             left: 50%;
@@ -854,65 +494,12 @@
             animation-delay: -10s;
         }
 
-        .orb-4 {
-            width: 300px;
-            height: 300px;
-            background: rgba(244, 114, 182, 0.2);
-            top: 20%;
-            left: 20%;
-            animation-delay: -15s;
-        }
-
         @keyframes orbFloat {
-            0%, 100% {
-                transform: translate(0, 0) scale(1);
-            }
-            25% {
-                transform: translate(50px, -50px) scale(1.1);
-            }
-            50% {
-                transform: translate(-30px, 30px) scale(0.95);
-            }
-            75% {
-                transform: translate(30px, 50px) scale(1.05);
-            }
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.05); }
+            66% { transform: translate(-20px, 20px) scale(0.95); }
         }
 
-        /* Floating Particles */
-        .particles {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-        }
-
-        .particle {
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            background: var(--primary);
-            border-radius: 50%;
-            opacity: 0.6;
-            animation: particleFloat 15s linear infinite;
-        }
-
-        @keyframes particleFloat {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.6;
-            }
-            90% {
-                opacity: 0.6;
-            }
-            100% {
-                transform: translateY(-100vh) rotate(720deg);
-                opacity: 0;
-            }
-        }
-
-        /* Grid Pattern */
         .grid-pattern {
             position: absolute;
             width: 100%;
@@ -920,68 +507,40 @@
             background-image: 
                 linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px);
-            background-size: 80px 80px;
+            background-size: 60px 60px;
         }
 
-        /* Hero Content */
         .hero-content {
             text-align: center;
-            max-width: 1000px;
-            position: relative;
-            z-index: 2;
+            max-width: 900px;
+            z-index: 1;
         }
 
         .hero-badge {
             display: inline-flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             background: var(--glass-bg);
-            backdrop-filter: blur(15px);
+            backdrop-filter: blur(10px);
             border: 1px solid var(--glass-border);
-            padding: 14px 28px;
+            padding: 12px 24px;
             border-radius: 50px;
-            margin-bottom: 35px;
-            animation: fadeInDown 0.8s ease;
+            margin-bottom: 30px;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
         }
 
         .hero-badge i {
             color: var(--primary);
-            font-size: 1.1rem;
-            animation: bounce 2s infinite;
-        }
-
-        .hero-badge span {
-            color: var(--text-secondary);
-            font-weight: 500;
-            font-size: 0.95rem;
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
         }
 
         .hero-title {
-            font-size: clamp(3rem, 8vw, 5.5rem);
-            font-weight: 900;
-            margin-bottom: 25px;
-            letter-spacing: -3px;
-            line-height: 1.1;
-            animation: fadeInUp 0.8s ease 0.2s backwards;
+            font-size: clamp(2.5rem, 7vw, 4.5rem);
+            margin-bottom: 20px;
+            letter-spacing: -2px;
         }
 
-        .hero-title .gradient-text {
+        .gradient-text {
             background: var(--gradient-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -989,17 +548,9 @@
         }
 
         .hero-subtitle {
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
-            font-weight: 500;
+            font-size: clamp(1.3rem, 3vw, 2rem);
             color: var(--text-secondary);
-            margin-bottom: 25px;
-            animation: fadeInUp 0.8s ease 0.3s backwards;
-        }
-
-        .typing-container {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
+            margin-bottom: 20px;
         }
 
         .typing-text {
@@ -1010,10 +561,10 @@
         .cursor {
             display: inline-block;
             width: 3px;
-            height: 1.2em;
+            height: 1em;
             background: var(--primary);
+            margin-left: 2px;
             animation: blink 1s infinite;
-            vertical-align: middle;
         }
 
         @keyframes blink {
@@ -1021,79 +572,46 @@
             51%, 100% { opacity: 0; }
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .hero-description {
-            font-size: 1.2rem;
+        .hero-desc {
+            font-size: 1.1rem;
             color: var(--text-muted);
-            max-width: 700px;
-            margin: 0 auto 45px;
+            max-width: 650px;
+            margin: 0 auto 40px;
             line-height: 1.8;
-            animation: fadeInUp 0.8s ease 0.4s backwards;
         }
 
         .hero-buttons {
             display: flex;
-            align-items: center;
-            justify-content: center;
             gap: 20px;
+            justify-content: center;
             flex-wrap: wrap;
-            margin-bottom: 70px;
-            animation: fadeInUp 0.8s ease 0.5s backwards;
+            margin-bottom: 60px;
         }
 
         .btn {
             display: inline-flex;
             align-items: center;
-            justify-content: center;
-            gap: 12px;
-            padding: 18px 40px;
-            font-size: 1.05rem;
+            gap: 10px;
+            padding: 16px 35px;
+            font-size: 1rem;
             font-weight: 600;
-            border-radius: 16px;
-            position: relative;
-            overflow: hidden;
-            transition: var(--transition-normal);
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: 0.6s;
-        }
-
-        .btn:hover::before {
-            left: 100%;
+            border-radius: 14px;
+            transition: var(--transition);
         }
 
         .btn-primary {
             background: var(--gradient-primary);
             color: white;
-            box-shadow: var(--shadow-md), 0 5px 25px var(--primary-glow);
+            box-shadow: 0 5px 20px var(--primary-glow);
         }
 
         .btn-primary:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg), 0 10px 40px var(--primary-glow);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px var(--primary-glow);
         }
 
         .btn-secondary {
             background: var(--glass-bg);
-            backdrop-filter: blur(15px);
             color: var(--text-primary);
             border: 2px solid var(--border-color);
         }
@@ -1102,155 +620,88 @@
             background: var(--primary);
             color: white;
             border-color: var(--primary);
-            transform: translateY(-5px);
         }
 
-        /* Stats */
         .hero-stats {
             display: flex;
-            align-items: center;
             justify-content: center;
-            gap: 80px;
+            gap: 60px;
             flex-wrap: wrap;
-            animation: fadeInUp 0.8s ease 0.6s backwards;
         }
 
-        .stat-item {
+        .stat {
             text-align: center;
         }
 
         .stat-number {
-            display: block;
-            font-size: 3rem;
+            font-size: 2.5rem;
             font-weight: 800;
             background: var(--gradient-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 8px;
         }
 
         .stat-label {
-            font-size: 1rem;
             color: var(--text-muted);
-            font-weight: 500;
+            font-size: 0.95rem;
         }
 
-        /* Scroll Indicator */
-        .scroll-indicator {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-            animation: scrollBounce 2s infinite;
-        }
-
-        .mouse {
-            width: 30px;
-            height: 50px;
-            border: 2px solid var(--text-muted);
-            border-radius: 20px;
-            position: relative;
-        }
-
-        .wheel {
-            width: 4px;
-            height: 10px;
-            background: var(--primary);
-            border-radius: 4px;
-            position: absolute;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: wheelScroll 1.5s infinite;
-        }
-
-        @keyframes wheelScroll {
-            0% { opacity: 1; transform: translateX(-50%) translateY(0); }
-            100% { opacity: 0; transform: translateX(-50%) translateY(15px); }
-        }
-
-        @keyframes scrollBounce {
-            0%, 100% { transform: translateX(-50%) translateY(0); }
-            50% { transform: translateX(-50%) translateY(10px); }
-        }
-
-        .scroll-text {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        /* ============================================
-           SECTION STYLES
-        ============================================ */
+        /* ===== Section Styles ===== */
         section {
-            padding: var(--section-padding) 0;
-            position: relative;
+            padding: 100px 0;
         }
 
         .section-header {
             text-align: center;
-            margin-bottom: 70px;
+            margin-bottom: 60px;
         }
 
         .section-badge {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             background: rgba(99, 102, 241, 0.1);
             color: var(--primary);
-            padding: 12px 25px;
+            padding: 10px 20px;
             border-radius: 50px;
             font-size: 0.9rem;
             font-weight: 600;
-            margin-bottom: 25px;
-            border: 1px solid rgba(99, 102, 241, 0.2);
+            margin-bottom: 20px;
         }
 
         .section-title {
-            font-size: clamp(2.2rem, 5vw, 3.5rem);
-            font-weight: 800;
-            margin-bottom: 20px;
-            letter-spacing: -1px;
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 15px;
         }
 
-        .section-subtitle {
-            font-size: 1.15rem;
+        .section-desc {
             color: var(--text-muted);
-            max-width: 650px;
+            font-size: 1.1rem;
+            max-width: 600px;
             margin: 0 auto;
-            line-height: 1.8;
         }
 
-        /* ============================================
-           COURSES SECTION
-        ============================================ */
+        /* ===== Courses Section ===== */
         .courses-section {
             background: var(--bg-primary);
         }
 
         .courses-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 30px;
         }
 
         .course-card {
-            position: relative;
             background: var(--gradient-card);
-            backdrop-filter: blur(15px);
             border: 1px solid var(--border-color);
-            border-radius: var(--border-radius);
-            padding: 40px 35px;
+            border-radius: var(--radius);
+            padding: 35px;
             cursor: pointer;
+            transition: var(--transition);
+            position: relative;
             overflow: hidden;
-            transition: var(--transition-normal);
         }
 
         .course-card::before {
@@ -1259,107 +710,80 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 5px;
+            height: 4px;
             background: var(--gradient-primary);
             transform: scaleX(0);
-            transform-origin: left;
-            transition: var(--transition-normal);
+            transition: var(--transition);
         }
 
         .course-card:hover::before {
             transform: scaleX(1);
         }
 
-        .course-card::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, var(--primary-glow), transparent 70%);
-            opacity: 0;
-            transition: var(--transition-normal);
-            pointer-events: none;
-        }
-
-        .course-card:hover::after {
-            opacity: 0.15;
-        }
-
         .course-card:hover {
-            transform: translateY(-12px);
-            box-shadow: var(--shadow-lg), var(--shadow-glow);
-            border-color: var(--primary);
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
         }
 
         .course-icon {
-            width: 80px;
-            height: 80px;
+            width: 70px;
+            height: 70px;
             background: var(--gradient-primary);
-            border-radius: 20px;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 30px;
-            transition: var(--transition-normal);
-            box-shadow: 0 10px 30px var(--primary-glow);
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            color: white;
+            transition: var(--transition);
         }
 
         .course-card:hover .course-icon {
             transform: scale(1.1) rotate(-5deg);
         }
 
-        .course-icon i {
-            font-size: 2rem;
-            color: white;
-        }
-
         .course-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            color: var(--text-primary);
+            font-size: 1.4rem;
+            margin-bottom: 12px;
         }
 
-        .course-description {
-            font-size: 1rem;
+        .course-desc {
             color: var(--text-muted);
-            line-height: 1.8;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
+            line-height: 1.7;
         }
 
         .course-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 25px;
+            gap: 8px;
+            margin-bottom: 20px;
         }
 
-        .course-tag {
-            padding: 8px 18px;
+        .tag {
             background: rgba(99, 102, 241, 0.1);
             color: var(--primary);
+            padding: 6px 14px;
             border-radius: 50px;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 500;
-            border: 1px solid rgba(99, 102, 241, 0.2);
         }
 
         .course-footer {
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            padding-top: 25px;
+            align-items: center;
+            padding-top: 20px;
             border-top: 1px solid var(--border-color);
         }
 
         .course-lessons {
+            color: var(--text-muted);
+            font-size: 0.9rem;
             display: flex;
             align-items: center;
-            gap: 8px;
-            color: var(--text-muted);
-            font-size: 0.95rem;
+            gap: 6px;
         }
 
         .course-lessons i {
@@ -1367,22 +791,18 @@
         }
 
         .course-link {
-            display: flex;
-            align-items: center;
-            gap: 8px;
             color: var(--primary);
             font-weight: 600;
-            font-size: 0.95rem;
-            transition: var(--transition-fast);
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
         .course-link:hover {
-            gap: 15px;
+            gap: 12px;
         }
 
-        /* ============================================
-           YOUTUBE CHANNELS SECTION
-        ============================================ */
+        /* ===== YouTube Section ===== */
         .youtube-section {
             background: var(--bg-secondary);
         }
@@ -1390,41 +810,38 @@
         .youtube-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 28px;
+            gap: 25px;
         }
 
         .youtube-card {
             background: var(--gradient-card);
-            backdrop-filter: blur(15px);
             border: 1px solid var(--border-color);
-            border-radius: var(--border-radius);
+            border-radius: var(--radius);
             overflow: hidden;
             cursor: pointer;
-            transition: var(--transition-normal);
+            transition: var(--transition);
         }
 
         .youtube-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-8px);
             box-shadow: var(--shadow-lg);
             border-color: #ff0000;
         }
 
-        .youtube-thumbnail {
+        .youtube-thumb {
             position: relative;
-            width: 100%;
             height: 180px;
             overflow: hidden;
-            background: var(--bg-tertiary);
         }
 
-        .youtube-thumbnail img {
+        .youtube-thumb img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: var(--transition-normal);
+            transition: var(--transition);
         }
 
-        .youtube-card:hover .youtube-thumbnail img {
+        .youtube-card:hover .youtube-thumb img {
             transform: scale(1.1);
         }
 
@@ -1434,12 +851,12 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0,0,0,0.5);
             display: flex;
             align-items: center;
             justify-content: center;
             opacity: 0;
-            transition: var(--transition-normal);
+            transition: var(--transition);
         }
 
         .youtube-card:hover .youtube-overlay {
@@ -1447,42 +864,49 @@
         }
 
         .play-btn {
-            width: 70px;
-            height: 70px;
+            width: 65px;
+            height: 65px;
             background: #ff0000;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            color: white;
+            font-size: 1.5rem;
             transform: scale(0.8);
-            transition: var(--transition-bounce);
-            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.4);
+            transition: var(--transition);
         }
 
         .youtube-card:hover .play-btn {
             transform: scale(1);
         }
 
-        .play-btn i {
-            font-size: 1.8rem;
+        .youtube-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: #ff0000;
             color: white;
-            margin-left: 5px;
+            padding: 5px 12px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
         }
 
         .youtube-info {
-            padding: 25px;
+            padding: 20px;
         }
 
         .channel-header {
             display: flex;
             align-items: center;
-            gap: 15px;
-            margin-bottom: 15px;
+            gap: 12px;
+            margin-bottom: 12px;
         }
 
         .channel-avatar {
-            width: 50px;
-            height: 50px;
+            width: 45px;
+            height: 45px;
             background: var(--gradient-primary);
             border-radius: 50%;
             display: flex;
@@ -1490,41 +914,25 @@
             justify-content: center;
             color: white;
             font-weight: 700;
-            font-size: 1.2rem;
         }
 
-        .channel-meta h4 {
-            font-size: 1.1rem;
+        .channel-name {
+            font-size: 1.05rem;
             font-weight: 700;
-            margin-bottom: 4px;
         }
 
-        .channel-meta span {
+        .channel-subs {
             font-size: 0.85rem;
             color: var(--text-muted);
         }
 
         .channel-desc {
-            font-size: 0.95rem;
             color: var(--text-muted);
-            line-height: 1.7;
+            font-size: 0.9rem;
+            line-height: 1.6;
         }
 
-        .youtube-badge {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: #ff0000;
-            color: white;
-            padding: 6px 15px;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        /* ============================================
-           RESOURCES SECTION
-        ============================================ */
+        /* ===== Resources Section ===== */
         .resources-section {
             background: var(--bg-primary);
         }
@@ -1532,70 +940,62 @@
         .resources-tabs {
             display: flex;
             justify-content: center;
-            gap: 12px;
+            gap: 10px;
             flex-wrap: wrap;
             margin-bottom: 50px;
         }
 
         .tab-btn {
-            padding: 14px 30px;
+            padding: 12px 25px;
             background: var(--glass-bg);
             border: 1px solid var(--border-color);
             border-radius: 50px;
             color: var(--text-secondary);
             font-weight: 600;
-            font-size: 0.95rem;
-            transition: var(--transition-fast);
+            transition: var(--transition);
         }
 
-        .tab-btn:hover,
-        .tab-btn.active {
+        .tab-btn:hover, .tab-btn.active {
             background: var(--gradient-primary);
             color: white;
             border-color: transparent;
-            box-shadow: var(--shadow-md);
         }
 
         .resources-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
             gap: 25px;
         }
 
         .resource-card {
             display: flex;
             align-items: flex-start;
-            gap: 20px;
+            gap: 18px;
             background: var(--gradient-card);
-            backdrop-filter: blur(15px);
             border: 1px solid var(--border-color);
-            border-radius: var(--border-radius);
-            padding: 28px;
-            transition: var(--transition-normal);
+            border-radius: var(--radius);
+            padding: 25px;
             cursor: pointer;
+            transition: var(--transition);
         }
 
         .resource-card:hover {
-            transform: translateX(10px);
-            box-shadow: var(--shadow-md);
+            transform: translateX(8px);
             border-color: var(--primary);
+            box-shadow: var(--shadow-md);
         }
 
         .resource-icon {
-            width: 65px;
-            height: 65px;
-            min-width: 65px;
+            width: 60px;
+            height: 60px;
+            min-width: 60px;
             background: var(--gradient-primary);
-            border-radius: 16px;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 8px 25px var(--primary-glow);
-        }
-
-        .resource-icon i {
-            font-size: 1.5rem;
             color: white;
+            font-size: 1.4rem;
         }
 
         .resource-content {
@@ -1603,22 +1003,20 @@
         }
 
         .resource-content h4 {
-            font-size: 1.15rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: var(--text-primary);
+            font-size: 1.1rem;
+            margin-bottom: 8px;
         }
 
         .resource-content p {
-            font-size: 0.95rem;
             color: var(--text-muted);
-            line-height: 1.7;
-            margin-bottom: 15px;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 12px;
         }
 
         .resource-meta {
             display: flex;
-            gap: 25px;
+            gap: 20px;
             font-size: 0.85rem;
             color: var(--text-muted);
         }
@@ -1626,7 +1024,7 @@
         .resource-meta span {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
         }
 
         .resource-meta i {
@@ -1634,124 +1032,109 @@
         }
 
         .resource-link {
-            width: 50px;
-            height: 50px;
-            min-width: 50px;
+            width: 45px;
+            height: 45px;
+            min-width: 45px;
             background: var(--bg-tertiary);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--text-secondary);
-            transition: var(--transition-fast);
+            transition: var(--transition);
             align-self: center;
         }
 
         .resource-link:hover {
             background: var(--gradient-primary);
             color: white;
-            transform: scale(1.1);
         }
 
-        /* ============================================
-           UPLOAD SECTION
-        ============================================ */
+        /* ===== Upload Section ===== */
         .upload-section {
             background: var(--bg-secondary);
         }
 
         .upload-wrapper {
-            max-width: 900px;
+            max-width: 800px;
             margin: 0 auto;
         }
 
         .upload-area {
             background: var(--gradient-card);
             border: 3px dashed var(--primary);
-            border-radius: var(--border-radius);
-            padding: 70px 50px;
+            border-radius: var(--radius);
+            padding: 60px 40px;
             text-align: center;
             cursor: pointer;
-            transition: var(--transition-normal);
+            transition: var(--transition);
         }
 
-        .upload-area:hover,
-        .upload-area.dragover {
+        .upload-area:hover, .upload-area.dragover {
             background: rgba(99, 102, 241, 0.05);
             border-style: solid;
-            transform: scale(1.02);
         }
 
         .upload-icon {
-            width: 100px;
-            height: 100px;
+            width: 90px;
+            height: 90px;
             background: var(--gradient-primary);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 30px;
-            animation: pulse 2s infinite;
-            box-shadow: var(--shadow-glow);
-        }
-
-        .upload-icon i {
-            font-size: 2.5rem;
+            margin: 0 auto 25px;
+            font-size: 2.2rem;
             color: white;
+            animation: bounce 2s infinite;
         }
 
         .upload-area h3 {
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-            color: var(--text-primary);
+            font-size: 1.5rem;
+            margin-bottom: 10px;
         }
 
         .upload-area > p {
             color: var(--text-muted);
-            margin-bottom: 30px;
-            font-size: 1.1rem;
+            margin-bottom: 25px;
         }
 
         .upload-btn {
             display: inline-flex;
             align-items: center;
-            gap: 12px;
-            padding: 16px 35px;
+            gap: 10px;
+            padding: 14px 30px;
             background: var(--gradient-primary);
             color: white;
-            border-radius: 14px;
+            border-radius: 12px;
             font-weight: 600;
-            font-size: 1rem;
-            margin-bottom: 20px;
-            transition: var(--transition-normal);
+            margin-bottom: 15px;
+            transition: var(--transition);
         }
 
         .upload-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
         }
 
         .upload-hint {
-            display: block;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--text-muted);
         }
 
         .uploaded-files {
-            margin-top: 50px;
+            margin-top: 40px;
             background: var(--gradient-card);
             border: 1px solid var(--border-color);
-            border-radius: var(--border-radius);
-            padding: 35px;
+            border-radius: var(--radius);
+            padding: 30px;
         }
 
         .uploaded-files h4 {
             display: flex;
             align-items: center;
-            gap: 12px;
-            font-size: 1.3rem;
-            margin-bottom: 25px;
-            color: var(--text-primary);
+            gap: 10px;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
         }
 
         .uploaded-files h4 i {
@@ -1761,119 +1144,93 @@
         .files-list {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 12px;
         }
 
         .file-item {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 20px 25px;
+            padding: 18px 20px;
             background: var(--bg-primary);
-            border-radius: 14px;
-            transition: var(--transition-fast);
+            border-radius: 12px;
+            transition: var(--transition);
         }
 
         .file-item:hover {
             background: var(--bg-tertiary);
-            transform: translateX(5px);
         }
 
         .file-info {
             display: flex;
             align-items: center;
-            gap: 18px;
+            gap: 15px;
         }
 
         .file-icon {
-            width: 55px;
-            height: 55px;
+            width: 50px;
+            height: 50px;
             background: var(--gradient-primary);
-            border-radius: 12px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-
-        .file-icon i {
-            font-size: 1.3rem;
             color: white;
+            font-size: 1.2rem;
         }
 
-        .file-details h5 {
-            font-size: 1rem;
+        .file-name {
             font-weight: 600;
-            margin-bottom: 5px;
-            color: var(--text-primary);
+            margin-bottom: 3px;
         }
 
-        .file-details span {
+        .file-meta {
             font-size: 0.85rem;
             color: var(--text-muted);
         }
 
         .file-actions {
             display: flex;
-            gap: 12px;
+            gap: 10px;
         }
 
-        .file-action-btn {
-            width: 42px;
-            height: 42px;
+        .file-action {
+            width: 40px;
+            height: 40px;
             background: var(--bg-secondary);
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--text-secondary);
-            transition: var(--transition-fast);
+            transition: var(--transition);
         }
 
-        .file-action-btn:hover {
+        .file-action:hover {
             color: var(--primary);
-            transform: scale(1.1);
         }
 
-        .file-action-btn.delete:hover {
+        .file-action.delete:hover {
             background: #fee2e2;
             color: #ef4444;
         }
 
         .no-files {
             text-align: center;
-            padding: 50px 30px;
+            padding: 40px;
             color: var(--text-muted);
         }
 
         .no-files i {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            opacity: 0.4;
-            display: block;
+            font-size: 3rem;
+            margin-bottom: 15px;
+            opacity: 0.5;
         }
 
-        .no-files p {
-            font-size: 1.1rem;
-        }
-
-        /* ============================================
-           NEWSLETTER SECTION
-        ============================================ */
-        .newsletter-section {
+        /* ===== Newsletter ===== */
+        .newsletter {
             background: var(--gradient-primary);
-            padding: 100px 24px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .newsletter-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            padding: 80px 20px;
         }
 
         .newsletter-content {
@@ -1881,125 +1238,85 @@
             align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
-            gap: 40px;
-            max-width: var(--container-max);
+            gap: 30px;
+            max-width: 1200px;
             margin: 0 auto;
-            position: relative;
-            z-index: 1;
         }
 
-        .newsletter-text h2 {
-            font-size: 2.5rem;
+        .newsletter h2 {
+            font-size: 2rem;
             color: white;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
-        .newsletter-text p {
-            font-size: 1.15rem;
-            color: rgba(255, 255, 255, 0.85);
+        .newsletter p {
+            color: rgba(255,255,255,0.8);
+            font-size: 1.1rem;
         }
 
         .newsletter-form {
             display: flex;
             gap: 15px;
             flex: 1;
-            max-width: 550px;
+            max-width: 500px;
         }
 
         .newsletter-form input {
             flex: 1;
-            padding: 20px 28px;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 14px;
+            padding: 18px 25px;
+            background: rgba(255,255,255,0.2);
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 12px;
             color: white;
             font-size: 1rem;
         }
 
         .newsletter-form input::placeholder {
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .newsletter-form input:focus {
-            border-color: white;
-            background: rgba(255, 255, 255, 0.2);
+            color: rgba(255,255,255,0.7);
         }
 
         .newsletter-form button {
-            padding: 20px 35px;
+            padding: 18px 30px;
             background: white;
             color: var(--primary);
+            border-radius: 12px;
             font-weight: 700;
-            border-radius: 14px;
             white-space: nowrap;
-            transition: var(--transition-normal);
+            transition: var(--transition);
         }
 
         .newsletter-form button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px);
         }
 
-        /* ============================================
-           FOOTER
-        ============================================ */
+        /* ===== Footer ===== */
         .footer {
             background: var(--bg-secondary);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .footer-bg-shape {
-            position: absolute;
-            border-radius: 50%;
-            background: var(--gradient-primary);
-            opacity: 0.03;
-        }
-
-        .footer-bg-shape-1 {
-            width: 600px;
-            height: 600px;
-            top: -300px;
-            right: -200px;
-        }
-
-        .footer-bg-shape-2 {
-            width: 500px;
-            height: 500px;
-            bottom: -250px;
-            left: -150px;
-        }
-
-        .footer-content {
-            position: relative;
-            z-index: 1;
-            padding: 100px 0 40px;
+            padding: 80px 0 30px;
         }
 
         .footer-main {
             display: grid;
             grid-template-columns: 2fr 1fr 1fr 1.5fr;
-            gap: 60px;
-            margin-bottom: 60px;
+            gap: 50px;
+            margin-bottom: 50px;
         }
 
         .footer-brand {
-            max-width: 380px;
+            max-width: 350px;
         }
 
         .footer-logo {
             display: flex;
             align-items: center;
-            gap: 14px;
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.8rem;
+            gap: 12px;
+            font-size: 1.5rem;
             font-weight: 800;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         .footer-logo i {
-            font-size: 2.2rem;
+            font-size: 1.8rem;
             background: var(--gradient-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -2015,100 +1332,86 @@
 
         .footer-brand > p {
             color: var(--text-muted);
-            line-height: 1.9;
-            margin-bottom: 30px;
-            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 25px;
         }
 
         .footer-social {
             display: flex;
-            gap: 14px;
+            gap: 12px;
         }
 
         .social-link {
-            width: 48px;
-            height: 48px;
+            width: 44px;
+            height: 44px;
             background: var(--bg-tertiary);
-            border-radius: 14px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--text-secondary);
-            font-size: 1.1rem;
-            transition: var(--transition-normal);
+            transition: var(--transition);
         }
 
         .social-link:hover {
             background: var(--gradient-primary);
             color: white;
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-md);
+            transform: translateY(-3px);
         }
 
-        .footer-links h4 {
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 28px;
-            color: var(--text-primary);
+        .footer-links h4,
+        .footer-contact h4 {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
         }
 
         .footer-links ul {
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 15px;
         }
 
         .footer-links a {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             color: var(--text-muted);
-            font-size: 0.98rem;
-            transition: var(--transition-fast);
+            transition: var(--transition);
         }
 
         .footer-links a i {
             font-size: 0.7rem;
             color: var(--primary);
-            transition: var(--transition-fast);
         }
 
         .footer-links a:hover {
             color: var(--primary);
-            padding-left: 8px;
-        }
-
-        .footer-contact h4 {
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 28px;
-            color: var(--text-primary);
+            padding-left: 5px;
         }
 
         .contact-item {
             display: flex;
             align-items: center;
-            gap: 18px;
-            margin-bottom: 22px;
+            gap: 15px;
+            margin-bottom: 18px;
         }
 
         .contact-item i {
-            width: 48px;
-            height: 48px;
+            width: 44px;
+            height: 44px;
             background: var(--gradient-primary);
-            border-radius: 14px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 1rem;
-            box-shadow: 0 5px 20px var(--primary-glow);
+            font-size: 0.95rem;
         }
 
         .contact-item span,
         .contact-item a {
             color: var(--text-muted);
-            font-size: 0.98rem;
+            font-size: 0.95rem;
         }
 
         .contact-item a:hover {
@@ -2118,7 +1421,7 @@
         .footer-divider {
             height: 1px;
             background: var(--border-color);
-            margin-bottom: 35px;
+            margin-bottom: 30px;
         }
 
         .footer-bottom {
@@ -2126,12 +1429,11 @@
             align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 15px;
         }
 
         .footer-bottom p {
             color: var(--text-muted);
-            font-size: 0.95rem;
         }
 
         .footer-bottom .highlight {
@@ -2149,28 +1451,26 @@
             50% { transform: scale(1.2); }
         }
 
-        /* ============================================
-           BACK TO TOP
-        ============================================ */
+        /* ===== Back to Top ===== */
         .back-to-top {
             position: fixed;
             bottom: 30px;
             right: 25px;
-            width: 55px;
-            height: 55px;
+            width: 50px;
+            height: 50px;
             background: var(--gradient-primary);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             box-shadow: var(--shadow-lg);
             opacity: 0;
             visibility: hidden;
             transform: translateY(20px);
-            transition: var(--transition-normal);
-            z-index: 9990;
+            transition: var(--transition);
+            z-index: 999;
         }
 
         .back-to-top.visible {
@@ -2181,44 +1481,35 @@
 
         .back-to-top:hover {
             transform: translateY(-5px);
-            box-shadow: var(--shadow-lg), var(--shadow-glow);
         }
 
-        /* ============================================
-           TOAST NOTIFICATIONS
-        ============================================ */
+        /* ===== Toast ===== */
         .toast-container {
             position: fixed;
             bottom: 30px;
             left: 50%;
             transform: translateX(-50%);
-            z-index: 99999;
+            z-index: 9999;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 10px;
         }
 
         .toast {
             display: flex;
             align-items: center;
-            gap: 15px;
-            padding: 18px 28px;
+            gap: 12px;
+            padding: 16px 24px;
             background: var(--bg-secondary);
             border: 1px solid var(--border-color);
-            border-radius: 14px;
+            border-radius: 12px;
             box-shadow: var(--shadow-lg);
-            animation: toastSlideIn 0.4s ease;
+            animation: slideUp 0.3s ease;
         }
 
-        @keyframes toastSlideIn {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .toast.success { border-left: 4px solid #10b981; }
@@ -2226,28 +1517,21 @@
         .toast.warning { border-left: 4px solid #f59e0b; }
         .toast.info { border-left: 4px solid #06b6d4; }
 
-        .toast i {
-            font-size: 1.3rem;
-        }
-
+        .toast i { font-size: 1.2rem; }
         .toast.success i { color: #10b981; }
         .toast.error i { color: #ef4444; }
         .toast.warning i { color: #f59e0b; }
         .toast.info i { color: #06b6d4; }
 
         .toast span {
-            color: var(--text-primary);
             font-weight: 500;
-            font-size: 0.98rem;
         }
 
-        /* ============================================
-           SCROLL REVEAL
-        ============================================ */
+        /* ===== Reveal Animation ===== */
         .reveal {
             opacity: 0;
-            transform: translateY(40px);
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(30px);
+            transition: all 0.6s ease;
         }
 
         .reveal.active {
@@ -2255,31 +1539,7 @@
             transform: translateY(0);
         }
 
-        .reveal-left {
-            opacity: 0;
-            transform: translateX(-50px);
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .reveal-left.active {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .reveal-right {
-            opacity: 0;
-            transform: translateX(50px);
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .reveal-right.active {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        /* ============================================
-           RESPONSIVE DESIGN
-        ============================================ */
+        /* ===== Responsive ===== */
         @media (max-width: 1200px) {
             .footer-main {
                 grid-template-columns: repeat(2, 1fr);
@@ -2287,22 +1547,18 @@
         }
 
         @media (max-width: 992px) {
-            :root {
-                --section-padding: 80px;
-            }
-
             .nav-menu {
                 position: fixed;
                 top: var(--nav-height);
                 left: 0;
                 width: 100%;
                 background: var(--glass-bg);
-                backdrop-filter: blur(25px);
+                backdrop-filter: blur(20px);
                 flex-direction: column;
-                padding: 30px;
+                padding: 25px;
                 transform: translateY(-150%);
                 opacity: 0;
-                transition: var(--transition-normal);
+                transition: var(--transition);
             }
 
             .nav-menu.active {
@@ -2311,37 +1567,27 @@
             }
 
             .nav-link {
-                padding: 16px 25px;
+                padding: 15px 20px;
                 width: 100%;
                 text-align: center;
             }
 
-            .nav-hamburger {
+            .hamburger {
                 display: flex;
             }
 
-            .nav-cta {
+            .nav-btn {
                 display: none;
             }
 
-            .courses-grid {
-                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            }
-
-            .resources-grid {
+            .courses-grid, .resources-grid {
                 grid-template-columns: 1fr;
             }
         }
 
         @media (max-width: 768px) {
-            :root {
-                --section-padding: 60px;
-                --nav-height: 70px;
-            }
-
-            .hero-title {
-                font-size: 2.8rem;
-                letter-spacing: -1px;
+            section {
+                padding: 70px 0;
             }
 
             .hero-buttons {
@@ -2351,19 +1597,11 @@
 
             .btn {
                 width: 100%;
+                justify-content: center;
             }
 
             .hero-stats {
                 gap: 40px;
-            }
-
-            .stat-number {
-                font-size: 2.5rem;
-            }
-
-            .courses-grid,
-            .youtube-grid {
-                grid-template-columns: 1fr;
             }
 
             .footer-main {
@@ -2375,11 +1613,7 @@
                 max-width: 100%;
             }
 
-            .footer-social {
-                justify-content: center;
-            }
-
-            .contact-item {
+            .footer-social, .contact-item {
                 justify-content: center;
             }
 
@@ -2398,26 +1632,6 @@
                 width: 100%;
             }
 
-            .settings-panel {
-                right: 15px;
-                left: 15px;
-                width: auto;
-            }
-
-            .settings-toggle {
-                right: 15px;
-                width: 50px;
-                height: 50px;
-                bottom: 90px;
-            }
-
-            .back-to-top {
-                right: 15px;
-                bottom: 25px;
-                width: 50px;
-                height: 50px;
-            }
-
             .resource-card {
                 flex-direction: column;
                 text-align: center;
@@ -2427,18 +1641,16 @@
                 align-self: center;
             }
 
-            .upload-area {
-                padding: 50px 30px;
+            .settings-panel {
+                right: 15px;
+                left: 15px;
+                width: auto;
             }
         }
 
         @media (max-width: 480px) {
-            .hero-title {
-                font-size: 2.2rem;
-            }
-
-            .section-title {
-                font-size: 1.8rem;
+            .youtube-grid, .resources-grid {
+                grid-template-columns: 1fr;
             }
 
             .resources-tabs {
@@ -2448,83 +1660,63 @@
             .tab-btn {
                 width: 100%;
             }
-
-            .newsletter-text h2 {
-                font-size: 1.8rem;
-            }
         }
     </style>
 </head>
-<body class="loading">
-
-    <!-- ============================================
-         LOADING SCREEN
-    ============================================ -->
-    <div class="loading-screen" id="loadingScreen">
-        <div class="loader-content">
-            <div class="loader-logo">
-                <i class="fas fa-graduation-cap"></i>
-            </div>
-            <div class="loader-spinner"></div>
-            <div class="loader-text">Loading...</div>
-            <div class="loader-progress">
-                <div class="loader-progress-bar"></div>
-            </div>
-        </div>
+<body>
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <i class="fas fa-graduation-cap loader-icon"></i>
+        <div class="loader-spinner"></div>
+        <div class="loader-text">Loading...</div>
     </div>
 
-    <!-- ============================================
-         SETTINGS PANEL
-    ============================================ -->
-    <div class="settings-toggle" id="settingsToggle">
+    <!-- Settings Button -->
+    <button class="settings-btn" id="settingsBtn">
         <i class="fas fa-cog"></i>
-    </div>
+    </button>
 
+    <!-- Settings Panel -->
     <div class="settings-panel" id="settingsPanel">
         <div class="settings-header">
             <h3><i class="fas fa-palette"></i> Customize</h3>
-            <button class="settings-close" id="settingsClose">
-                <i class="fas fa-times"></i>
-            </button>
+            <button class="settings-close" id="settingsClose"><i class="fas fa-times"></i></button>
         </div>
         <div class="settings-body">
-            <div class="settings-item">
-                <div class="settings-item-label">
+            <div class="setting-item">
+                <div class="setting-label">
                     <i class="fas fa-moon"></i>
                     <span>Dark Mode</span>
                 </div>
-                <label class="toggle-switch">
-                    <input type="checkbox" id="darkModeToggle">
-                    <span class="toggle-slider"></span>
+                <label class="switch">
+                    <input type="checkbox" id="darkToggle">
+                    <span class="slider"></span>
                 </label>
             </div>
-            <div class="settings-item">
-                <div class="settings-item-label">
+            <div class="setting-item">
+                <div class="setting-label">
                     <i class="fas fa-swatchbook"></i>
                     <span>Theme Color</span>
                 </div>
             </div>
-            <div class="color-picker">
-                <div class="color-option active" data-color="#6366f1" style="background: linear-gradient(135deg, #6366f1, #8b5cf6);"></div>
-                <div class="color-option" data-color="#ec4899" style="background: linear-gradient(135deg, #ec4899, #f472b6);"></div>
-                <div class="color-option" data-color="#10b981" style="background: linear-gradient(135deg, #10b981, #34d399);"></div>
-                <div class="color-option" data-color="#f59e0b" style="background: linear-gradient(135deg, #f59e0b, #fbbf24);"></div>
-                <div class="color-option" data-color="#ef4444" style="background: linear-gradient(135deg, #ef4444, #f87171);"></div>
-                <div class="color-option" data-color="#06b6d4" style="background: linear-gradient(135deg, #06b6d4, #22d3ee);"></div>
+            <div class="color-options">
+                <div class="color-btn active" data-color="#6366f1" style="background: linear-gradient(135deg, #6366f1, #8b5cf6);"></div>
+                <div class="color-btn" data-color="#ec4899" style="background: linear-gradient(135deg, #ec4899, #f472b6);"></div>
+                <div class="color-btn" data-color="#10b981" style="background: linear-gradient(135deg, #10b981, #34d399);"></div>
+                <div class="color-btn" data-color="#f59e0b" style="background: linear-gradient(135deg, #f59e0b, #fbbf24);"></div>
+                <div class="color-btn" data-color="#ef4444" style="background: linear-gradient(135deg, #ef4444, #f87171);"></div>
+                <div class="color-btn" data-color="#06b6d4" style="background: linear-gradient(135deg, #06b6d4, #22d3ee);"></div>
             </div>
         </div>
     </div>
 
-    <!-- ============================================
-         NAVIGATION
-    ============================================ -->
+    <!-- Navbar -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <a href="#" class="nav-logo">
                 <i class="fas fa-graduation-cap"></i>
                 <span>IT Learning Hub</span>
             </a>
-
             <ul class="nav-menu" id="navMenu">
                 <li><a href="#home" class="nav-link active">Home</a></li>
                 <li><a href="#courses" class="nav-link">Courses</a></li>
@@ -2533,13 +1725,9 @@
                 <li><a href="#upload" class="nav-link">Upload</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
-
             <div class="nav-actions">
-                <button class="nav-search" id="searchBtn">
-                    <i class="fas fa-search"></i>
-                </button>
-                <a href="#courses" class="nav-cta">Get Started</a>
-                <button class="nav-hamburger" id="navHamburger">
+                <a href="#courses" class="nav-btn">Get Started</a>
+                <button class="hamburger" id="hamburger">
                     <span></span>
                     <span></span>
                     <span></span>
@@ -2548,121 +1736,70 @@
         </div>
     </nav>
 
-    <!-- ============================================
-         SEARCH MODAL
-    ============================================ -->
-    <div class="search-modal" id="searchModal">
-        <div class="search-wrapper">
-            <div class="search-box">
-                <i class="fas fa-search"></i>
-                <input type="text" id="searchInput" placeholder="Search courses, resources, channels...">
-                <button class="search-close" id="searchClose">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="search-results" id="searchResults"></div>
-        </div>
-    </div>
-
-    <!-- ============================================
-         HERO SECTION
-    ============================================ -->
+    <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero-bg">
-            <div class="gradient-orbs">
-                <div class="orb orb-1"></div>
-                <div class="orb orb-2"></div>
-                <div class="orb orb-3"></div>
-                <div class="orb orb-4"></div>
-            </div>
-            <div class="particles" id="particles"></div>
+            <div class="orb orb-1"></div>
+            <div class="orb orb-2"></div>
+            <div class="orb orb-3"></div>
             <div class="grid-pattern"></div>
         </div>
-
         <div class="hero-content">
             <div class="hero-badge">
                 <i class="fas fa-rocket"></i>
                 <span>Welcome to the Future of Learning</span>
             </div>
-
             <h1 class="hero-title">
                 <span class="gradient-text">IT Learning Hub</span>
             </h1>
-
             <p class="hero-subtitle">
-                Master <span class="typing-container"><span class="typing-text" id="typingText"></span><span class="cursor"></span></span>
+                Master <span class="typing-text" id="typingText"></span><span class="cursor"></span>
             </p>
-
-            <p class="hero-description">
-                Your ultimate gateway to mastering cutting-edge technologies. Access premium courses, 
-                curated resources, and learn from the best YouTube educators.
+            <p class="hero-desc">
+                Your ultimate gateway to mastering cutting-edge technologies. Access premium courses, curated resources, and learn from the best YouTube educators.
             </p>
-
             <div class="hero-buttons">
                 <a href="#courses" class="btn btn-primary">
-                    <i class="fas fa-compass"></i>
-                    Explore Courses
+                    <i class="fas fa-compass"></i> Explore Courses
                 </a>
                 <a href="#youtube" class="btn btn-secondary">
-                    <i class="fas fa-play-circle"></i>
-                    Watch Videos
+                    <i class="fas fa-play-circle"></i> Watch Videos
                 </a>
             </div>
-
             <div class="hero-stats">
-                <div class="stat-item">
+                <div class="stat">
                     <span class="stat-number" data-count="50">0</span>
                     <span class="stat-label">+ Courses</span>
                 </div>
-                <div class="stat-item">
+                <div class="stat">
                     <span class="stat-number" data-count="15000">0</span>
                     <span class="stat-label">+ Students</span>
                 </div>
-                <div class="stat-item">
+                <div class="stat">
                     <span class="stat-number" data-count="200">0</span>
                     <span class="stat-label">+ Resources</span>
                 </div>
             </div>
         </div>
-
-        <div class="scroll-indicator">
-            <div class="mouse">
-                <div class="wheel"></div>
-            </div>
-            <span class="scroll-text">Scroll Down</span>
-        </div>
     </section>
 
-    <!-- ============================================
-         COURSES SECTION
-    ============================================ -->
+    <!-- Courses Section -->
     <section class="courses-section" id="courses">
         <div class="container">
             <div class="section-header reveal">
-                <span class="section-badge">
-                    <i class="fas fa-book-open"></i>
-                    Our Courses
-                </span>
+                <span class="section-badge"><i class="fas fa-book-open"></i> Our Courses</span>
                 <h2 class="section-title">Explore IT Domains</h2>
-                <p class="section-subtitle">
-                    Dive into the world of technology with our comprehensive courses designed for aspiring IT professionals.
-                </p>
+                <p class="section-desc">Dive into the world of technology with our comprehensive courses.</p>
             </div>
-
             <div class="courses-grid">
-                <!-- AI Course -->
-                <div class="course-card reveal" onclick="showToast('Exploring Artificial Intelligence...', 'info')">
-                    <div class="course-icon">
-                        <i class="fas fa-brain"></i>
-                    </div>
+                <div class="course-card reveal">
+                    <div class="course-icon"><i class="fas fa-brain"></i></div>
                     <h3 class="course-title">Artificial Intelligence</h3>
-                    <p class="course-description">
-                        Master machine learning, neural networks, and deep learning. Build intelligent systems that can learn, adapt, and make decisions.
-                    </p>
+                    <p class="course-desc">Master machine learning, neural networks, and deep learning. Build intelligent systems.</p>
                     <div class="course-tags">
-                        <span class="course-tag">Machine Learning</span>
-                        <span class="course-tag">Deep Learning</span>
-                        <span class="course-tag">NLP</span>
+                        <span class="tag">Machine Learning</span>
+                        <span class="tag">Deep Learning</span>
+                        <span class="tag">NLP</span>
                     </div>
                     <div class="course-footer">
                         <span class="course-lessons"><i class="fas fa-book"></i> 45 Lessons</span>
@@ -2670,19 +1807,14 @@
                     </div>
                 </div>
 
-                <!-- Data Science Course -->
-                <div class="course-card reveal" onclick="showToast('Exploring Data Science...', 'info')">
-                    <div class="course-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
+                <div class="course-card reveal">
+                    <div class="course-icon"><i class="fas fa-chart-line"></i></div>
                     <h3 class="course-title">Data Science</h3>
-                    <p class="course-description">
-                        Learn to extract insights from complex data. Master Python, R, statistics, and powerful data visualization techniques.
-                    </p>
+                    <p class="course-desc">Learn to extract insights from complex data. Master Python, R, and visualization.</p>
                     <div class="course-tags">
-                        <span class="course-tag">Python</span>
-                        <span class="course-tag">Statistics</span>
-                        <span class="course-tag">Visualization</span>
+                        <span class="tag">Python</span>
+                        <span class="tag">Statistics</span>
+                        <span class="tag">Visualization</span>
                     </div>
                     <div class="course-footer">
                         <span class="course-lessons"><i class="fas fa-book"></i> 52 Lessons</span>
@@ -2690,19 +1822,14 @@
                     </div>
                 </div>
 
-                <!-- Data Analysis Course -->
-                <div class="course-card reveal" onclick="showToast('Exploring Data Analysis...', 'info')">
-                    <div class="course-icon">
-                        <i class="fas fa-database"></i>
-                    </div>
+                <div class="course-card reveal">
+                    <div class="course-icon"><i class="fas fa-database"></i></div>
                     <h3 class="course-title">Data Analysis</h3>
-                    <p class="course-description">
-                        Transform raw data into actionable business insights. Master Excel, SQL, Tableau, and Power BI for professional analytics.
-                    </p>
+                    <p class="course-desc">Transform raw data into actionable insights. Master Excel, SQL, and Power BI.</p>
                     <div class="course-tags">
-                        <span class="course-tag">SQL</span>
-                        <span class="course-tag">Excel</span>
-                        <span class="course-tag">Power BI</span>
+                        <span class="tag">SQL</span>
+                        <span class="tag">Excel</span>
+                        <span class="tag">Power BI</span>
                     </div>
                     <div class="course-footer">
                         <span class="course-lessons"><i class="fas fa-book"></i> 38 Lessons</span>
@@ -2710,19 +1837,13 @@
                     </div>
                 </div>
 
-                <!-- Cyber Security Course -->
-                <div class="course-card reveal" onclick="showToast('Exploring Cyber Security...', 'info')">
-                    <div class="course-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
+                <div class="course-card reveal">
+                    <div class="course-icon"><i class="fas fa-shield-alt"></i></div>
                     <h3 class="course-title">Cyber Security</h3>
-                    <p class="course-description">
-                        Protect digital assets and infrastructure. Learn ethical hacking, network security, penetration testing, and cryptography.
-                    </p>
+                    <p class="course-desc">Protect digital assets. Learn ethical hacking, network security, and cryptography.</p>
                     <div class="course-tags">
-                        <span class="course-tag">Ethical Hacking</span>
-                        <span class="course-tag">Network Security</span>
-                        <span class="course-tag">Cryptography</span>
+                        <span class="tag">Ethical Hacking</span>
+                        <span class="tag">Network Security</span>
                     </div>
                     <div class="course-footer">
                         <span class="course-lessons"><i class="fas fa-book"></i> 48 Lessons</span>
@@ -2730,19 +1851,14 @@
                     </div>
                 </div>
 
-                <!-- Web Development Course -->
-                <div class="course-card reveal" onclick="showToast('Exploring Web Development...', 'info')">
-                    <div class="course-icon">
-                        <i class="fas fa-code"></i>
-                    </div>
+                <div class="course-card reveal">
+                    <div class="course-icon"><i class="fas fa-code"></i></div>
                     <h3 class="course-title">Web Development</h3>
-                    <p class="course-description">
-                        Build modern, responsive websites and web applications. Master HTML, CSS, JavaScript, React, Node.js, and more.
-                    </p>
+                    <p class="course-desc">Build modern websites. Master HTML, CSS, JavaScript, React, and Node.js.</p>
                     <div class="course-tags">
-                        <span class="course-tag">React</span>
-                        <span class="course-tag">Node.js</span>
-                        <span class="course-tag">Full Stack</span>
+                        <span class="tag">React</span>
+                        <span class="tag">Node.js</span>
+                        <span class="tag">Full Stack</span>
                     </div>
                     <div class="course-footer">
                         <span class="course-lessons"><i class="fas fa-book"></i> 68 Lessons</span>
@@ -2750,19 +1866,14 @@
                     </div>
                 </div>
 
-                <!-- Cloud Computing Course -->
-                <div class="course-card reveal" onclick="showToast('Exploring Cloud Computing...', 'info')">
-                    <div class="course-icon">
-                        <i class="fas fa-cloud"></i>
-                    </div>
+                <div class="course-card reveal">
+                    <div class="course-icon"><i class="fas fa-cloud"></i></div>
                     <h3 class="course-title">Cloud Computing</h3>
-                    <p class="course-description">
-                        Deploy and manage scalable cloud infrastructure. Master AWS, Azure, Google Cloud, Docker, and Kubernetes.
-                    </p>
+                    <p class="course-desc">Deploy scalable infrastructure. Master AWS, Azure, Docker, and Kubernetes.</p>
                     <div class="course-tags">
-                        <span class="course-tag">AWS</span>
-                        <span class="course-tag">Azure</span>
-                        <span class="course-tag">DevOps</span>
+                        <span class="tag">AWS</span>
+                        <span class="tag">Azure</span>
+                        <span class="tag">DevOps</span>
                     </div>
                     <div class="course-footer">
                         <span class="course-lessons"><i class="fas fa-book"></i> 55 Lessons</span>
@@ -2773,28 +1884,19 @@
         </div>
     </section>
 
-    <!-- ============================================
-         YOUTUBE CHANNELS SECTION
-    ============================================ -->
+    <!-- YouTube Section -->
     <section class="youtube-section" id="youtube">
         <div class="container">
             <div class="section-header reveal">
-                <span class="section-badge">
-                    <i class="fab fa-youtube"></i>
-                    Video Learning
-                </span>
+                <span class="section-badge"><i class="fab fa-youtube"></i> Video Learning</span>
                 <h2 class="section-title">Top YouTube Channels</h2>
-                <p class="section-subtitle">
-                    Learn from the best educators on YouTube. These hand-picked channels offer high-quality IT education.
-                </p>
+                <p class="section-desc">Learn from the best educators on YouTube.</p>
             </div>
-
             <div class="youtube-grid">
-                <!-- CodeWithHarry -->
                 <div class="youtube-card reveal" onclick="window.open('https://www.youtube.com/@CodeWithHarry', '_blank')">
-                    <div class="youtube-thumbnail">
-                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=500&h=300&fit=crop" alt="CodeWithHarry">
-                        <div class="youtube-badge">Hindi</div>
+                    <div class="youtube-thumb">
+                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=200&fit=crop" alt="CodeWithHarry">
+                        <span class="youtube-badge">Hindi</span>
                         <div class="youtube-overlay">
                             <div class="play-btn"><i class="fas fa-play"></i></div>
                         </div>
@@ -2802,20 +1904,19 @@
                     <div class="youtube-info">
                         <div class="channel-header">
                             <div class="channel-avatar">CH</div>
-                            <div class="channel-meta">
-                                <h4>CodeWithHarry</h4>
-                                <span>15M+ Subscribers</span>
+                            <div>
+                                <div class="channel-name">CodeWithHarry</div>
+                                <div class="channel-subs">15M+ Subscribers</div>
                             </div>
                         </div>
-                        <p class="channel-desc">Best Hindi programming tutorials covering Python, JavaScript, Web Development, DSA, and more.</p>
+                        <p class="channel-desc">Best Hindi programming tutorials - Python, JavaScript, Web Dev, DSA</p>
                     </div>
                 </div>
 
-                <!-- Apna College -->
                 <div class="youtube-card reveal" onclick="window.open('https://www.youtube.com/@ApnaCollegeOfficial', '_blank')">
-                    <div class="youtube-thumbnail">
-                        <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&h=300&fit=crop" alt="Apna College">
-                        <div class="youtube-badge">Hindi</div>
+                    <div class="youtube-thumb">
+                        <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=200&fit=crop" alt="Apna College">
+                        <span class="youtube-badge">Hindi</span>
                         <div class="youtube-overlay">
                             <div class="play-btn"><i class="fas fa-play"></i></div>
                         </div>
@@ -2823,20 +1924,19 @@
                     <div class="youtube-info">
                         <div class="channel-header">
                             <div class="channel-avatar">AC</div>
-                            <div class="channel-meta">
-                                <h4>Apna College</h4>
-                                <span>6M+ Subscribers</span>
+                            <div>
+                                <div class="channel-name">Apna College</div>
+                                <div class="channel-subs">6M+ Subscribers</div>
                             </div>
                         </div>
-                        <p class="channel-desc">Complete DSA, Web Development, Java, and placement preparation courses in Hindi.</p>
+                        <p class="channel-desc">Complete DSA, Web Dev, Java, and placement preparation</p>
                     </div>
                 </div>
 
-                <!-- freeCodeCamp -->
                 <div class="youtube-card reveal" onclick="window.open('https://www.youtube.com/@freecodecamp', '_blank')">
-                    <div class="youtube-thumbnail">
-                        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=500&h=300&fit=crop" alt="freeCodeCamp">
-                        <div class="youtube-badge">English</div>
+                    <div class="youtube-thumb">
+                        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&h=200&fit=crop" alt="freeCodeCamp">
+                        <span class="youtube-badge">English</span>
                         <div class="youtube-overlay">
                             <div class="play-btn"><i class="fas fa-play"></i></div>
                         </div>
@@ -2844,20 +1944,19 @@
                     <div class="youtube-info">
                         <div class="channel-header">
                             <div class="channel-avatar">fC</div>
-                            <div class="channel-meta">
-                                <h4>freeCodeCamp</h4>
-                                <span>9M+ Subscribers</span>
+                            <div>
+                                <div class="channel-name">freeCodeCamp</div>
+                                <div class="channel-subs">9M+ Subscribers</div>
                             </div>
                         </div>
-                        <p class="channel-desc">Free full-length courses on programming, web development, data science, and machine learning.</p>
+                        <p class="channel-desc">Free full-length courses on programming and data science</p>
                     </div>
                 </div>
 
-                <!-- Programming with Mosh -->
                 <div class="youtube-card reveal" onclick="window.open('https://www.youtube.com/@programmingwithmosh', '_blank')">
-                    <div class="youtube-thumbnail">
-                        <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=500&h=300&fit=crop" alt="Programming with Mosh">
-                        <div class="youtube-badge">English</div>
+                    <div class="youtube-thumb">
+                        <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=200&fit=crop" alt="Programming with Mosh">
+                        <span class="youtube-badge">English</span>
                         <div class="youtube-overlay">
                             <div class="play-btn"><i class="fas fa-play"></i></div>
                         </div>
@@ -2865,20 +1964,19 @@
                     <div class="youtube-info">
                         <div class="channel-header">
                             <div class="channel-avatar">PM</div>
-                            <div class="channel-meta">
-                                <h4>Programming with Mosh</h4>
-                                <span>3M+ Subscribers</span>
+                            <div>
+                                <div class="channel-name">Programming with Mosh</div>
+                                <div class="channel-subs">3M+ Subscribers</div>
                             </div>
                         </div>
-                        <p class="channel-desc">Clear and concise tutorials on Python, JavaScript, React, C#, and software engineering.</p>
+                        <p class="channel-desc">Clear tutorials on Python, JavaScript, React, C#</p>
                     </div>
                 </div>
 
-                <!-- Tech With Tim -->
                 <div class="youtube-card reveal" onclick="window.open('https://www.youtube.com/@TechWithTim', '_blank')">
-                    <div class="youtube-thumbnail">
-                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=500&h=300&fit=crop" alt="Tech With Tim">
-                        <div class="youtube-badge">English</div>
+                    <div class="youtube-thumb">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=200&fit=crop" alt="Tech With Tim">
+                        <span class="youtube-badge">English</span>
                         <div class="youtube-overlay">
                             <div class="play-btn"><i class="fas fa-play"></i></div>
                         </div>
@@ -2886,20 +1984,19 @@
                     <div class="youtube-info">
                         <div class="channel-header">
                             <div class="channel-avatar">TT</div>
-                            <div class="channel-meta">
-                                <h4>Tech With Tim</h4>
-                                <span>1.5M+ Subscribers</span>
+                            <div>
+                                <div class="channel-name">Tech With Tim</div>
+                                <div class="channel-subs">1.5M+ Subscribers</div>
                             </div>
                         </div>
-                        <p class="channel-desc">Python, AI, Machine Learning tutorials with hands-on projects and coding challenges.</p>
+                        <p class="channel-desc">Python, AI, Machine Learning with hands-on projects</p>
                     </div>
                 </div>
 
-                <!-- Simplilearn -->
                 <div class="youtube-card reveal" onclick="window.open('https://www.youtube.com/@SimplilearnOfficial', '_blank')">
-                    <div class="youtube-thumbnail">
-                        <img src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=500&h=300&fit=crop" alt="Simplilearn">
-                        <div class="youtube-badge">English</div>
+                    <div class="youtube-thumb">
+                        <img src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=400&h=200&fit=crop" alt="Simplilearn">
+                        <span class="youtube-badge">English</span>
                         <div class="youtube-overlay">
                             <div class="play-btn"><i class="fas fa-play"></i></div>
                         </div>
@@ -2907,20 +2004,19 @@
                     <div class="youtube-info">
                         <div class="channel-header">
                             <div class="channel-avatar">SL</div>
-                            <div class="channel-meta">
-                                <h4>Simplilearn</h4>
-                                <span>4M+ Subscribers</span>
+                            <div>
+                                <div class="channel-name">Simplilearn</div>
+                                <div class="channel-subs">4M+ Subscribers</div>
                             </div>
                         </div>
-                        <p class="channel-desc">Professional courses on Data Science, Cloud Computing, Cyber Security, and Digital Marketing.</p>
+                        <p class="channel-desc">Professional courses on Data Science, Cloud, Security</p>
                     </div>
                 </div>
 
-                <!-- Great Learning -->
-                <div class="youtube-card reveal" onclick="window.open('https://www.youtube.com/@greatabornjackson', '_blank')">
-                    <div class="youtube-thumbnail">
-                        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=500&h=300&fit=crop" alt="Great Learning">
-                        <div class="youtube-badge">English</div>
+                <div class="youtube-card reveal" onclick="window.open('https://www.youtube.com/@GreatLearning', '_blank')">
+                    <div class="youtube-thumb">
+                        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=200&fit=crop" alt="Great Learning">
+                        <span class="youtube-badge">English</span>
                         <div class="youtube-overlay">
                             <div class="play-btn"><i class="fas fa-play"></i></div>
                         </div>
@@ -2928,20 +2024,19 @@
                     <div class="youtube-info">
                         <div class="channel-header">
                             <div class="channel-avatar">GL</div>
-                            <div class="channel-meta">
-                                <h4>Great Learning</h4>
-                                <span>3M+ Subscribers</span>
+                            <div>
+                                <div class="channel-name">Great Learning</div>
+                                <div class="channel-subs">3M+ Subscribers</div>
                             </div>
                         </div>
-                        <p class="channel-desc">Industry-focused courses on AI, ML, Data Analytics, and career development.</p>
+                        <p class="channel-desc">Industry-focused AI, ML, Data Analytics courses</p>
                     </div>
                 </div>
 
-                <!-- The iScale -->
-                <div class="youtube-card reveal" onclick="window.open('https://www.youtube.com/@theiScale', '_blank')">
-                    <div class="youtube-thumbnail">
-                        <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=500&h=300&fit=crop" alt="The iScale">
-                        <div class="youtube-badge">Hindi</div>
+                <div class="youtube-card reveal" onclick="window.open('https://www.youtube.com/@TheIScale', '_blank')">
+                    <div class="youtube-thumb">
+                        <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=400&h=200&fit=crop" alt="The iScale">
+                        <span class="youtube-badge">Hindi</span>
                         <div class="youtube-overlay">
                             <div class="play-btn"><i class="fas fa-play"></i></div>
                         </div>
@@ -2949,397 +2044,304 @@
                     <div class="youtube-info">
                         <div class="channel-header">
                             <div class="channel-avatar">iS</div>
-                            <div class="channel-meta">
-                                <h4>The iScale</h4>
-                                <span>500K+ Subscribers</span>
+                            <div>
+                                <div class="channel-name">The iScale</div>
+                                <div class="channel-subs">500K+ Subscribers</div>
                             </div>
                         </div>
-                        <p class="channel-desc">DSA, System Design, Interview Preparation, and Career Guidance for IT professionals.</p>
+                        <p class="channel-desc">DSA, System Design, Interview Prep, Career Guidance</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ============================================
-         RESOURCES SECTION
-    ============================================ -->
+    <!-- Resources Section -->
     <section class="resources-section" id="resources">
         <div class="container">
             <div class="section-header reveal">
-                <span class="section-badge">
-                    <i class="fas fa-folder-open"></i>
-                    Study Materials
-                </span>
+                <span class="section-badge"><i class="fas fa-folder-open"></i> Study Materials</span>
                 <h2 class="section-title">Top 10 Learning Resources</h2>
-                <p class="section-subtitle">
-                    Access the best documentation, tutorials, and learning platforms trusted by millions of developers worldwide.
-                </p>
+                <p class="section-desc">Access the best documentation and learning platforms.</p>
             </div>
-
             <div class="resources-tabs reveal">
                 <button class="tab-btn active" data-tab="all">All Resources</button>
                 <button class="tab-btn" data-tab="docs">Documentation</button>
                 <button class="tab-btn" data-tab="tutorials">Tutorials</button>
                 <button class="tab-btn" data-tab="courses">Courses</button>
             </div>
-
             <div class="resources-grid" id="resourcesGrid">
-                <!-- W3Schools -->
                 <div class="resource-card reveal" data-category="tutorials" onclick="window.open('https://www.w3schools.com', '_blank')">
-                    <div class="resource-icon">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
+                    <div class="resource-icon"><i class="fas fa-graduation-cap"></i></div>
                     <div class="resource-content">
                         <h4>W3Schools</h4>
-                        <p>The world's largest web developer site. Learn HTML, CSS, JavaScript, Python, SQL, and more with interactive tutorials.</p>
+                        <p>World's largest web developer site. Learn HTML, CSS, JS, Python with interactive tutorials.</p>
                         <div class="resource-meta">
-                            <span><i class="fas fa-star"></i> 4.9 Rating</span>
+                            <span><i class="fas fa-star"></i> 4.9</span>
                             <span><i class="fas fa-users"></i> 50M+ Users</span>
                         </div>
                     </div>
-                    <a href="https://www.w3schools.com" target="_blank" class="resource-link" onclick="event.stopPropagation()">
-                        <i class="fas fa-external-link-alt"></i>
-                    </a>
+                    <a href="https://www.w3schools.com" target="_blank" class="resource-link" onclick="event.stopPropagation()"><i class="fas fa-external-link-alt"></i></a>
                 </div>
 
-                <!-- GeeksforGeeks -->
                 <div class="resource-card reveal" data-category="tutorials" onclick="window.open('https://www.geeksforgeeks.org', '_blank')">
-                    <div class="resource-icon">
-                        <i class="fas fa-laptop-code"></i>
-                    </div>
+                    <div class="resource-icon"><i class="fas fa-laptop-code"></i></div>
                     <div class="resource-content">
                         <h4>GeeksforGeeks</h4>
-                        <p>Computer science portal with DSA, programming tutorials, interview preparation, and coding practice problems.</p>
+                        <p>CS portal with DSA, programming tutorials, interview prep, and coding problems.</p>
                         <div class="resource-meta">
-                            <span><i class="fas fa-star"></i> 4.8 Rating</span>
+                            <span><i class="fas fa-star"></i> 4.8</span>
                             <span><i class="fas fa-users"></i> 35M+ Users</span>
                         </div>
                     </div>
-                    <a href="https://www.geeksforgeeks.org" target="_blank" class="resource-link" onclick="event.stopPropagation()">
-                        <i class="fas fa-external-link-alt"></i>
-                    </a>
+                    <a href="https://www.geeksforgeeks.org" target="_blank" class="resource-link" onclick="event.stopPropagation()"><i class="fas fa-external-link-alt"></i></a>
                 </div>
 
-                <!-- MDN Web Docs -->
                 <div class="resource-card reveal" data-category="docs" onclick="window.open('https://developer.mozilla.org', '_blank')">
-                    <div class="resource-icon">
-                        <i class="fab fa-firefox-browser"></i>
-                    </div>
+                    <div class="resource-icon"><i class="fab fa-firefox-browser"></i></div>
                     <div class="resource-content">
                         <h4>MDN Web Docs</h4>
-                        <p>The most authoritative documentation for web technologies including HTML, CSS, JavaScript, and Web APIs.</p>
+                        <p>Authoritative documentation for HTML, CSS, JavaScript, and Web APIs.</p>
                         <div class="resource-meta">
-                            <span><i class="fas fa-star"></i> 5.0 Rating</span>
+                            <span><i class="fas fa-star"></i> 5.0</span>
                             <span><i class="fas fa-users"></i> 20M+ Users</span>
                         </div>
                     </div>
-                    <a href="https://developer.mozilla.org" target="_blank" class="resource-link" onclick="event.stopPropagation()">
-                        <i class="fas fa-external-link-alt"></i>
-                    </a>
+                    <a href="https://developer.mozilla.org" target="_blank" class="resource-link" onclick="event.stopPropagation()"><i class="fas fa-external-link-alt"></i></a>
                 </div>
 
-                <!-- Tutorialspoint -->
                 <div class="resource-card reveal" data-category="tutorials" onclick="window.open('https://www.tutorialspoint.com', '_blank')">
-                    <div class="resource-icon">
-                        <i class="fas fa-book-reader"></i>
-                    </div>
+                    <div class="resource-icon"><i class="fas fa-book-reader"></i></div>
                     <div class="resource-content">
                         <h4>Tutorialspoint</h4>
-                        <p>Simple and easy tutorials covering programming languages, databases, frameworks, and software technologies.</p>
+                        <p>Simple tutorials covering programming, databases, frameworks, and more.</p>
                         <div class="resource-meta">
-                            <span><i class="fas fa-star"></i> 4.7 Rating</span>
+                            <span><i class="fas fa-star"></i> 4.7</span>
                             <span><i class="fas fa-users"></i> 25M+ Users</span>
                         </div>
                     </div>
-                    <a href="https://www.tutorialspoint.com" target="_blank" class="resource-link" onclick="event.stopPropagation()">
-                        <i class="fas fa-external-link-alt"></i>
-                    </a>
+                    <a href="https://www.tutorialspoint.com" target="_blank" class="resource-link" onclick="event.stopPropagation()"><i class="fas fa-external-link-alt"></i></a>
                 </div>
 
-                <!-- JavaTpoint -->
                 <div class="resource-card reveal" data-category="tutorials" onclick="window.open('https://www.javatpoint.com', '_blank')">
-                    <div class="resource-icon">
-                        <i class="fab fa-java"></i>
-                    </div>
+                    <div class="resource-icon"><i class="fab fa-java"></i></div>
                     <div class="resource-content">
                         <h4>JavaTpoint</h4>
-                        <p>Comprehensive tutorials on Java, Python, PHP, Android, Spring, Hibernate, and interview questions.</p>
+                        <p>Comprehensive tutorials on Java, Python, PHP, Android, Spring, Hibernate.</p>
                         <div class="resource-meta">
-                            <span><i class="fas fa-star"></i> 4.6 Rating</span>
+                            <span><i class="fas fa-star"></i> 4.6</span>
                             <span><i class="fas fa-users"></i> 15M+ Users</span>
                         </div>
                     </div>
-                    <a href="https://www.javatpoint.com" target="_blank" class="resource-link" onclick="event.stopPropagation()">
-                        <i class="fas fa-external-link-alt"></i>
-                    </a>
+                    <a href="https://www.javatpoint.com" target="_blank" class="resource-link" onclick="event.stopPropagation()"><i class="fas fa-external-link-alt"></i></a>
                 </div>
 
-                <!-- freeCodeCamp -->
                 <div class="resource-card reveal" data-category="courses" onclick="window.open('https://www.freecodecamp.org', '_blank')">
-                    <div class="resource-icon">
-                        <i class="fas fa-campground"></i>
-                    </div>
+                    <div class="resource-icon"><i class="fas fa-campground"></i></div>
                     <div class="resource-content">
                         <h4>freeCodeCamp</h4>
-                        <p>Free coding bootcamp with certifications in web development, data science, machine learning, and more.</p>
+                        <p>Free coding bootcamp with certifications in web dev, data science, ML.</p>
                         <div class="resource-meta">
-                            <span><i class="fas fa-star"></i> 4.9 Rating</span>
+                            <span><i class="fas fa-star"></i> 4.9</span>
                             <span><i class="fas fa-users"></i> 40M+ Users</span>
                         </div>
                     </div>
-                    <a href="https://www.freecodecamp.org" target="_blank" class="resource-link" onclick="event.stopPropagation()">
-                        <i class="fas fa-external-link-alt"></i>
-                    </a>
+                    <a href="https://www.freecodecamp.org" target="_blank" class="resource-link" onclick="event.stopPropagation()"><i class="fas fa-external-link-alt"></i></a>
                 </div>
 
-                <!-- Khan Academy -->
                 <div class="resource-card reveal" data-category="courses" onclick="window.open('https://www.khanacademy.org', '_blank')">
-                    <div class="resource-icon">
-                        <i class="fas fa-chalkboard-teacher"></i>
-                    </div>
+                    <div class="resource-icon"><i class="fas fa-chalkboard-teacher"></i></div>
                     <div class="resource-content">
                         <h4>Khan Academy</h4>
-                        <p>Free education platform with courses on computer science, math, algorithms, and programming fundamentals.</p>
+                        <p>Free education on computer science, math, algorithms, fundamentals.</p>
                         <div class="resource-meta">
-                            <span><i class="fas fa-star"></i> 4.8 Rating</span>
+                            <span><i class="fas fa-star"></i> 4.8</span>
                             <span><i class="fas fa-users"></i> 100M+ Users</span>
                         </div>
                     </div>
-                    <a href="https://www.khanacademy.org" target="_blank" class="resource-link" onclick="event.stopPropagation()">
-                        <i class="fas fa-external-link-alt"></i>
-                    </a>
+                    <a href="https://www.khanacademy.org" target="_blank" class="resource-link" onclick="event.stopPropagation()"><i class="fas fa-external-link-alt"></i></a>
                 </div>
 
-                <!-- Coursera -->
                 <div class="resource-card reveal" data-category="courses" onclick="window.open('https://www.coursera.org', '_blank')">
-                    <div class="resource-icon">
-                        <i class="fas fa-university"></i>
-                    </div>
+                    <div class="resource-icon"><i class="fas fa-university"></i></div>
                     <div class="resource-content">
                         <h4>Coursera</h4>
-                        <p>Online courses from top universities and companies. Many free courses with certificates in tech fields.</p>
+                        <p>Online courses from top universities. Many free courses with certificates.</p>
                         <div class="resource-meta">
-                            <span><i class="fas fa-star"></i> 4.7 Rating</span>
+                            <span><i class="fas fa-star"></i> 4.7</span>
                             <span><i class="fas fa-users"></i> 90M+ Users</span>
                         </div>
                     </div>
-                    <a href="https://www.coursera.org" target="_blank" class="resource-link" onclick="event.stopPropagation()">
-                        <i class="fas fa-external-link-alt"></i>
-                    </a>
+                    <a href="https://www.coursera.org" target="_blank" class="resource-link" onclick="event.stopPropagation()"><i class="fas fa-external-link-alt"></i></a>
                 </div>
 
-                <!-- edX -->
                 <div class="resource-card reveal" data-category="courses" onclick="window.open('https://www.edx.org', '_blank')">
-                    <div class="resource-icon">
-                        <i class="fas fa-user-graduate"></i>
-                    </div>
+                    <div class="resource-icon"><i class="fas fa-user-graduate"></i></div>
                     <div class="resource-content">
                         <h4>edX</h4>
-                        <p>Free online courses from Harvard, MIT, and other top institutions. CS50 and other popular tech courses.</p>
+                        <p>Free courses from Harvard, MIT. CS50 and other popular tech courses.</p>
                         <div class="resource-meta">
-                            <span><i class="fas fa-star"></i> 4.8 Rating</span>
+                            <span><i class="fas fa-star"></i> 4.8</span>
                             <span><i class="fas fa-users"></i> 35M+ Users</span>
                         </div>
                     </div>
-                    <a href="https://www.edx.org" target="_blank" class="resource-link" onclick="event.stopPropagation()">
-                        <i class="fas fa-external-link-alt"></i>
-                    </a>
+                    <a href="https://www.edx.org" target="_blank" class="resource-link" onclick="event.stopPropagation()"><i class="fas fa-external-link-alt"></i></a>
                 </div>
 
-                <!-- Programiz -->
                 <div class="resource-card reveal" data-category="tutorials" onclick="window.open('https://www.programiz.com', '_blank')">
-                    <div class="resource-icon">
-                        <i class="fas fa-terminal"></i>
-                    </div>
+                    <div class="resource-icon"><i class="fas fa-terminal"></i></div>
                     <div class="resource-content">
                         <h4>Programiz</h4>
-                        <p>Learn programming with easy-to-follow tutorials. Python, C, C++, Java, JavaScript with online compilers.</p>
+                        <p>Easy tutorials for Python, C, C++, Java, JavaScript with online compilers.</p>
                         <div class="resource-meta">
-                            <span><i class="fas fa-star"></i> 4.7 Rating</span>
+                            <span><i class="fas fa-star"></i> 4.7</span>
                             <span><i class="fas fa-users"></i> 10M+ Users</span>
                         </div>
                     </div>
-                    <a href="https://www.programiz.com" target="_blank" class="resource-link" onclick="event.stopPropagation()">
-                        <i class="fas fa-external-link-alt"></i>
-                    </a>
+                    <a href="https://www.programiz.com" target="_blank" class="resource-link" onclick="event.stopPropagation()"><i class="fas fa-external-link-alt"></i></a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ============================================
-         UPLOAD SECTION
-    ============================================ -->
+    <!-- Upload Section -->
     <section class="upload-section" id="upload">
         <div class="container">
             <div class="section-header reveal">
-                <span class="section-badge">
-                    <i class="fas fa-cloud-upload-alt"></i>
-                    Share Resources
-                </span>
+                <span class="section-badge"><i class="fas fa-cloud-upload-alt"></i> Share Resources</span>
                 <h2 class="section-title">Upload Your Notes</h2>
-                <p class="section-subtitle">
-                    Contribute to the community by sharing your study materials, notes, and resources with fellow students.
-                </p>
+                <p class="section-desc">Contribute by sharing your study materials.</p>
             </div>
-
             <div class="upload-wrapper reveal">
                 <div class="upload-area" id="uploadArea">
-                    <div class="upload-icon">
-                        <i class="fas fa-cloud-upload-alt"></i>
-                    </div>
+                    <div class="upload-icon"><i class="fas fa-cloud-upload-alt"></i></div>
                     <h3>Drag & Drop Files Here</h3>
-                    <p>or click to browse from your computer</p>
+                    <p>or click to browse</p>
                     <input type="file" id="fileInput" multiple hidden>
                     <button class="upload-btn" onclick="document.getElementById('fileInput').click()">
-                        <i class="fas fa-folder-open"></i>
-                        Browse Files
+                        <i class="fas fa-folder-open"></i> Browse Files
                     </button>
-                    <span class="upload-hint">Supported: PDF, DOC, DOCX, PPT, TXT (Max 10MB)</span>
+                    <span class="upload-hint">PDF, DOC, DOCX, PPT, TXT (Max 10MB)</span>
                 </div>
-
-                <div class="uploaded-files" id="uploadedFiles">
-                    <h4><i class="fas fa-file-alt"></i> Your Uploaded Files</h4>
+                <div class="uploaded-files">
+                    <h4><i class="fas fa-file-alt"></i> Uploaded Files</h4>
                     <div class="files-list" id="filesList"></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ============================================
-         NEWSLETTER SECTION
-    ============================================ -->
-    <section class="newsletter-section">
+    <!-- Newsletter -->
+    <section class="newsletter">
         <div class="newsletter-content reveal">
-            <div class="newsletter-text">
+            <div>
                 <h2>Stay Updated</h2>
-                <p>Subscribe to get the latest IT resources, tutorials, and learning materials directly to your inbox.</p>
+                <p>Subscribe for the latest IT resources and tutorials.</p>
             </div>
             <form class="newsletter-form" id="newsletterForm">
-                <input type="email" placeholder="Enter your email address" required>
-                <button type="submit">
-                    <i class="fas fa-paper-plane"></i>
-                    Subscribe
-                </button>
+                <input type="email" placeholder="Enter your email" required>
+                <button type="submit"><i class="fas fa-paper-plane"></i> Subscribe</button>
             </form>
         </div>
     </section>
 
-    <!-- ============================================
-         FOOTER
-    ============================================ -->
+    <!-- Footer -->
     <footer class="footer" id="contact">
-        <div class="footer-bg-shape footer-bg-shape-1"></div>
-        <div class="footer-bg-shape footer-bg-shape-2"></div>
-
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-main reveal">
-                    <div class="footer-brand">
-                        <div class="footer-logo">
-                            <i class="fas fa-graduation-cap"></i>
-                            <span>IT Learning Hub</span>
-                        </div>
-                        <p>Your ultimate gateway to mastering cutting-edge technologies. Empowering IT students with premium resources, expert guidance, and quality learning materials.</p>
-                        <div class="footer-social">
-                            <a href="#" class="social-link" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#" class="social-link" title="Twitter"><i class="fab fa-twitter"></i></a>
-                            <a href="#" class="social-link" title="Instagram"><i class="fab fa-instagram"></i></a>
-                            <a href="#" class="social-link" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="#" class="social-link" title="GitHub"><i class="fab fa-github"></i></a>
-                            <a href="#" class="social-link" title="YouTube"><i class="fab fa-youtube"></i></a>
-                        </div>
+            <div class="footer-main reveal">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>IT Learning Hub</span>
                     </div>
-
-                    <div class="footer-links">
-                        <h4>Quick Links</h4>
-                        <ul>
-                            <li><a href="#home"><i class="fas fa-chevron-right"></i> Home</a></li>
-                            <li><a href="#courses"><i class="fas fa-chevron-right"></i> Courses</a></li>
-                            <li><a href="#youtube"><i class="fas fa-chevron-right"></i> YouTube</a></li>
-                            <li><a href="#resources"><i class="fas fa-chevron-right"></i> Resources</a></li>
-                            <li><a href="#upload"><i class="fas fa-chevron-right"></i> Upload</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="footer-links">
-                        <h4>Categories</h4>
-                        <ul>
-                            <li><a href="#courses"><i class="fas fa-chevron-right"></i> Artificial Intelligence</a></li>
-                            <li><a href="#courses"><i class="fas fa-chevron-right"></i> Data Science</a></li>
-                            <li><a href="#courses"><i class="fas fa-chevron-right"></i> Web Development</a></li>
-                            <li><a href="#courses"><i class="fas fa-chevron-right"></i> Cyber Security</a></li>
-                            <li><a href="#courses"><i class="fas fa-chevron-right"></i> Cloud Computing</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="footer-contact">
-                        <h4>Contact Info</h4>
-                        <div class="contact-item">
-                            <i class="fas fa-user"></i>
-                            <span>Himanshu Choudhary</span>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Jaipur, Rajasthan</span>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-phone-alt"></i>
-                            <a href="tel:8302072829">83020728292</a>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-envelope"></i>
-                            <a href="mailto:himanshuhimanshu2746@gmail.com">himanshuhimanshu2746@gmail.com</a>
-                        </div>
+                    <p>Your ultimate gateway to mastering cutting-edge technologies. Empowering IT students with premium resources and quality learning materials.</p>
+                    <div class="footer-social">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
-
-                <div class="footer-divider"></div>
-
-                <div class="footer-bottom reveal">
-                    <p>&copy; 2024 IT Learning Hub. All Rights Reserved.</p>
-                    <p class="highlight">Built for IT Students 🚀</p>
-                    <p>Created with <i class="fas fa-heart heart"></i> by <strong>Himanshu Choudhary</strong></p>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="#courses"><i class="fas fa-chevron-right"></i> Courses</a></li>
+                        <li><a href="#youtube"><i class="fas fa-chevron-right"></i> YouTube</a></li>
+                        <li><a href="#resources"><i class="fas fa-chevron-right"></i> Resources</a></li>
+                        <li><a href="#upload"><i class="fas fa-chevron-right"></i> Upload</a></li>
+                    </ul>
                 </div>
+                <div class="footer-links">
+                    <h4>Categories</h4>
+                    <ul>
+                        <li><a href="#courses"><i class="fas fa-chevron-right"></i> Artificial Intelligence</a></li>
+                        <li><a href="#courses"><i class="fas fa-chevron-right"></i> Data Science</a></li>
+                        <li><a href="#courses"><i class="fas fa-chevron-right"></i> Web Development</a></li>
+                        <li><a href="#courses"><i class="fas fa-chevron-right"></i> Cyber Security</a></li>
+                        <li><a href="#courses"><i class="fas fa-chevron-right"></i> Cloud Computing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact Info</h4>
+                    <div class="contact-item">
+                        <i class="fas fa-user"></i>
+                        <span>Himanshu Choudhary</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Jaipur, Rajasthan</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <a href="tel:83020728292">83020728292</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:himanshuhimanshu2746@gmail.com">himanshuhimanshu2746@gmail.com</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-divider"></div>
+            <div class="footer-bottom reveal">
+                <p>&copy; 2024 IT Learning Hub. All Rights Reserved.</p>
+                <p class="highlight">Built for IT Students 🚀</p>
+                <p>Created with <i class="fas fa-heart heart"></i> by <strong>Himanshu Choudhary</strong></p>
             </div>
         </div>
     </footer>
 
-    <!-- ============================================
-         BACK TO TOP BUTTON
-    ============================================ -->
-    <button class="back-to-top" id="backToTop">
-        <i class="fas fa-arrow-up"></i>
-    </button>
+    <!-- Back to Top -->
+    <button class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></button>
 
-    <!-- ============================================
-         TOAST CONTAINER
-    ============================================ -->
+    <!-- Toast Container -->
     <div class="toast-container" id="toastContainer"></div>
 
-    <!-- ============================================
-         JAVASCRIPT
-    ============================================ -->
     <script>
-        // ============================================
-        // DOM ELEMENTS
-        // ============================================
-        const loadingScreen = document.getElementById('loadingScreen');
+        // ===== HIDE LOADER IMMEDIATELY AFTER DOM LOADS =====
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                document.getElementById('loader').classList.add('hide');
+            }, 1500);
+        });
+
+        // Fallback: Hide loader after 3 seconds no matter what
+        setTimeout(function() {
+            const loader = document.getElementById('loader');
+            if (loader) loader.classList.add('hide');
+        }, 3000);
+
+        // ===== DOM ELEMENTS =====
         const navbar = document.getElementById('navbar');
         const navMenu = document.getElementById('navMenu');
-        const navHamburger = document.getElementById('navHamburger');
-        const navLinks = document.querySelectorAll('.nav-link');
-        const settingsToggle = document.getElementById('settingsToggle');
+        const hamburger = document.getElementById('hamburger');
+        const settingsBtn = document.getElementById('settingsBtn');
         const settingsPanel = document.getElementById('settingsPanel');
         const settingsClose = document.getElementById('settingsClose');
-        const darkModeToggle = document.getElementById('darkModeToggle');
-        const colorOptions = document.querySelectorAll('.color-option');
-        const searchBtn = document.getElementById('searchBtn');
-        const searchModal = document.getElementById('searchModal');
-        const searchClose = document.getElementById('searchClose');
-        const searchInput = document.getElementById('searchInput');
-        const searchResults = document.getElementById('searchResults');
+        const darkToggle = document.getElementById('darkToggle');
+        const colorBtns = document.querySelectorAll('.color-btn');
         const backToTop = document.getElementById('backToTop');
         const uploadArea = document.getElementById('uploadArea');
         const fileInput = document.getElementById('fileInput');
@@ -3349,202 +2351,80 @@
         const newsletterForm = document.getElementById('newsletterForm');
         const typingText = document.getElementById('typingText');
 
-        // ============================================
-        // LOADING SCREEN
-        // ============================================
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                loadingScreen.classList.add('hidden');
-                document.body.classList.remove('loading');
-            }, 2500);
-        });
-
-        // ============================================
-        // PARTICLES ANIMATION
-        // ============================================
-        function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            for (let i = 0; i < 50; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 15 + 's';
-                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
-                particlesContainer.appendChild(particle);
-            }
-        }
-        createParticles();
-
-        // ============================================
-        // TYPING ANIMATION
-        // ============================================
-        const words = ['AI & Machine Learning', 'Data Science', 'Web Development', 'Cyber Security', 'Cloud Computing', 'Data Analysis'];
-        let wordIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
+        // ===== TYPING ANIMATION =====
+        const words = ['AI & Machine Learning', 'Data Science', 'Web Development', 'Cyber Security', 'Cloud Computing'];
+        let wordIndex = 0, charIndex = 0, isDeleting = false;
 
         function typeEffect() {
-            const currentWord = words[wordIndex];
+            const word = words[wordIndex];
+            typingText.textContent = isDeleting ? word.substring(0, charIndex - 1) : word.substring(0, charIndex + 1);
+            charIndex = isDeleting ? charIndex - 1 : charIndex + 1;
             
-            if (isDeleting) {
-                typingText.textContent = currentWord.substring(0, charIndex - 1);
-                charIndex--;
-            } else {
-                typingText.textContent = currentWord.substring(0, charIndex + 1);
-                charIndex++;
-            }
-
-            let typeSpeed = isDeleting ? 50 : 100;
-
-            if (!isDeleting && charIndex === currentWord.length) {
-                typeSpeed = 2000;
-                isDeleting = true;
+            let speed = isDeleting ? 50 : 100;
+            if (!isDeleting && charIndex === word.length) {
+                speed = 2000; isDeleting = true;
             } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                wordIndex = (wordIndex + 1) % words.length;
-                typeSpeed = 500;
+                isDeleting = false; wordIndex = (wordIndex + 1) % words.length; speed = 500;
             }
-
-            setTimeout(typeEffect, typeSpeed);
+            setTimeout(typeEffect, speed);
         }
         typeEffect();
 
-        // ============================================
-        // COUNTER ANIMATION
-        // ============================================
+        // ===== COUNTER ANIMATION =====
         function animateCounters() {
-            const counters = document.querySelectorAll('.stat-number');
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const counter = entry.target;
-                        const target = parseInt(counter.dataset.count);
-                        const duration = 2000;
-                        const step = target / (duration / 16);
-                        let current = 0;
-
-                        const updateCounter = () => {
-                            current += step;
-                            if (current < target) {
-                                counter.textContent = Math.floor(current);
-                                requestAnimationFrame(updateCounter);
-                            } else {
-                                counter.textContent = target;
-                            }
-                        };
-                        updateCounter();
-                        observer.unobserve(counter);
-                    }
-                });
-            }, { threshold: 0.5 });
-
-            counters.forEach(counter => observer.observe(counter));
+            document.querySelectorAll('.stat-number').forEach(counter => {
+                const target = parseInt(counter.dataset.count);
+                let current = 0;
+                const step = target / 100;
+                const update = () => {
+                    current += step;
+                    counter.textContent = current < target ? Math.floor(current) : target;
+                    if (current < target) requestAnimationFrame(update);
+                };
+                update();
+            });
         }
-        animateCounters();
+        setTimeout(animateCounters, 2000);
 
-        // ============================================
-        // NAVIGATION
-        // ============================================
-        // Hamburger Menu
-        navHamburger.addEventListener('click', () => {
-            navHamburger.classList.toggle('active');
+        // ===== NAVIGATION =====
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
             navMenu.classList.toggle('active');
         });
 
-        // Close menu on link click
-        navLinks.forEach(link => {
+        document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', () => {
-                navHamburger.classList.remove('active');
+                hamburger.classList.remove('active');
                 navMenu.classList.remove('active');
             });
         });
 
-        // Navbar scroll effect
         window.addEventListener('scroll', () => {
             navbar.classList.toggle('scrolled', window.scrollY > 50);
             backToTop.classList.toggle('visible', window.scrollY > 500);
-            updateActiveNavLink();
         });
 
-        // Update active nav link
-        function updateActiveNavLink() {
-            const sections = document.querySelectorAll('section[id]');
-            let current = '';
+        backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop - 100;
-                if (window.scrollY >= sectionTop) {
-                    current = section.getAttribute('id');
-                }
-            });
+        // ===== SETTINGS =====
+        settingsBtn.addEventListener('click', () => settingsPanel.classList.toggle('active'));
+        settingsClose.addEventListener('click', () => settingsPanel.classList.remove('active'));
 
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === '#' + current) {
-                    link.classList.add('active');
-                }
-            });
-        }
-
-        // Back to top
-        backToTop.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    window.scrollTo({
-                        top: target.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
-        // ============================================
-        // SETTINGS PANEL
-        // ============================================
-        settingsToggle.addEventListener('click', () => {
-            settingsPanel.classList.toggle('active');
-        });
-
-        settingsClose.addEventListener('click', () => {
-            settingsPanel.classList.remove('active');
-        });
-
-        document.addEventListener('click', (e) => {
-            if (!settingsPanel.contains(e.target) && !settingsToggle.contains(e.target)) {
-                settingsPanel.classList.remove('active');
-            }
-        });
-
-        // ============================================
-        // THEME MANAGEMENT
-        // ============================================
+        // Theme
         function initTheme() {
-            const savedTheme = localStorage.getItem('theme') || 'light';
-            const savedColor = localStorage.getItem('themeColor') || '#6366f1';
-
-            if (savedTheme === 'dark') {
+            const theme = localStorage.getItem('theme') || 'light';
+            const color = localStorage.getItem('themeColor') || '#6366f1';
+            if (theme === 'dark') {
                 document.documentElement.setAttribute('data-theme', 'dark');
-                darkModeToggle.checked = true;
+                darkToggle.checked = true;
             }
-
-            applyThemeColor(savedColor);
-            colorOptions.forEach(option => {
-                option.classList.toggle('active', option.dataset.color === savedColor);
-            });
+            document.documentElement.style.setProperty('--primary', color);
+            colorBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.color === color));
         }
         initTheme();
 
-        // Dark mode toggle
-        darkModeToggle.addEventListener('change', () => {
-            if (darkModeToggle.checked) {
+        darkToggle.addEventListener('change', () => {
+            if (darkToggle.checked) {
                 document.documentElement.setAttribute('data-theme', 'dark');
                 localStorage.setItem('theme', 'dark');
                 showToast('Dark mode enabled', 'info');
@@ -3555,337 +2435,148 @@
             }
         });
 
-        // Color options
-        colorOptions.forEach(option => {
-            option.addEventListener('click', () => {
-                const color = option.dataset.color;
-                applyThemeColor(color);
+        colorBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const color = btn.dataset.color;
+                document.documentElement.style.setProperty('--primary', color);
                 localStorage.setItem('themeColor', color);
-                colorOptions.forEach(opt => opt.classList.remove('active'));
-                option.classList.add('active');
-                showToast('Theme color updated', 'success');
+                colorBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                showToast('Theme updated', 'success');
             });
         });
 
-        function applyThemeColor(color) {
-            document.documentElement.style.setProperty('--primary', color);
-            document.documentElement.style.setProperty('--primary-glow', color + '80');
-        }
-
-        // ============================================
-        // SEARCH MODAL
-        // ============================================
-        const searchData = [
-            { title: 'Artificial Intelligence', type: 'Course', icon: 'fa-brain', link: '#courses' },
-            { title: 'Data Science', type: 'Course', icon: 'fa-chart-line', link: '#courses' },
-            { title: 'Web Development', type: 'Course', icon: 'fa-code', link: '#courses' },
-            { title: 'Cyber Security', type: 'Course', icon: 'fa-shield-alt', link: '#courses' },
-            { title: 'Cloud Computing', type: 'Course', icon: 'fa-cloud', link: '#courses' },
-            { title: 'CodeWithHarry', type: 'YouTube', icon: 'fab fa-youtube', link: '#youtube' },
-            { title: 'freeCodeCamp', type: 'YouTube', icon: 'fab fa-youtube', link: '#youtube' },
-            { title: 'W3Schools', type: 'Resource', icon: 'fa-graduation-cap', link: '#resources' },
-            { title: 'GeeksforGeeks', type: 'Resource', icon: 'fa-laptop-code', link: '#resources' },
-            { title: 'MDN Web Docs', type: 'Resource', icon: 'fa-book', link: '#resources' },
-        ];
-
-        searchBtn.addEventListener('click', () => {
-            searchModal.classList.add('active');
-            searchInput.focus();
-        });
-
-        searchClose.addEventListener('click', () => {
-            searchModal.classList.remove('active');
-            searchInput.value = '';
-            searchResults.style.display = 'none';
-        });
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                searchModal.classList.remove('active');
-                settingsPanel.classList.remove('active');
-            }
-        });
-
-        searchInput.addEventListener('input', (e) => {
-            const query = e.target.value.toLowerCase();
-            
-            if (query.length > 0) {
-                const filtered = searchData.filter(item => 
-                    item.title.toLowerCase().includes(query) || 
-                    item.type.toLowerCase().includes(query)
-                );
-                
-                if (filtered.length > 0) {
-                    searchResults.innerHTML = filtered.map(item => `
-                        <div class="search-result-item" onclick="navigateTo('${item.link}')">
-                            <div class="result-info">
-                                <i class="fas ${item.icon}"></i>
-                                <div>
-                                    <h4>${item.title}</h4>
-                                    <span>${item.type}</span>
-                                </div>
-                            </div>
-                            <span class="result-badge">${item.type}</span>
-                        </div>
-                    `).join('');
-                    searchResults.style.display = 'block';
-                } else {
-                    searchResults.innerHTML = '<div class="search-result-item"><div class="result-info"><i class="fas fa-search"></i><div><h4>No results found</h4><span>Try different keywords</span></div></div></div>';
-                    searchResults.style.display = 'block';
-                }
-            } else {
-                searchResults.style.display = 'none';
-            }
-        });
-
-        function navigateTo(link) {
-            searchModal.classList.remove('active');
-            searchInput.value = '';
-            searchResults.style.display = 'none';
-            
-            const target = document.querySelector(link);
-            if (target) {
-                window.scrollTo({
-                    top: target.offsetTop - 80,
-                    behavior: 'smooth'
-                });
-            }
-        }
-
-        // ============================================
-        // RESOURCE TABS
-        // ============================================
+        // ===== TABS =====
         tabBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 const tab = btn.dataset.tab;
-                
                 tabBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
-                
                 resourceCards.forEach(card => {
-                    const category = card.dataset.category;
-                    if (tab === 'all' || category === tab) {
-                        card.style.display = 'flex';
-                        card.style.animation = 'fadeInUp 0.5s ease forwards';
-                    } else {
-                        card.style.display = 'none';
-                    }
+                    card.style.display = (tab === 'all' || card.dataset.category === tab) ? 'flex' : 'none';
                 });
             });
         });
 
-        // ============================================
-        // FILE UPLOAD
-        // ============================================
-        // Drag and drop
-        uploadArea.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            uploadArea.classList.add('dragover');
-        });
-
-        uploadArea.addEventListener('dragleave', () => {
-            uploadArea.classList.remove('dragover');
-        });
-
-        uploadArea.addEventListener('drop', (e) => {
-            e.preventDefault();
-            uploadArea.classList.remove('dragover');
-            handleFiles(e.dataTransfer.files);
-        });
-
-        uploadArea.addEventListener('click', (e) => {
-            if (!e.target.closest('.upload-btn')) {
-                fileInput.click();
-            }
-        });
-
-        fileInput.addEventListener('change', (e) => {
-            handleFiles(e.target.files);
-        });
+        // ===== FILE UPLOAD =====
+        uploadArea.addEventListener('dragover', e => { e.preventDefault(); uploadArea.classList.add('dragover'); });
+        uploadArea.addEventListener('dragleave', () => uploadArea.classList.remove('dragover'));
+        uploadArea.addEventListener('drop', e => { e.preventDefault(); uploadArea.classList.remove('dragover'); handleFiles(e.dataTransfer.files); });
+        uploadArea.addEventListener('click', e => { if (!e.target.closest('.upload-btn')) fileInput.click(); });
+        fileInput.addEventListener('change', e => handleFiles(e.target.files));
 
         function handleFiles(files) {
-            const allowedTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/vnd.ms-powerpoint', 'application/vnd.openxmlformats-officedocument.presentationml.presentation', 'text/plain'];
-            const maxSize = 10 * 1024 * 1024;
-
+            const allowed = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'text/plain'];
             Array.from(files).forEach(file => {
-                if (!allowedTypes.includes(file.type)) {
-                    showToast(`Invalid file type: ${file.name}`, 'error');
-                    return;
-                }
-                if (file.size > maxSize) {
-                    showToast(`File too large: ${file.name}`, 'error');
-                    return;
-                }
+                if (!allowed.includes(file.type)) { showToast('Invalid file type', 'error'); return; }
+                if (file.size > 10 * 1024 * 1024) { showToast('File too large', 'error'); return; }
                 saveFile(file);
             });
         }
 
         function saveFile(file) {
             const reader = new FileReader();
-            reader.onload = (e) => {
-                const fileData = {
-                    name: file.name,
-                    size: formatFileSize(file.size),
-                    type: file.type,
-                    data: e.target.result,
-                    date: new Date().toLocaleDateString()
-                };
-
-                let uploadedFiles = JSON.parse(localStorage.getItem('uploadedFiles')) || [];
-                uploadedFiles.push(fileData);
-                localStorage.setItem('uploadedFiles', JSON.stringify(uploadedFiles));
-
+            reader.onload = e => {
+                const data = { name: file.name, size: formatSize(file.size), type: file.type, data: e.target.result, date: new Date().toLocaleDateString() };
+                let files = JSON.parse(localStorage.getItem('uploadedFiles')) || [];
+                files.push(data);
+                localStorage.setItem('uploadedFiles', JSON.stringify(files));
                 renderFiles();
-                showToast(`File uploaded: ${file.name}`, 'success');
+                showToast('File uploaded: ' + file.name, 'success');
             };
             reader.readAsDataURL(file);
         }
 
         function renderFiles() {
-            const uploadedFiles = JSON.parse(localStorage.getItem('uploadedFiles')) || [];
-
-            if (uploadedFiles.length === 0) {
-                filesList.innerHTML = '<div class="no-files"><i class="fas fa-folder-open"></i><p>No files uploaded yet</p></div>';
+            const files = JSON.parse(localStorage.getItem('uploadedFiles')) || [];
+            if (!files.length) {
+                filesList.innerHTML = '<div class="no-files"><i class="fas fa-folder-open"></i><p>No files uploaded</p></div>';
                 return;
             }
-
-            filesList.innerHTML = uploadedFiles.map((file, index) => `
+            filesList.innerHTML = files.map((f, i) => `
                 <div class="file-item">
                     <div class="file-info">
-                        <div class="file-icon">
-                            <i class="${getFileIcon(file.type)}"></i>
-                        </div>
-                        <div class="file-details">
-                            <h5>${file.name}</h5>
-                            <span>${file.size} • ${file.date}</span>
-                        </div>
+                        <div class="file-icon"><i class="${getIcon(f.type)}"></i></div>
+                        <div><div class="file-name">${f.name}</div><div class="file-meta">${f.size} • ${f.date}</div></div>
                     </div>
                     <div class="file-actions">
-                        <button class="file-action-btn" onclick="downloadFile(${index})" title="Download">
-                            <i class="fas fa-download"></i>
-                        </button>
-                        <button class="file-action-btn delete" onclick="deleteFile(${index})" title="Delete">
-                            <i class="fas fa-trash"></i>
-                        </button>
+                        <button class="file-action" onclick="downloadFile(${i})"><i class="fas fa-download"></i></button>
+                        <button class="file-action delete" onclick="deleteFile(${i})"><i class="fas fa-trash"></i></button>
                     </div>
                 </div>
             `).join('');
         }
 
-        function getFileIcon(type) {
-            const icons = {
-                'application/pdf': 'fas fa-file-pdf',
-                'application/msword': 'fas fa-file-word',
-                'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'fas fa-file-word',
-                'application/vnd.ms-powerpoint': 'fas fa-file-powerpoint',
-                'application/vnd.openxmlformats-officedocument.presentationml.presentation': 'fas fa-file-powerpoint',
-                'text/plain': 'fas fa-file-alt'
-            };
+        function getIcon(type) {
+            const icons = { 'application/pdf': 'fas fa-file-pdf', 'application/msword': 'fas fa-file-word', 'text/plain': 'fas fa-file-alt' };
             return icons[type] || 'fas fa-file';
         }
 
-        function formatFileSize(bytes) {
-            if (bytes === 0) return '0 Bytes';
-            const k = 1024;
-            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+        function formatSize(bytes) {
+            const k = 1024, sizes = ['Bytes', 'KB', 'MB'];
             const i = Math.floor(Math.log(bytes) / Math.log(k));
-            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+            return (bytes / Math.pow(k, i)).toFixed(2) + ' ' + sizes[i];
         }
 
-        function downloadFile(index) {
-            const files = JSON.parse(localStorage.getItem('uploadedFiles')) || [];
-            const file = files[index];
-            const link = document.createElement('a');
-            link.href = file.data;
-            link.download = file.name;
-            link.click();
-            showToast(`Downloading: ${file.name}`, 'info');
+        function downloadFile(i) {
+            const files = JSON.parse(localStorage.getItem('uploadedFiles'));
+            const a = document.createElement('a');
+            a.href = files[i].data;
+            a.download = files[i].name;
+            a.click();
         }
 
-        function deleteFile(index) {
-            let files = JSON.parse(localStorage.getItem('uploadedFiles')) || [];
-            const fileName = files[index].name;
-            files.splice(index, 1);
+        function deleteFile(i) {
+            let files = JSON.parse(localStorage.getItem('uploadedFiles'));
+            const name = files[i].name;
+            files.splice(i, 1);
             localStorage.setItem('uploadedFiles', JSON.stringify(files));
             renderFiles();
-            showToast(`Deleted: ${fileName}`, 'success');
+            showToast('Deleted: ' + name, 'success');
         }
 
-        // Load files on page load
         renderFiles();
 
-        // ============================================
-        // NEWSLETTER FORM
-        // ============================================
-        newsletterForm.addEventListener('submit', (e) => {
+        // ===== NEWSLETTER =====
+        newsletterForm.addEventListener('submit', e => {
             e.preventDefault();
             const email = newsletterForm.querySelector('input').value;
-            
-            let subscribers = JSON.parse(localStorage.getItem('subscribers')) || [];
-            
-            if (subscribers.includes(email)) {
-                showToast('You are already subscribed!', 'warning');
-                return;
-            }
-            
-            subscribers.push(email);
-            localStorage.setItem('subscribers', JSON.stringify(subscribers));
-            
-            showToast('Successfully subscribed!', 'success');
+            let subs = JSON.parse(localStorage.getItem('subscribers')) || [];
+            if (subs.includes(email)) { showToast('Already subscribed!', 'warning'); return; }
+            subs.push(email);
+            localStorage.setItem('subscribers', JSON.stringify(subs));
+            showToast('Subscribed successfully!', 'success');
             newsletterForm.reset();
         });
 
-        // ============================================
-        // TOAST NOTIFICATIONS
-        // ============================================
-        function showToast(message, type = 'info') {
-            const container = document.getElementById('toastContainer');
-            const icons = {
-                success: 'fa-check-circle',
-                error: 'fa-times-circle',
-                warning: 'fa-exclamation-circle',
-                info: 'fa-info-circle'
-            };
-
+        // ===== TOAST =====
+        function showToast(msg, type = 'info') {
+            const icons = { success: 'fa-check-circle', error: 'fa-times-circle', warning: 'fa-exclamation-circle', info: 'fa-info-circle' };
             const toast = document.createElement('div');
-            toast.className = `toast ${type}`;
-            toast.innerHTML = `
-                <i class="fas ${icons[type]}"></i>
-                <span>${message}</span>
-            `;
-
-            container.appendChild(toast);
-
-            setTimeout(() => {
-                toast.style.opacity = '0';
-                toast.style.transform = 'translateY(20px)';
-                setTimeout(() => toast.remove(), 300);
-            }, 3000);
+            toast.className = 'toast ' + type;
+            toast.innerHTML = `<i class="fas ${icons[type]}"></i><span>${msg}</span>`;
+            document.getElementById('toastContainer').appendChild(toast);
+            setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 300); }, 3000);
         }
 
-        // ============================================
-        // SCROLL REVEAL ANIMATION
-        // ============================================
-        function initScrollReveal() {
-            const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('active');
-                    }
-                });
-            }, {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
+        // ===== SCROLL REVEAL =====
+        function reveal() {
+            document.querySelectorAll('.reveal').forEach(el => {
+                const top = el.getBoundingClientRect().top;
+                if (top < window.innerHeight - 100) el.classList.add('active');
             });
-
-            revealElements.forEach(el => observer.observe(el));
         }
-        initScrollReveal();
+        window.addEventListener('scroll', reveal);
+        reveal();
 
-        // ============================================
-        // BUTTON RIPPLE EFFECT
-        // ============================================
-        document.querySelectorAll('.btn, .course-card, .youtube-card, .resource-card').forEach(element => {
-            element.addEventListener('click', function(e)
+        // ===== SMOOTH SCROLL =====
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                e.preventDefault();
+                const target = document.querySelector(a.getAttribute('href'));
+                if (target) window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
